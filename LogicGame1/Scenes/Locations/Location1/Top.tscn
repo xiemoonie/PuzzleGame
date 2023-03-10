@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Images/Locations/Location1/Background1.png" type="Texture" id=1]
+[ext_resource path="res://Images/Locations/Location1/Tree.png" type="Texture" id=2]
+[ext_resource path="res://Images/Locations/Location1/Box.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Location/LocationHolder.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=5]
+
+[node name="Holder" type="Node"]
+script = ExtResource( 4 )
+leftLocationPath = "res://Scenes/Locations/Location1/Top3.tscn"
+rightLocationPath = "res://Scenes/Locations/Location1/Top2.tscn"
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite" type="Sprite" parent="BackgroundLayer"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ObjectsLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Tree" type="Sprite" parent="ObjectsLayer"]
+position = Vector2( 232, 540 )
+texture = ExtResource( 2 )
+
+[node name="Tree2" type="Sprite" parent="ObjectsLayer"]
+position = Vector2( 1583, 536 )
+texture = ExtResource( 2 )
+
+[node name="Box" type="Sprite" parent="ObjectsLayer"]
+position = Vector2( 678, 830 )
+texture = ExtResource( 3 )
+
+[node name="ClickArea" type="Area2D" parent="ObjectsLayer/Box"]
+script = ExtResource( 5 )
+locationPath = "res://Scenes/Locations/Location1/Box.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="ObjectsLayer/Box/ClickArea"]
+polygon = PoolVector2Array( -212, -63, -219, 165, 71, 167, 225, 63, 218, -150, -36, -163 )
