@@ -11,4 +11,7 @@ export_presets.cfg
 data_*/
 .idea/
 .vs/
- 
+
+*.png~
+*.kra~
+*.jpg~

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background1.png-af438eca55560e347a19e31a05da4500.stex"
+path="res://.import/Scene2.png-ec24df4aa276c21a2336f25734ed5d03.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Locations/Location1/Background1.png"
-dest_files=[ "res://.import/Background1.png-af438eca55560e347a19e31a05da4500.stex" ]
+source_file="res://Images/Locations/GateLaboratory/Scene2.png"
+dest_files=[ "res://.import/Scene2.png-ec24df4aa276c21a2336f25734ed5d03.stex" ]
 
 [params]
 
@@ -18,7 +18,7 @@ compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=2
+compress/normal_map=0
 flags/repeat=0
 flags/filter=true
 flags/mipmaps=false

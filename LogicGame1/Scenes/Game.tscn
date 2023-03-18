@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Images/Gui/Debug/Border.png" type="Texture" id=1]
 [ext_resource path="res://Images/Gui/Controls.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/Game/InventoryCollapseButton.cs" type="Script" id=7]
 [ext_resource path="res://Objects/Gui/GrabbedItem.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Game/LocationChangeButton.cs" type="Script" id=9]
+[ext_resource path="res://Objects/Debug/DebugView.tscn" type="PackedScene" id=10]
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -155,6 +156,178 @@ scroll_horizontal_enabled = false
 margin_right = 276.0
 mouse_filter = 2
 size_flags_horizontal = 3
+
+[node name="InventoryItem" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_right = 120.0
+margin_bottom = 152.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem2" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_right = 244.0
+margin_bottom = 152.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem3" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 156.0
+margin_right = 120.0
+margin_bottom = 308.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem4" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 156.0
+margin_right = 244.0
+margin_bottom = 308.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem5" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 312.0
+margin_right = 120.0
+margin_bottom = 464.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem6" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 312.0
+margin_right = 244.0
+margin_bottom = 464.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem7" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 468.0
+margin_right = 120.0
+margin_bottom = 620.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem8" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 468.0
+margin_right = 244.0
+margin_bottom = 620.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem9" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 624.0
+margin_right = 120.0
+margin_bottom = 776.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem10" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 624.0
+margin_right = 244.0
+margin_bottom = 776.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem11" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 780.0
+margin_right = 120.0
+margin_bottom = 932.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem12" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 780.0
+margin_right = 244.0
+margin_bottom = 932.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem13" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 936.0
+margin_right = 120.0
+margin_bottom = 1088.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem14" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 936.0
+margin_right = 244.0
+margin_bottom = 1088.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem15" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 1092.0
+margin_right = 120.0
+margin_bottom = 1244.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem16" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 1092.0
+margin_right = 244.0
+margin_bottom = 1244.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem17" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 1248.0
+margin_right = 120.0
+margin_bottom = 1400.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem18" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 1248.0
+margin_right = 244.0
+margin_bottom = 1400.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem19" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 1404.0
+margin_right = 120.0
+margin_bottom = 1556.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem20" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 1404.0
+margin_right = 244.0
+margin_bottom = 1556.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem21" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 1560.0
+margin_right = 120.0
+margin_bottom = 1712.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem22" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 1560.0
+margin_right = 244.0
+margin_bottom = 1712.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InventoryItem23" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer" instance=ExtResource( 8 )]
+margin_top = 1716.0
+margin_right = 120.0
+margin_bottom = 1868.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Control" parent="GuiLayer" instance=ExtResource( 10 )]
 
 [node name="FullscreenRect" type="NinePatchRect" parent="GuiLayer"]
 visible = false

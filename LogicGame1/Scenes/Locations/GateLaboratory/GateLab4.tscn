@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Images/Locations/GateLaboratory/Scene4.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/Location/LocationHolder.cs" type="Script" id=4]
+
+[node name="Holder" type="Node"]
+script = ExtResource( 4 )
+leftLocationPath = "res://Scenes/Locations/GateLaboratory/GateLab3.tscn"
+rightLocationPath = "res://Scenes/Locations/GateLaboratory/GateLab1.tscn"
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite" type="Sprite" parent="BackgroundLayer"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ObjectsLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="ClickArea" type="Area2D" parent="ObjectsLayer"]
+script = ExtResource( 2 )
+locationPath = "res://Scenes/Locations/GateLaboratory/ElectricBox.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="ObjectsLayer/ClickArea"]
+position = Vector2( 1271, 456 )
+polygon = PoolVector2Array( -311, -152, -317, 190, 323, 191, 438, 84, 437, -255, -209, -254 )
