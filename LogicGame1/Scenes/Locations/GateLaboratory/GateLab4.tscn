@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Images/Locations/GateLaboratory/Scene4.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Location/LocationHolder.cs" type="Script" id=4]
+
+[node name="Holder" type="Node"]
+script = ExtResource( 4 )
+leftLocationPath = "res://Scenes/Locations/GateLaboratory/GateLab3.tscn"
+rightLocationPath = "res://Scenes/Locations/GateLaboratory/GateLab1.tscn"
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite" type="Sprite" parent="BackgroundLayer"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ObjectsLayer" type="CanvasLayer" parent="."]
+layer = 0

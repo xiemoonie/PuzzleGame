@@ -20,7 +20,9 @@ public class SceneController : Node {
         var gameWrapper = GameTemplate.Instance<GameWrapper>();
         ScreenContent.removeAllChildren();
 
-        gameWrapper.LocationToLoad = "res://Scenes/Locations/Location1/Top.tscn";
+        gameWrapper.LocationToLoad = "res://Scenes/Locations/GateLaboratory/GateLab1.tscn";
         ScreenContent.AddChild(gameWrapper);
+
+       
     }
 }
