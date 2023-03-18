@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Images/Gui/Debug/Border.png" type="Texture" id=1]
 [ext_resource path="res://Images/Gui/Controls.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/Game/InventoryCollapseButton.cs" type="Script" id=7]
 [ext_resource path="res://Objects/Gui/InventoryItem.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Game/LocationChangeButton.cs" type="Script" id=9]
+[ext_resource path="res://Objects/Debug/DebugView.tscn" type="PackedScene" id=10]
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -322,6 +323,8 @@ margin_right = 120.0
 margin_bottom = 1868.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
+
+[node name="Control" parent="GuiLayer" instance=ExtResource( 10 )]
 
 [node name="FullscreenRect" type="NinePatchRect" parent="GuiLayer"]
 visible = false
