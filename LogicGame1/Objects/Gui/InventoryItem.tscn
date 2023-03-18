@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Images/Gui/Inventory.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Game/InventoryItem.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/Game/ItemGrabbed.cs" type="Script" id=3]
+[ext_resource path="res://Images/Gui/selected.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -8,9 +11,11 @@ atlas = ExtResource( 1 )
 region = Rect2( 0, 64, 64, 64 )
 
 [node name="InventoryItem" type="Control"]
-margin_right = 60.0
-margin_bottom = 60.0
+margin_right = 120.0
+margin_bottom = 152.0
 rect_min_size = Vector2( 120, 152 )
+mouse_filter = 2
+script = ExtResource( 2 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchor_right = 1.0
@@ -25,7 +30,35 @@ patch_margin_bottom = 16
 [node name="Content" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -32.0
+margin_left = 25.0
+margin_top = 35.0
+margin_right = -33.0
+margin_bottom = -59.0
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+
+[node name="Texture" type="TextureRect" parent="Content"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.522
+anchor_bottom = 0.5
+margin_left = -59.0
+margin_top = -60.0
+margin_right = 61.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 120, 120 )
+mouse_filter = 0
+input_pass_on_modal_close_click = false
+expand = true
+script = ExtResource( 3 )
+
+[node name="SelectedItem" type="TextureRect" parent="Content/Texture"]
+visible = false
+margin_top = -2.0
+margin_right = 124.0
+margin_bottom = 117.0
+texture = ExtResource( 4 )
+expand = true
 
 [node name="Label" type="Label" parent="."]
 anchor_top = 1.0
