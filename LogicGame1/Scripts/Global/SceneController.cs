@@ -21,6 +21,8 @@ public class SceneController : Node {
 		ScreenContent.removeAllChildren();
 
 		gameWrapper.LocationToLoad = "res://Scenes/Locations/Location1/Top4.tscn";
+		
+		
 		ScreenContent.AddChild(gameWrapper);
 	}
 }

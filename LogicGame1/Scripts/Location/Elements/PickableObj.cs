@@ -21,13 +21,13 @@ class PickableObj : Area2D
                 Sprite some = (Sprite)this.GetParent();
                 if (some != null)
                 {
-
-                    var s = GetNode("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+                    var s = GetNode<ItemOnInventory>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+                      s.itemAdded(item);
                     item.setItem(some);
                     s.AddChild(item);
                     some.QueueFree();
-                
-
+                    s.itemAdded(item);
+                    
                 }
                 }
            
