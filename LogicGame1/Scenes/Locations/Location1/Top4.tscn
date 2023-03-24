@@ -10,6 +10,7 @@
 script = ExtResource( 3 )
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="Sprite" type="Sprite" parent="BackgroundLayer"]
 texture = ExtResource( 1 )
