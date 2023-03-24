@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/Game/Inventory.cs" type="Script" id=5]
 [ext_resource path="res://Scripts/Game/InventoryExpansionButton.cs" type="Script" id=6]
 [ext_resource path="res://Scripts/Game/InventoryCollapseButton.cs" type="Script" id=7]
+[ext_resource path="res://Objects/Gui/InventoryItem.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Game/LocationChangeButton.cs" type="Script" id=9]
 [ext_resource path="res://Scripts/Game/InventoryManager.cs" type="Script" id=10]
 
