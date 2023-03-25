@@ -8,7 +8,7 @@ class PickableObj : Area2D
     InventoryItem item;
     public override void _Ready()
     {
-      item= itemScene.Instance<InventoryItem>();
+        item = itemScene.Instance<InventoryItem>();
     }
     public override void _InputEvent(Object viewport, InputEvent @event, int shapeIdx)
     {
@@ -21,20 +21,23 @@ class PickableObj : Area2D
                 Sprite some = (Sprite)this.GetParent();
                 if (some != null)
                 {
-                    var s = GetNode<ItemOnInventory>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-                      s.itemAdded(item);
-                    item.setItem(some);
-                    s.AddChild(item);
+                    var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+                    s.pickedItem(item, some);
                     some.QueueFree();
-                    s.itemAdded(item);
-                    
+
+
                 }
-                }
-           
+            }
+
+
+
+       
+     
+
         }
     }
-}
 
+}
 
 
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Images/Gui/Inventory.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Game/InventoryItem.cs" type="Script" id=2]
-[ext_resource path="res://Scripts/Game/ItemGrabbed.cs" type="Script" id=3]
+[ext_resource path="res://Scripts/Game/ItemSelected.cs" type="Script" id=3]
 [ext_resource path="res://Images/Gui/selected.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -14,7 +14,7 @@ region = Rect2( 0, 64, 64, 64 )
 margin_right = 120.0
 margin_bottom = 152.0
 rect_min_size = Vector2( 120, 152 )
-mouse_filter = 2
+mouse_default_cursor_shape = 2
 script = ExtResource( 2 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -42,9 +42,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.522
 anchor_bottom = 0.5
-margin_left = -59.0
+margin_left = -58.0
 margin_top = -60.0
-margin_right = 61.0
+margin_right = 60.636
 margin_bottom = 60.0
 rect_min_size = Vector2( 120, 120 )
 mouse_filter = 0
@@ -57,6 +57,7 @@ visible = false
 margin_top = -2.0
 margin_right = 124.0
 margin_bottom = 117.0
+mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 
