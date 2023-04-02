@@ -15,12 +15,19 @@ public class GameWrapper : Node {
 		leftLocationButton = GetNode<LocationChangeButton>("GuiLayer/LeftLocationChange");
 		rightLocationButton = GetNode<LocationChangeButton>("GuiLayer/RightLocationChange");
 		backLocationButton = GetNode<LocationChangeButton>("GuiLayer/BackLocationChange");
-		
 		leftLocationButton.gameWrapper = this;
 		rightLocationButton.gameWrapper = this;
 		backLocationButton.gameWrapper = this;
-		loadLocation(LocationToLoad);
+
+
+		if (LocationToLoad != null && !LocationToLoad.Empty())
+        {
+			loadLocation(LocationToLoad);
+		}
+		
 	}
+
+
 
 	public void loadLocation(string locationToLoad) {
 		var template = ResourceLoader.Load<PackedScene>(locationToLoad);

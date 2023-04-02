@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Game/InventoryManager.cs" type="Script" id=1]
+
+[node name="InventoryContainer" type="HFlowContainer" groups=["PersistInventory"]]
+margin_right = 276.0
+mouse_filter = 2
+size_flags_horizontal = 3
+script = ExtResource( 1 )
