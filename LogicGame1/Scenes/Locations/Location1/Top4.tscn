@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=4]
 [ext_resource path="res://Images/Locations/Location1/someObjforTheGame.jpg" type="Texture" id=5]
 
-[node name="Object" type="Node2D"]
+[node name="Object" type="Node2D" groups=["Persist"]]
 script = ExtResource( 3 )
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
@@ -16,32 +16,30 @@ layer = -1
 texture = ExtResource( 1 )
 centered = false
 
-[node name="circle" type="CanvasLayer" parent="."]
+[node name="Coin" type="CanvasLayer" parent="."]
 
-[node name="ObjectsLayer" type="CanvasLayer" parent="circle"]
-
-[node name="Sprite" type="Sprite" parent="circle/ObjectsLayer"]
+[node name="Coin" type="Sprite" parent="Coin"]
 position = Vector2( 1270, 751 )
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="circle/ObjectsLayer/Sprite"]
+[node name="Area2D" type="Area2D" parent="Coin/Coin"]
 position = Vector2( -1270, -755 )
 script = ExtResource( 4 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="circle/ObjectsLayer/Sprite/Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Coin/Coin/Area2D"]
 position = Vector2( 1276, 724 )
 polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )
 
-[node name="cube" type="CanvasLayer" parent="."]
+[node name="Magnifier" type="CanvasLayer" parent="."]
 
-[node name="Sprite" type="Sprite" parent="cube"]
+[node name="Magnifier" type="Sprite" parent="Magnifier"]
 position = Vector2( 550, 753 )
 texture = ExtResource( 5 )
 
-[node name="Area2D" type="Area2D" parent="cube/Sprite"]
+[node name="Area2D" type="Area2D" parent="Magnifier/Magnifier"]
 position = Vector2( -1270, -755 )
 script = ExtResource( 4 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="cube/Sprite/Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Magnifier/Magnifier/Area2D"]
 position = Vector2( 1276, 724 )
 polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )

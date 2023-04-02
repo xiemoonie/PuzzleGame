@@ -8,21 +8,19 @@ public class SceneController : Node {
 	
 	public override void _Ready() {
 		base._Ready();
+
 		ScreenContent = GetParent().GetNode<Control>("Screen");
-		
-		GameTemplate = ResourceLoader.Load<PackedScene>("res://Scenes/Game.tscn");
-		
-		
-		goToGame();
+		GameTemplate = ResourceLoader.Load<PackedScene>("res://Objects/Menu.tscn");
+		goToMenu();
+
 	}
 
-	public void goToGame() {
-		var gameWrapper = GameTemplate.Instance<GameWrapper>();
+	public void goToMenu()
+    {
 		ScreenContent.removeAllChildren();
-
-		gameWrapper.LocationToLoad = "res://Scenes/Locations/Location1/Top4.tscn";
-		
-		
+		var gameWrapper = GameTemplate.Instance<Menu>();
 		ScreenContent.AddChild(gameWrapper);
 	}
+
+
 }
