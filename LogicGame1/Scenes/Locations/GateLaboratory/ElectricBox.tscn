@@ -4,7 +4,7 @@
 [ext_resource path="res://Objects/Locations/GateLaboratory/ElectricBlockKnobExpander.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Location/LocationHolder.cs" type="Script" id=4]
 
-[node name="Holder" type="Node"]
+[node name="Holder2" type="Node"]
 script = ExtResource( 4 )
 backLocationPath = "res://Scenes/Locations/GateLaboratory/GateLab4.tscn"
 

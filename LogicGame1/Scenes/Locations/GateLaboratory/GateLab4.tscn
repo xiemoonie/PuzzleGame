@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/Location/LocationHolder.cs" type="Script" id=4]
 
-[node name="Holder" type="Node"]
+[node name="Holder2" type="Node"]
 script = ExtResource( 4 )
 leftLocationPath = "res://Scenes/Locations/GateLaboratory/GateLab3.tscn"
 rightLocationPath = "res://Scenes/Locations/GateLaboratory/GateLab1.tscn"

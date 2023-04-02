@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Images/Locations/GateLaboratory/Scene2.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/Location/LocationHolder.cs" type="Script" id=4]
 
 [node name="Holder" type="Node"]
@@ -17,3 +18,11 @@ centered = false
 
 [node name="ObjectsLayer" type="CanvasLayer" parent="."]
 layer = 0
+
+[node name="GoToTable" type="Area2D" parent="ObjectsLayer"]
+script = ExtResource( 2 )
+locationPath = "res://Scenes/Locations/GateLaboratory/Table.tscn"
+
+[node name="ClickPolygon" type="CollisionPolygon2D" parent="ObjectsLayer/GoToTable"]
+position = Vector2( 824, 537 )
+polygon = PoolVector2Array( -233, -42, -162, 142, 199, 136, 253, 46, 338, -188, -110, -186 )
