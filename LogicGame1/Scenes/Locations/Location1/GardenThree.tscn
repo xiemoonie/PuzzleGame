@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Images/Gui/GardenThree.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Location/GardenThreeLocationHolder.cs" type="Script" id=2]
+[ext_resource path="res://Images/Locations/MoonieDrawing/Paint Layer 4 Merged.PNG" type="Texture" id=3]
+
+[node name="Node" type="Node2D"]
+script = ExtResource( 2 )
+leftLocationPath = "res://Scenes/Locations/Location1/GardenOne.tscn"
+rightLocationPath = "res://Scenes/Locations/Location1/GardenTwo.tscn"
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite" type="Sprite" parent="BackgroundLayer"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="JingerMan" type="Sprite" parent="BackgroundLayer"]
+position = Vector2( 873, 778 )
+scale = Vector2( 0.474286, 0.455446 )
+texture = ExtResource( 3 )
+centered = false

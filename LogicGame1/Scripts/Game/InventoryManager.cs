@@ -54,6 +54,17 @@ public void itemAdded(InventoryItem inventoryItem){
 			unselectTexture.Visible = false;
 			itemGrabbed = false;	
 	}
+
+	public InventoryItem eraseItem()
+	{
+        if (itemToDrop != null)
+        {
+			dropItem(itemToDrop);
+			itemToDrop.QueueFree();
+		}
+		return itemToDrop;
+	}
+
 	public void selectedItem(InventoryItem inventoryItem)
     {
         if(itemToDrop == inventoryItem)

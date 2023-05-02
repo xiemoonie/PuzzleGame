@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class LocationHolder : Node {
+public abstract class LocationHolder : Node {
 
     [Export] public string leftLocationPath = "";
     [Export] public string rightLocationPath = "";
@@ -18,24 +18,15 @@ public class LocationHolder : Node {
         base._Ready();
         
        // element1 = GetNode<Area2D>("cube/Sprite/Area2D");
-        coin = GetNode<Sprite>("Coin/Coin");
-        position = coin.GetPosition();
+       
         GC.Collect();
     }
 
-    public Godot.Collections.Dictionary<string, object> Save()
-    {
-        return new Godot.Collections.Dictionary<string, object>()
-    {
-        { "Filename", this.Filename},
-        { "Parent", GetParent().GetParent()},
-        { "Coin", coin},
-        { "PosX", position.x + 20.0f}, 
-        { "PosY", position.y - 20.0f}
 
-    };
-    }
-
+    //to each Garden class make inherit LocationHolder make it 
+    public abstract Godot.Collections.Dictionary<string, object> Save();
+    
+    
 
 
 }

@@ -143,7 +143,7 @@ public class GameSaver
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
                 string key = entry.Key.ToString();
-                if (key == "Filename" || key == "Parent" || key == "Coin" ||  key == "PosX" || key == "PosY")
+                if (key == "Filename" || key == "Parent" || key == "Coin" ||  key == "PosX" || key == "PosY" || key == "Screwdriver")
                     continue;
                 newObject.Set(key, entry.Value);
             }
