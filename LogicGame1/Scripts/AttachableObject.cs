@@ -25,12 +25,13 @@ public class AttachableObject : Area2D
             {
                 
                 Sprite knob = this.GetNode<Sprite>("Knob");
-                knob.Visible = true;
-                var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-                inventory.eraseItem();
-                unlockedSlide = true;
-
-
+                if (knob != null)
+                {
+                    knob.Visible = true;
+                    var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+                    inventory.eraseItem();
+                    unlockedSlide = true;
+                }
             }
         }
     }
@@ -46,15 +47,15 @@ public class AttachableObject : Area2D
         {
             posKnob.x -= 200;
             posWoodenPlank.x -= 75;
-            woodenPlank.SetPosition(posWoodenPlank);
-            this.SetGlobalPosition(posKnob);
+            woodenPlank.Position = posWoodenPlank;
+            this.Position = posKnob;
         }
         else
         {
             posKnob.x = 230;
             posWoodenPlank.x = 500;
-            this.SetGlobalPosition(posKnob);
-            woodenPlank.SetPosition(posWoodenPlank);
+            this.GlobalPosition = posKnob;
+            woodenPlank.Position = posWoodenPlank;
             ShowSecretCompartiment();
         }
     }
@@ -83,13 +84,9 @@ public class AttachableObject : Area2D
                 {
                     ReshapeArea2D();
                 }
-
-
             }
 
         }
-
-           
 
         }
     }

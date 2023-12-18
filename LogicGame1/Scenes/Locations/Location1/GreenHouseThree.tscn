@@ -1,19 +1,26 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Images/Locations/MoonieDrawing/SecretCompartiment.PNG" type="Texture" id=1]
 [ext_resource path="res://Images/Locations/MoonieDrawing/FlowerPotScene.png" type="Texture" id=2]
 [ext_resource path="res://Images/Locations/MoonieDrawing/Group 7.PNG" type="Texture" id=3]
 [ext_resource path="res://Images/Locations/MoonieDrawing/FlowerOnWindow.PNG" type="Texture" id=4]
-[ext_resource path="res://Scripts/AttachableObject.cs" type="Script" id=5]
+[ext_resource path="res://Scripts/ClickMoveObject.cs" type="Script" id=5]
 [ext_resource path="res://Scripts/Location/GreenHousePotLocationHolder.cs" type="Script" id=6]
-[ext_resource path="res://Images/Locations/MoonieDrawing/CoinPNG.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/ClickMoveObject.cs" type="Script" id=8]
+[ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=7]
+[ext_resource path="res://Scripts/AttachableObject.cs" type="Script" id=8]
 [ext_resource path="res://Images/Locations/MoonieDrawing/sextant.PNG" type="Texture" id=9]
+[ext_resource path="res://Images/Locations/MoonieDrawing/CoinPNG.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[node name="Object" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 220.909, 212.988 )
+
+[node name="GreenHouseThree" type="Node2D"]
 script = ExtResource( 6 )
+leftLocationPath = "res://Scenes/Locations/Location1/GreenHouseTwo.tscn"
+rightLocationPath = "res://Scenes/Locations/Location1/GreenHouseOne.tscn"
+backLocationPath = "res://Scenes/Locations/Location1/GardenTwo.tscn"
 
 [node name="FlowerPotScene" type="Sprite" parent="."]
 position = Vector2( 962, 546 )
@@ -25,7 +32,7 @@ texture = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 1600, 231 )
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 pathResource = "res://Images/Locations/MoonieDrawing/FungiKey.PNG"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -37,7 +44,7 @@ shape = SubResource( 1 )
 visible = false
 position = Vector2( -0.999512, 4 )
 scale = Vector2( 0.0931921, 0.087864 )
-texture = ExtResource( 7 )
+texture = ExtResource( 10 )
 
 [node name="SecretCompartiment" type="Sprite" parent="."]
 visible = false
@@ -45,13 +52,20 @@ position = Vector2( 500, 660 )
 scale = Vector2( 0.990385, 0.975728 )
 z_index = 1
 texture = ExtResource( 1 )
-script = ExtResource( 8 )
+script = ExtResource( 5 )
 shift = 2.0
 
 [node name="Sextant" type="Sprite" parent="SecretCompartiment"]
 position = Vector2( 11.1068, 0 )
 scale = Vector2( 0.205681, 0.204505 )
 texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="SecretCompartiment/Sextant"]
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecretCompartiment/Sextant/Area2D"]
+position = Vector2( 0, 7.51685 )
+shape = SubResource( 2 )
 
 [node name="WoodenPlank" type="Sprite" parent="."]
 position = Vector2( 1500, 701 )

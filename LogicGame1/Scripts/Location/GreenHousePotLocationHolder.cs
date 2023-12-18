@@ -4,17 +4,47 @@ using System;
 public class GreenHousePotLocationHolder : LocationHolder
 {
 
-    private Sprite coin;
-    Vector2 position;
+    private Sprite knob;
+    private Sprite woodenPlank;
+    Area2D areaKnob;
+    bool knobVisibility;
+    Vector2 positionAreaKnob;
+    Vector2 positionWoodenPlank;
+    private Sprite secretCompartiment;
+    bool secretCompartimentVisibility;
+    string leftPath;
+    string rightPath;
+    string backPath;
 
     public override void _Ready()
     {
         base._Ready();
-        /*  coin = GetNode<Sprite>("Coin/Coin");
-          if (coin != null)
-          {
-              Vector2 position = coin.GetPosition();
-          }*/
+        areaKnob = GetNode<Area2D>("Area2D");
+        woodenPlank = GetNode<Sprite>("WoodenPlank");
+        secretCompartiment = GetNode<Sprite>("SecretCompartiment");
+        
+        leftPath = base.leftLocationPath;
+        rightPath = base.rightLocationPath;
+        backPath = base.backLocationPath;
+    }
+
+    public void saveGreenHouseThree()
+    {
+
+        if (areaKnob != null)
+        {
+            knob = areaKnob.GetNode<Sprite>("Knob");
+            knobVisibility = knob.Visible;
+            positionAreaKnob = areaKnob.Position;
+        }
+        if (woodenPlank != null)
+        {
+            positionWoodenPlank = woodenPlank.Position;
+        }
+        if (secretCompartiment != null)
+        {
+            secretCompartimentVisibility = secretCompartiment.Visible;
+        }
     }
     public override Godot.Collections.Dictionary<string, object> Save()
     {
@@ -22,9 +52,15 @@ public class GreenHousePotLocationHolder : LocationHolder
             {
                 { "Filename", this.Filename},
                 { "Parent", GetParent().GetParent()},
-                //{ "GreenhouseThing", coin},
-                { "PosX", position.x + 20.0f},
-                { "PosY", position.y - 20.0f}
+                { "KnobVisibility", knobVisibility},
+                { "AreaKnobPosX",positionAreaKnob.x},
+                { "AreaKnobPosY", positionAreaKnob.y},
+                { "WoodenPlankPosX", positionWoodenPlank.x},
+                { "WoodenPlankPosY", positionWoodenPlank.y},
+                { "SecretCompartimentVisibility", secretCompartimentVisibility},
+                { "LeftPath", leftPath},
+                { "RightPath", rightPath},
+                { "BackPath", backPath}
 
             };
     }

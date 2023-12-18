@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Images/Locations/MoonieDrawing/KatleMain.PNG" type="Texture" id=1]
+[ext_resource path="res://Images/Locations/MoonieDrawing/GreenHouseScene.png" type="Texture" id=2]
+[ext_resource path="res://Images/Locations/MoonieDrawing/Katle.PNG" type="Texture" id=3]
+[ext_resource path="res://Images/Locations/MoonieDrawing/stand.PNG" type="Texture" id=4]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=5]
+[ext_resource path="res://Scripts/Location/GreenhouseLocationHolder.cs" type="Script" id=6]
+
+[node name="GreenHouseOne" type="Node2D"]
+script = ExtResource( 6 )
+leftLocationPath = "res://Scenes/Locations/Location1/GreenHouseThree.tscn"
+rightLocationPath = "res://Scenes/Locations/Location1/GreenHouseTwo.tscn"
+backLocationPath = "res://Scenes/Locations/Location1/GardenTwo.tscn"
+
+[node name="Stand" type="Sprite" parent="."]
+position = Vector2( 1200, 451.5 )
+scale = Vector2( 0.188764, 0.168399 )
+texture = ExtResource( 4 )
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite" type="Sprite" parent="BackgroundLayer"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Area2D" type="Area2D" parent="BackgroundLayer"]
+position = Vector2( 0, -4 )
+script = ExtResource( 5 )
+locationPath = "res://Scenes/Locations/Location1/WorkingTable.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="BackgroundLayer/Area2D"]
+position = Vector2( 292, 342 )
+scale = Vector2( 0.717359, 0.638432 )
+polygon = PoolVector2Array( 947.921, 269.41, 950.71, 316.4, 1576.62, 314.834, 1734.14, 222.42, 1729.96, 183.262, 1104.05, 180.129 )
+
+[node name="Katle" type="Sprite" parent="."]
+position = Vector2( 1141, 399 )
+scale = Vector2( 0.276385, 0.348195 )
+texture = ExtResource( 3 )
+
+[node name="KatleMain" type="Sprite" parent="."]
+position = Vector2( 1148.75, 426.875 )
+scale = Vector2( 0.240941, 0.238338 )
+texture = ExtResource( 1 )

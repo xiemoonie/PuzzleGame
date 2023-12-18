@@ -15,7 +15,7 @@ public class LoadGame : TextureButton
     {
         base._Pressed();
         GD.Print("Load Game");
-        GameSaver myScript = new GameSaver();
+        GameSaver myGameSaver = new GameSaver();
 
         Control screenContent = GetNode<Control>("/root/Main/Screen");
         screenContent.removeAllChildren();
@@ -31,9 +31,7 @@ public class LoadGame : TextureButton
         var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
         var inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
 
-       
-
-
-        myScript.LoadGame(inventoryContainer, sceneContainer);
+        myGameSaver.LoadGardenOneScene(inventoryContainer, sceneContainer);
+       gameWrapper.fetchLocation();
     }
 }

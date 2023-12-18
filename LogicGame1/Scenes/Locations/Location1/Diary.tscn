@@ -9,8 +9,9 @@
 [ext_resource path="res://Images/Locations/MoonieDrawing/Paint Layer 4.PNG" type="Texture" id=7]
 [ext_resource path="res://Scripts/ClickOnDiaryPage.cs" type="Script" id=8]
 
-[node name="Node" type="Node2D"]
+[node name="Diary" type="Node2D"]
 script = ExtResource( 1 )
+backLocationPath = "res://Scenes/Locations/Location1/GardenTwo.tscn"
 
 [node name="First" type="Sprite" parent="."]
 texture = ExtResource( 4 )

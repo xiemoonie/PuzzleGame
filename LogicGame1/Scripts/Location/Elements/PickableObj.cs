@@ -25,7 +25,6 @@ class PickableObj : Area2D
                     s.pickedItem(item, some);
                     some.QueueFree();
 
-
                 }
             }
 

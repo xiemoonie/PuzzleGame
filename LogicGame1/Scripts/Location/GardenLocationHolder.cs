@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +10,29 @@ namespace LogicGame1.Scripts.Location
     public class GardenLocationHolder : LocationHolder
     {
         private Sprite coin;
-        Vector2 position;
+        private Sprite fungi;
+        Vector2 positionCoin;
+        Vector2 positionFungi;
+        string leftPath;
+        string rightPath;
 
 
         public override void _Ready()
         {
             base._Ready();
-            coin = GetNode<Sprite>("Coin/Coin");
+           coin = GetNode<Sprite>("Coin/Coin");
+           fungi = GetNode<Sprite>("Fungi/Fungi");
             if (coin != null)
             {
-               Vector2 position = coin.GetPosition();
+                positionCoin = coin.Position;
             }
+            if (fungi != null)
+            {
+                positionFungi = fungi.Position;
+            }
+            leftPath = base.leftLocationPath;
+            rightPath = base.rightLocationPath;
+
         }
 
         public override Godot.Collections.Dictionary<string, object> Save()
@@ -29,9 +41,14 @@ namespace LogicGame1.Scripts.Location
             {
                 { "Filename", this.Filename},
                 { "Parent", GetParent().GetParent()},
-                { "GardenThing", coin},
-                { "PosX", position.x + 20.0f},
-                { "PosY", position.y - 20.0f}
+                { "Coin", coin},
+                { "Fungi", fungi},
+                { "PosXcoin", positionCoin.x},
+                { "PosYcoin", positionCoin.y},
+                { "PosXfungi", positionFungi.x},
+                { "PosYfungi", positionFungi.y},
+                { "LeftPath", leftPath},
+                { "RightPath", rightPath}
 
             };
         }

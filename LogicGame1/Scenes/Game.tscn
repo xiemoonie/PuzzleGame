@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Images/Gui/Debug/Border.png" type="Texture" id=1]
 [ext_resource path="res://Images/Gui/Controls.png" type="Texture" id=2]
@@ -8,9 +8,11 @@
 [ext_resource path="res://Scripts/Game/InventoryExpansionButton.cs" type="Script" id=6]
 [ext_resource path="res://Scripts/Game/InventoryCollapseButton.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/SaveButton.cs" type="Script" id=8]
-[ext_resource path="res://Scripts/Game/LocationChangeButton.cs" type="Script" id=9]
+[ext_resource path="res://Scripts/Game/LocationChangeButtonRight.cs" type="Script" id=9]
 [ext_resource path="res://Objects/Gui/InventoryContainer.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Images/Locations/GateLaboratory/ElectricBlockKnob.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/Game/LocationChangeButtonLeft.cs" type="Script" id=12]
+[ext_resource path="res://Scripts/Game/LocationChangeButtonBack.cs" type="Script" id=13]
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -58,7 +60,7 @@ texture_pressed = SubResource( 4 )
 texture_hover = SubResource( 4 )
 texture_focused = SubResource( 4 )
 flip_h = true
-script = ExtResource( 9 )
+script = ExtResource( 12 )
 
 [node name="RightLocationChange" type="TextureButton" parent="GuiLayer"]
 anchor_left = 1.0
@@ -89,7 +91,19 @@ texture_normal = SubResource( 4 )
 texture_pressed = SubResource( 4 )
 texture_hover = SubResource( 4 )
 texture_focused = SubResource( 4 )
-script = ExtResource( 9 )
+script = ExtResource( 13 )
+
+[node name="GrabbedItem" type="TextureRect" parent="GuiLayer"]
+anchor_left = 0.889
+anchor_top = 0.071
+anchor_right = 0.947
+anchor_bottom = 0.166
+margin_left = 0.119873
+margin_top = 0.32
+margin_right = 0.76001
+margin_bottom = -0.280014
+expand = true
+stretch_mode = 6
 
 [node name="Inventory" type="Control" parent="GuiLayer"]
 anchor_left = 1.0
@@ -162,20 +176,14 @@ patch_margin_top = 11
 patch_margin_right = 15
 patch_margin_bottom = 12
 
-[node name="GrabbedItem" type="TextureRect" parent="GuiLayer"]
-anchor_left = 0.435
-anchor_top = 0.109
-anchor_right = 0.58
-anchor_bottom = 0.181
-margin_right = 40.0
-margin_bottom = 40.0
-
 [node name="Save" type="TextureButton" parent="GuiLayer"]
 anchor_left = 0.095
 anchor_top = 0.063
 anchor_right = 0.15
 anchor_bottom = 0.158
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -15.4
+margin_top = -8.03997
+margin_right = 24.6
+margin_bottom = 31.96
 texture_normal = ExtResource( 11 )
 script = ExtResource( 8 )

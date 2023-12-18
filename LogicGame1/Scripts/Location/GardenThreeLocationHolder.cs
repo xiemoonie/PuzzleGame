@@ -6,18 +6,23 @@ namespace LogicGame1.Scripts.Location
 {
     public class GardenThreeLocationHolder : LocationHolder
     {
-        private Sprite coin;
+        private Sprite vision;
         Vector2 position;
+        string leftPath;
+        string rightPath;
 
 
         public override void _Ready()
         {
             base._Ready();
-           /* coin = GetNode<Sprite>("Coin/Coin");
-            if (coin != null)
-            {
-                Vector2 position = coin.GetPosition();
-            }*/
+            vision = GetNode<Sprite>("Vision/Vision");
+            if (vision != null)
+             {
+                 position = vision.Position;
+             }
+            
+          leftPath = base.leftLocationPath;
+          rightPath = base.rightLocationPath;
         }
 
         public override Godot.Collections.Dictionary<string, object> Save()
@@ -26,9 +31,11 @@ namespace LogicGame1.Scripts.Location
             {
                 { "Filename", this.Filename},
                 { "Parent", GetParent().GetParent()},
-              //  { "GardenThing", coin},
-                { "PosX", position.x + 20.0f},
-                { "PosY", position.y - 20.0f}
+                { "Vision", vision},
+                { "PosXvision", position.x},
+                { "PosYvision", position.y },
+                { "LeftPath", leftPath},
+                { "RightPath", rightPath}
 
             };
         }

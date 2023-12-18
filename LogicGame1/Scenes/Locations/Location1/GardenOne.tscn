@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Location/GardenLocationHolder.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=5]
 
-[node name="Object" type="Node2D" groups=["Persist"]]
+[node name="GardenOne" type="Node2D"]
 script = ExtResource( 4 )
 leftLocationPath = "res://Scenes/Locations/Location1/GardenTwo.tscn"
 rightLocationPath = "res://Scenes/Locations/Location1/GardenThree.tscn"

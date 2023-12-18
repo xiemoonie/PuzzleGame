@@ -1,13 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Images/Locations/MoonieDrawing/SecondScene.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Location/GardenTwoLocationHolder.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=3]
+[ext_resource path="res://Images/Locations/MoonieDrawing/ChineseLintern.PNG" type="Texture" id=4]
+[ext_resource path="res://Images/Locations/MoonieDrawing/Paint Layer 5 Merged.PNG" type="Texture" id=5]
+[ext_resource path="res://Images/Locations/MoonieDrawing/coin.PNG" type="Texture" id=6]
+[ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=7]
 
-[node name="Holder" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 49, 21 )
+
+[node name="GardenTwo" type="Node2D"]
 script = ExtResource( 2 )
 leftLocationPath = "res://Scenes/Locations/Location1/GardenThree.tscn"
 rightLocationPath = "res://Scenes/Locations/Location1/GardenOne.tscn"
+
+[node name="Coin" type="Sprite" parent="."]
+position = Vector2( 1575, 500 )
+texture = ExtResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="Coin"]
+position = Vector2( -1270, -755 )
+script = ExtResource( 7 )
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Coin/Area2D"]
+position = Vector2( 1276, 743 )
+scale = Vector2( 0.191981, 0.162209 )
+polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -20,7 +40,7 @@ centered = false
 [node name="Area2D" type="Area2D" parent="BackgroundLayer"]
 position = Vector2( 0, -4 )
 script = ExtResource( 3 )
-locationPath = "res://Scenes/Locations/Location1/GreenHouseInsideOne.tscn"
+locationPath = "res://Scenes/Locations/Location1/GreenHouseOne.tscn"
 
 [node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="BackgroundLayer/Area2D"]
 position = Vector2( 289, 339 )
@@ -30,7 +50,8 @@ polygon = PoolVector2Array( -246.738, -51.6892, -253.708, 239.65, 469.778, 231.8
 [node name="Book" type="CanvasLayer" parent="."]
 
 [node name="Book" type="Sprite" parent="Book"]
-position = Vector2( 1270, 751 )
+position = Vector2( 1030, 350 )
+texture = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="Book/Book"]
 position = Vector2( -1270, -755 )
@@ -38,5 +59,18 @@ script = ExtResource( 3 )
 locationPath = "res://Scenes/Locations/Location1/Diary.tscn"
 
 [node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Book/Book/Area2D"]
-position = Vector2( 1276, 724 )
-polygon = PoolVector2Array( -262, -402, -254, -390, -239, -375, -217, -398, -267, -422 )
+position = Vector2( 1523, 1151 )
+polygon = PoolVector2Array( -285, -399, -260, -385, -239, -375, -217, -398, -267, -422 )
+
+[node name="PaintLayer5Merged" type="Sprite" parent="Book"]
+position = Vector2( 1308, 336 )
+texture = ExtResource( 5 )
+
+[node name="Area2D" type="Area2D" parent="Book/PaintLayer5Merged"]
+position = Vector2( 0, -4 )
+script = ExtResource( 3 )
+locationPath = "res://Scenes/Locations/Location1/GardenSextant.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Book/PaintLayer5Merged/Area2D"]
+position = Vector2( 0, 5 )
+shape = SubResource( 1 )

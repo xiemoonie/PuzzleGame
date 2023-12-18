@@ -22,8 +22,7 @@ namespace LogicGame1.Scripts.Location
         int pageNum = 0;
 
         bool open = false;
-        
-
+        string backPath;
 
         public override void _Ready()
         {
@@ -38,6 +37,7 @@ namespace LogicGame1.Scripts.Location
             two = GetNode<Sprite>("Middle/Two");
             three = GetNode<Sprite>("Middle/Three");
             page = GetNode<Sprite>("Middle/Page");
+            backPath = base.backLocationPath;
         }
 
         public void goRight()
@@ -93,7 +93,8 @@ namespace LogicGame1.Scripts.Location
                 { "Parent", GetParent().GetParent()},
                 { "GardenThing", first},
                 { "PosX", position.x + 20.0f},
-                { "PosY", position.y - 20.0f}
+                { "PosY", position.y - 20.0f},
+                { "BackPath", backPath}
 
             };
         }
