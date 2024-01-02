@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 
 public class LoadGame : TextureButton
 {
@@ -8,7 +9,7 @@ public class LoadGame : TextureButton
 
     public override void _Ready()
     {
-        
+
     }
 
     public override void _Pressed()
@@ -25,13 +26,30 @@ public class LoadGame : TextureButton
         GameTemplate = ResourceLoader.Load<PackedScene>("res://Scenes/Game.tscn");
 
         var gameWrapper = GameTemplate.Instance<GameWrapper>();
-      //  gameWrapper.LocationToLoad = "res://Scenes/Locations/Location1/Top4.tscn";
+        //  gameWrapper.LocationToLoad = "res://Scenes/Locations/Location1/Top4.tscn";
 
         screenContent.AddChild(gameWrapper);
         var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
         var inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
 
         myGameSaver.LoadGardenOneScene(inventoryContainer, sceneContainer);
-       gameWrapper.fetchLocation();
+        myGameSaver.LoadInventory(inventoryContainer);
+
+        gameWrapper.fetchLocation();
+  
+    }
+    public void EraseFiles()
+    {
+        string[] filePaths = System.IO.Directory.GetFiles("C:\\Users\\carod\\AppData\\Roaming\\Godot\\app_userdata\\LogicGame1");
+
+        foreach (string filePath in filePaths)
+        {
+            var name = new FileInfo(filePath).Name;
+            name = name.ToLower();
+            if (name != "logs")
+            {
+                System.IO.File.Delete(filePath);
+            }
+        }
     }
 }

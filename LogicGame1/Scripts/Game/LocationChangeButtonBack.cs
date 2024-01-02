@@ -17,8 +17,6 @@ public class LocationChangeButtonBack : TextureButton
         var inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
         var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
 
-        inventory.getSprites();
-
         var sceneChilds = sceneContainer.GetChild<Node>(0);
         var list = sceneChilds.GetGroups();
         GD.Print($"Scene childs is :{sceneChilds?.Name}, list:{list.Count}");

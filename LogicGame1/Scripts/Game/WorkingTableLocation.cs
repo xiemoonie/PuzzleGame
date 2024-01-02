@@ -5,20 +5,20 @@ public class WorkingTableLocation : LocationHolder
 {
     Sprite standClassic;
     bool standClassisVisibility;
-    Sprite sextandStand;
-    bool sextantStandVisibility;
-    Sprite sextandClomplited;
-    bool sextandClomplitedVisibility;
-    Sprite sextand;
-    bool sextandVisibility;
+    Sprite sextandUnfinished;
+    bool sextantUnfinishedVisibility;
+    Sprite finishedSextant;
+    bool finishedSextantVisibility;
+    Sprite sextant;
+    bool sextantVisibility;
     string backPath;
     public override void _Ready()
     {
         backPath = base.backLocationPath;
         standClassic = GetNode<Sprite>("Stand");
-        sextandStand = GetNode<Sprite>("SectantUnfinished");
-        sextandClomplited = GetNode<Sprite>("FinishedSextant");
-        sextand = GetNode<Sprite>("CompletedSextant");
+        sextandUnfinished = GetNode<Sprite>("SectantUnfinished");
+        finishedSextant = GetNode<Sprite>("FinishedSextant");
+        sextant = GetNode<Sprite>("CompletedSextant");
     }
 
     public void WorkingTableToSave()
@@ -29,17 +29,17 @@ public class WorkingTableLocation : LocationHolder
         {
             standClassisVisibility = standClassic.Visible;
         }
-        if (sextandStand != null)
+        if (sextandUnfinished != null)
         {
-            sextantStandVisibility = sextandStand.Visible;
+            sextantUnfinishedVisibility = sextandUnfinished.Visible;
         }
-        if (sextandClomplited != null)
+        if (finishedSextant != null)
         {
-            sextandClomplitedVisibility = sextandClomplited.Visible;
+            finishedSextantVisibility = finishedSextant.Visible;
         }
-        if (sextand != null)
+        if (sextant != null)
         {
-            sextandVisibility = sextand.Visible;
+            sextantVisibility = sextant.Visible;
         }
 
     }
@@ -51,9 +51,9 @@ public class WorkingTableLocation : LocationHolder
                 { "Filename", this.Filename},
                 { "Parent", GetParent().GetParent()},
                 { "StandClassisVisibility", standClassisVisibility},
-                { "SextantStandVisibility", sextantStandVisibility},
-                { "SextandClomplitedVisibility", sextandClomplitedVisibility},
-                { "SextandVisibility", sextandVisibility},
+                { "SextantUnfinished", sextantUnfinishedVisibility},
+                { "finishedSextantVisibility", finishedSextantVisibility},
+                { "SextandVisibility", sextantVisibility},
                 { "BackPath", backPath}
 
             };

@@ -1,14 +1,11 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
+
 public class GameSaver
 {
-    public void someFun(Node parentInventory, Node parentScene)
-    {
-        SaveGameScene(parentScene);
-        SaveInventory(parentInventory);
-    }
-
     public void SaveInventory(Node parentInventory)
     {
         var saveGame = new File();
@@ -36,16 +33,11 @@ public class GameSaver
 
             // Store the save dictionary as a new line in the save file.
             saveGame.StoreLine(JSON.Print(nodeData));
-            GD.Print("saving 1...", nodeData.ToString());
+            GD.Print("saving Inventory right here...", nodeData.ToString());
         }
-        SceneController myScript = parentInventory.GetNode<SceneController>("/root/Main/SceneController");
-        GD.Print("Going to MENUUUU");
-
-        myScript.goToMenu();
         saveGame.Close();
     }
-
-    public void LoadInventory(HFlowContainer parentOne)
+    public void LoadInventory(HFlowContainer parentInventory)
     {
         var saveGame = new File();
         if (!saveGame.FileExists("user://savegameInventory.save"))
@@ -54,10 +46,9 @@ public class GameSaver
         }
         else
         {
-            GD.Print("FILE INVENTORY FOUND!! name of parent:", parentOne.Name);
+            GD.Print("FILE INVENTORY FOUND!! name of parent:", parentInventory.Name);
 
         }
-
         saveGame.Open("user://savegameInventory.save", File.ModeFlags.Read);
 
         while (saveGame.GetPosition() < saveGame.GetLen())
@@ -76,7 +67,7 @@ public class GameSaver
                 GD.Print("name object on file", listTextures[i].ToString());
                 var item = newItemObject.GetNode<TextureRect>("Content/Texture");
                 item.Texture = ResourceLoader.Load<Texture>(listTextures[i] as String);
-                parentOne.AddChild(newItemObject);
+                parentInventory.AddChild(newItemObject);
 
 
                 foreach (KeyValuePair<string, object> entry in nodeData)
@@ -87,11 +78,8 @@ public class GameSaver
                     newItemObject.Set(key, entry.Value);
                 }
             }
-
         }
-
         saveGame.Close();
-
     }
 
     public void SaveGameScene(Node parent)
@@ -128,12 +116,11 @@ public class GameSaver
 
     }
 
-
     public void SaveParticularScene(Node parentInventory, Node parentScene, string nameSceneFolder)
     {
         var saveNodes = parentScene.GetTree().GetNodesInGroup("Garden");
         GD.Print("Nodes: " + saveNodes.Count);
-        var saveItemInventory = parentInventory.GetTree().GetNodesInGroup("GardenInventory");
+        //var saveItemInventory = parentInventory.GetTree().GetNodesInGroup("GardenInventory");
         var saveSceneGame = new File();
         saveSceneGame.Open("user://save" + nameSceneFolder + ".save", File.ModeFlags.Write);
         GD.Print("saving Game...");
@@ -159,17 +146,14 @@ public class GameSaver
             saveSceneGame.StoreLine(JSON.Print(nodeData));
             GD.Print("saving GameScene...", nodeData.ToString());
         }
+
+        //SaveInventory(parentInventory);
         saveSceneGame.Close();
-
-
-        foreach (Node saveNode in saveItemInventory)
-        {
-            // SaveInventory(parentInventory);
-        }
     }
 
-    public bool LoadGardenOneScene(HFlowContainer parentOne, Control parentTwo)
+    public bool LoadGardenOneScene(HFlowContainer parentInventory, Control parentTwo)
     {
+
         bool found = false;
         var saveGame = new File();
         if (!saveGame.FileExists("user://saveGardenOne.save"))
@@ -206,9 +190,9 @@ public class GameSaver
                 var fungi = newObject.GetNode<Sprite>("Fungi/Fungi");
                 fungi.QueueFree();
             }
-            
-                parentTwo.AddChild(newObject);
-            
+
+            parentTwo.AddChild(newObject);
+
 
             // Now we set the remaining variables.
             foreach (KeyValuePair<string, object> entry in nodeData)
@@ -269,7 +253,7 @@ public class GameSaver
                 coin.QueueFree();
 
             }
-                parentTwo.AddChild(newObject);
+            parentTwo.AddChild(newObject);
             // Now we set the remaining variables.
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
@@ -402,9 +386,23 @@ public class GameSaver
 
             var newObjectScene = (PackedScene)ResourceLoader.Load(nodeData["Filename"].ToString());
             var newObject = (LocationHolder)newObjectScene.Instance();
+           
+            newObject.backLocationPath = nodeData["BackPath"].ToString();
+            newObject.rightLocationPath = nodeData["RightPath"].ToString();
+            newObject.leftLocationPath = nodeData["LeftPath"].ToString();
+            float sackPosX = (float)nodeData["PosXSack"];
+            float sackPosY = (float)nodeData["PosYSack"];
 
 
-
+            var screwdriver = nodeData["Screwdriver"];
+            var sack = newObject.GetNode<CanvasLayer>("Sack");
+            Vector2 positionSack = new Vector2(sackPosX, sackPosY);
+            if (screwdriver == null)
+            {
+                var screwDriver = newObject.GetNode<CanvasLayer>("Screwdriver");
+                screwDriver.QueueFree();
+            }
+            
             parentTwo.AddChild(newObject);
 
 
@@ -412,7 +410,7 @@ public class GameSaver
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
                 string key = entry.Key.ToString();
-                if (key == "Filename" || key == "Parent" || key == "PosX" || key == "PosY" || key == "LeftPath" || key == "RightPath")
+                if (key == "Filename" || key == "Parent" || key == "Screwdriver" || key == "Sack" || key == "PosXSack" || key == "PosYSack" || key == "LeftPath" || key == "RightPath" || key == "BackPath")
                     continue;
                 newObject.Set(key, entry.Value);
             }
@@ -455,20 +453,24 @@ public class GameSaver
             var secretCompartiment = newObject.GetNode<Sprite>("SecretCompartiment");
             var woodenPlank = newObject.GetNode<Sprite>("WoodenPlank");
             var areaKnob = newObject.GetNode<Area2D>("Area2D");
-            var knob = areaKnob.GetNode<Sprite>("Knob");
             
-
+            var knob = areaKnob.GetNode<Sprite>("Knob");
+            bool sextant = (bool)nodeData["Sextant"];
+            
             bool visibilityKnob = (bool)nodeData["KnobVisibility"];
             bool secretCompartimentVisibility = (bool)nodeData["SecretCompartimentVisibility"];
             float woodenPlankPosX = (float)nodeData["WoodenPlankPosX"];
             float woodenPlankPosY = (float)nodeData["WoodenPlankPosY"];
+            var locked = (bool)nodeData["Locked"];
             float areaKnobPosX = (float)nodeData["AreaKnobPosX"];
             float areaKnobPosY = (float)nodeData["AreaKnobPosY"];
             Vector2 positionWoodenPlank = new Vector2(woodenPlankPosX, woodenPlankPosY);
             Vector2 positionArea = new Vector2(areaKnobPosX, areaKnobPosY);
             if (visibilityKnob)
             {
-                knob.Visible = visibilityKnob;
+                knob.Visible = true;
+                var s = (AttachableObject)areaKnob;
+                s.unlockedSlide = true;
             }
             else
             {
@@ -477,13 +479,19 @@ public class GameSaver
             if (secretCompartimentVisibility)
             {
                 secretCompartiment.Visible = secretCompartimentVisibility;
+                if (!sextant)
+                {
+                    secretCompartiment.removeAllChildren();
+                }
+                
             }
             else
             {
                 secretCompartiment.Visible = secretCompartimentVisibility;
             }
+            
             woodenPlank.Position = positionWoodenPlank;
-            areaKnob.Position = positionArea;  
+            areaKnob.Position = positionArea;
 
             parentTwo.AddChild(newObject);
 
@@ -492,15 +500,13 @@ public class GameSaver
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
                 string key = entry.Key.ToString();
-                if (key == "Filename" || key == "Parent" || key == "KnobVisibility" || key == "SecretCompartimentVisibility" || key == "WoodenPlankPosY" || key == "WoodenPlankPosX" || key == "AreaKnobPosX" || key == "AreaKnobPosY" || key == "LeftPath" || key == "RightPath" || key == "BackPath")
+                if (key == "Filename" || key == "Parent" || key == "Locked" ||  key == "KnobVisibility" || key == "SecretCompartimentVisibility" || key == "WoodenPlankPosY" || key == "WoodenPlankPosX" || key == "AreaKnobPosX" || key == "AreaKnobPosY" || key == "LeftPath" || key == "RightPath" || key == "BackPath")
                     continue;
                 newObject.Set(key, entry.Value);
             }
 
             found = true;
-
         }
-
         saveGame.Close();
         return found;
     }
@@ -523,72 +529,62 @@ public class GameSaver
 
         while (saveGame.GetPosition() < saveGame.GetLen())
         {
-            GD.Print(" INDISE OF THE MADNESS!!!!");
-
             // Get the saved dictionary from the next line in the save file
             var nodeData = new Godot.Collections.Dictionary<string, object>((Godot.Collections.Dictionary)JSON.Parse(saveGame.GetLine()).Result);
 
             var newObjectScene = (PackedScene)ResourceLoader.Load(nodeData["Filename"].ToString());
             var newObject = (LocationHolder)newObjectScene.Instance();
-
+            
             var background = newObject.GetNode<Sprite>("SextantGardenBackground");
             var sunComplited = newObject.GetNode<Sprite>("SunCompleted");
-            var sun = newObject.GetNode<Sprite>("Sun");
             var sextantView = newObject.GetNode<Sprite>("SextantView");
-            var ruler = newObject.GetNode<Sprite>("Ruler");
             var angleRuler = newObject.GetNode<Label>("Ruler/RichTextLabel");
+            var ruler = newObject.GetNode<Sprite>("Ruler");
 
             newObject.backLocationPath = nodeData["BackPath"].ToString();
             Vector2 position;
+            Vector2 positionSun;
+            positionSun.x = (float)nodeData["PositionSunCompletedX"];
+            positionSun.y = (float)nodeData["PositionSunCompletedY"];
 
-
-            position.x = (float)nodeData["PositionBackgroundX"];
-            position.y = (float)nodeData["PositionBackgroundY"];
-            background.Position = position;
-            bool sunVisibility = (bool)nodeData["SunVisibility"];
             bool sunCompletedVisibility = (bool)nodeData["SunCompletedVisibility"];
-            bool sextantVisibility = (bool)nodeData["SextantViewVisibility"];
-            string angles = nodeData["AnglesRuler"].ToString();
-            if (sunVisibility)
-            {
-                position.x = (float)nodeData["PositionSunX"];
-                position.y = (float)nodeData["PositionSunY"];
-                sunComplited.Visible = false;
-                sun.Visible = true;
-                sun.Position = position;
-            }
+
+            string angles = (string)nodeData["Degree"];
+            
             if (sunCompletedVisibility)
             {
-                sun.Visible = false;
+                sextantView.Visible = (bool)nodeData["SextantVisibility"];
                 sunComplited.Visible = true;
-                position.x = (float)nodeData["PositionSunCompletedX"];
-                position.y = (float)nodeData["PositionSunCompletedY"];
-            }
-            if (sextantVisibility)
-            {
-                sextantView.Visible = true;
+                sunComplited.Position = positionSun;
+                position.x = (float)nodeData["PositionBackgroundX"];
+                position.y = (float)nodeData["PositionBackgroundY"];
+                background.Position = position;
                 ruler.Visible = true;
-
+                angleRuler.Text = angles.ToString();
             }
-            else
-            {
-                sextantView.Visible = false;
-            }
-            angleRuler.Text = angles;
-
-
+           
             parentTwo.AddChild(newObject);
 
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
                 string key = entry.Key.ToString();
-                if (key == "Filename" || key == "Parent" || key == "PositionBackgroundX" || key == "PositionBackgroundY" || key == "PositionSunX" || key == "PositionSunY" || key == "SunVisibility" || key == "PositionSunCompletedX" || key == "PositionSunCompletedY" || key == "SunCompletedVisibility" || key == "SextantViewVisibility" || key == "AnglesRuler" || key == "BackPath")
+                if (key == "Filename" || 
+                    key == "Parent" ||
+                    key == "PositionBackgroundX" ||
+                    key == "PositionBackgroundY" ||
+                    key == "SunVisibility" ||
+                    key == "PositionSunCompletedX" ||
+                    key == "PositionSunCompletedY" ||
+                    key == "SunCompletedVisibility" ||
+                    key == "BackPath" ||
+                    key == "Degree" ||
+                    key == "RulerBlocked" ||
+                    key == "SextantVisibility"
+                   )
                     continue;
                 newObject.Set(key, entry.Value);
             }
-
             found = true;
-
         }
 
         saveGame.Close();
@@ -619,7 +615,6 @@ public class GameSaver
             newObject.backLocationPath = nodeData["BackPath"].ToString();
             parentTwo.AddChild(newObject);
 
-
             // Now we set the remaining variables.
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
@@ -630,7 +625,6 @@ public class GameSaver
             }
 
             found = true;
-
         }
 
         saveGame.Close();
@@ -639,8 +633,6 @@ public class GameSaver
 
     public bool LoadWorkingTableScene(HFlowContainer parentOne, Control parentTwo)
     {
-
-
         bool found = false;
         var saveGame = new File();
         if (!saveGame.FileExists("user://saveWorkingTable.save"))
@@ -662,14 +654,15 @@ public class GameSaver
             var newObjectScene = (PackedScene)ResourceLoader.Load(nodeData["Filename"].ToString());
             var newObject = (LocationHolder)newObjectScene.Instance();
             bool standClassicVisibility = (bool)nodeData["StandClassisVisibility"];
-            bool sextantStandVisibility = (bool)nodeData["SextantStandVisibility"];
-            bool sextandClomplitedVisibility = (bool)nodeData["SextandClomplitedVisibility"];
+            bool sextantUnfinishedVisibility = (bool)nodeData["SextantUnfinished"];
+            bool sextandFinishedVisibility = (bool)nodeData["finishedSextantVisibility"];
             bool sextandVisibility = (bool)nodeData["SextandVisibility"];
 
             Sprite standClassic = newObject.GetNode<Sprite>("Stand"); ;
             Sprite sextandStand = newObject.GetNode<Sprite>("SectantUnfinished");
             Sprite sextandClomplited = newObject.GetNode<Sprite>("FinishedSextant"); ;
             Sprite sextand = newObject.GetNode<Sprite>("CompletedSextant");
+
             if (standClassicVisibility)
             {
                 standClassic.Visible = standClassicVisibility;
@@ -678,17 +671,17 @@ public class GameSaver
             {
                 standClassic.Visible = false;
             }
-            if (sextantStandVisibility)
+            if (sextantUnfinishedVisibility)
             {
-                sextandStand.Visible = sextantStandVisibility;
+                sextandStand.Visible = sextantUnfinishedVisibility;
             }
             else
             {
                 sextandStand.Visible = false;
             }
-            if (sextandClomplitedVisibility)
+            if (sextandFinishedVisibility)
             {
-                sextandClomplited.Visible = sextandClomplitedVisibility;
+                sextandClomplited.Visible = sextandFinishedVisibility;
             }
             else
             {
@@ -707,7 +700,14 @@ public class GameSaver
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
                 string key = entry.Key.ToString();
-                if (key == "Filename" || key == "Parent" || key == "StandClassisVisibility" || key == "SextantStandVisibility" || key == "SextandClomplitedVisibility" || key == "SextandVisibility" || key == "BackPath")
+              
+                if (key == "Filename" || 
+                    key == "Parent" || 
+                    key == "StandClassisVisibility" ||
+                    key == "finishedSextantVisibility" ||
+                    key == "SextantUnfinished" ||
+                    key == "SextandVisibility" ||
+                    key == "BackPath")
                     continue;
                 newObject.Set(key, entry.Value);
             }

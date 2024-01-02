@@ -11,7 +11,6 @@ public class ClickMoveObject : Sprite
     {
         originPos = this.GlobalPosition;
     }
-
     public override void _Process(float delta)
     {
         base._Process(delta);

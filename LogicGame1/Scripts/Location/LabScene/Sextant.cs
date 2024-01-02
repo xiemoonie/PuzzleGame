@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using Object= Godot.Object;
+using Object = Godot.Object;
 
 public class Sextant : Area2D
 {
@@ -10,43 +10,27 @@ public class Sextant : Area2D
     Sprite sun;
     Sprite sunCompleted;
     Sprite ruler;
-    TextureRect itemToDisplay;
-    Label degrees;
-    float degreeValue;
+    public TextureRect itemToDisplay;
+    public Label degrees;
+    public float degreeValue;
     AudioStreamPlayer2D click;
     public bool locked = false;
- 
     public override void _Ready()
     {
-       parent = this.GetParent();
-       background = parent.GetNode<Sprite>("SextantGardenBackground");
-       ruler = parent.GetNode<Sprite>("Ruler");
-       sextantView = parent.GetNode<Sprite>("SextantView");
-       sun = parent.GetNode<Sprite>("Sun");
-       sunCompleted = parent.GetNode<Sprite>("SunCompleted");
-       degrees = ruler.GetNode<Label>("RichTextLabel");
-       GD.Print("hey I am being called");
-       degreeValue = 100;
-       click = parent.GetNode<AudioStreamPlayer2D>("click");
+        parent = this.GetParent();
+        background = parent.GetNode<Sprite>("SextantGardenBackground");
+        ruler = parent.GetNode<Sprite>("Ruler");
+        sextantView = parent.GetNode<Sprite>("SextantView");
+        sun = parent.GetNode<Sprite>("Sun");
+        sunCompleted = parent.GetNode<Sprite>("SunCompleted");
+        degrees = ruler.GetNode<Label>("RichTextLabel");
+        degreeValue = 100;
+        click = parent.GetNode<AudioStreamPlayer2D>("click");
         itemToDisplay = GetNode<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");
-        /*
-        if (itemToDisplay.Texture != null && itemToDisplay.Texture.ResourcePath == "res://Images/Locations/MoonieDrawing/CompletedSextant.PNG")
-        {
-            sextantView.Visible = true;
-            ruler.Visible = true;
-            sun.Visible = true;
-        }
-        else
-        {
-            sextantView.Visible = false;
-            ruler.Visible = false;
-            sun.Visible = false;
-        }
-        */
     }
 
     public void MoveRight()
-    { 
+    {
         if (background != null)
         {
             Vector2 position = background.Position;
@@ -55,21 +39,19 @@ public class Sextant : Area2D
             {
                 position.x -= 50;
                 background.Position = position;
-                //GD.Print("RightBackGround X:" + position.x);
             }
         }
-    } 
+    }
     public void MoveLeft()
     {
         if (background != null)
         {
             Vector2 position = background.Position;
-            
+
             if (position.x <= 2500)
             {
                 position.x += 50;
                 background.Position = position;
-           //     GD.Print("Left BackGround X:" + position.x);
             }
         }
     }
@@ -80,9 +62,8 @@ public class Sextant : Area2D
         {
             position.y += 50;
             background.Position = position;
-          //  GD.Print("Up BackGround Y:" + position.y);
         }
-       
+
     }
     public void MoveDown()
     {
@@ -91,14 +72,11 @@ public class Sextant : Area2D
         {
             position.y -= 50;
             background.Position = position;
-          //  GD.Print("Down BackGround Y:" + position.y);
         }
-      
-
     }
     public void MoveUpRuler()
     {
-        
+
         if (sun != null)
         {
             Vector2 position = sun.Position;
@@ -107,33 +85,30 @@ public class Sextant : Area2D
             {
                 float axisY = Mathf.InverseLerp(-600, 800, position.y);
                 position.y -= 50;
-                int invY = (int)Mathf.Lerp(0,180, 1-axisY);
+                int invY = (int)Mathf.Lerp(0, 180, 1 - axisY);
                 sun.Position = position;
-                degreeValue  = invY; //+
-              //  GD.Print("Up SUN Y:" + position.y);
+                degreeValue = invY;
                 degrees.Text = degreeValue.ToString();
             }
-         
         }
     }
     public void MoveDownRuler()
     {
-        
+
         if (sun != null)
         {
             Vector2 position = sun.Position;
-        
+
             if (position.y <= 800)
             {
-                float axisY = Mathf.InverseLerp(-600, 800, position.y);// -700, 800, position.y
+                float axisY = Mathf.InverseLerp(-600, 800, position.y);
                 position.y += 50;
-                int invY = (int)Mathf.Lerp(0,180, 1-axisY);
+                int invY = (int)Mathf.Lerp(0, 180, 1 - axisY);
                 sun.Position = position;
-                degreeValue  = invY;
-             //   GD.Print("Down SUN Y:" + position.y);
+                degreeValue = invY;
                 degrees.Text = degreeValue.ToString();
             }
-          
+
         }
     }
 
@@ -142,7 +117,7 @@ public class Sextant : Area2D
         Vector2 positionSun = sun.Position;
         Vector2 positionBackground = background.Position;
 
-        if (positionBackground.x == 2475 && positionBackground.y == 0  && positionSun.x == 960  && positionSun.y == 300)
+        if (positionBackground.x == 2475 && positionBackground.y == 0 && positionSun.x == 960 && positionSun.y == 300)
         {
             click.Play();
             sun.Visible = false;
@@ -150,7 +125,7 @@ public class Sextant : Area2D
             var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
             s.eraseItem();
             return true;
-       
+
         }
         else
         {
@@ -167,7 +142,7 @@ public class Sextant : Area2D
         {
             click.Play();
         }
-  }
+    }
     public override void _InputEvent(Object viewport, InputEvent @event, int shapeIdx)
     {
         base._InputEvent(viewport, @event, shapeIdx);
@@ -181,7 +156,6 @@ public class Sextant : Area2D
                 {
                     if (itemToDisplay.Texture.ResourcePath == "res://Images/Locations/MoonieDrawing/CompletedSextant.PNG")
                     {
-
                         ruler.Visible = true;
                         sextantView.Visible = true;
                         sun.Visible = true;
@@ -216,18 +190,18 @@ public class Sextant : Area2D
                     }
                     else
                     {
-                       
-                            sextantView.Visible = false;
-                            ruler.Visible = false;
-                            sun.Visible = false;
-                        
+
+                        sextantView.Visible = false;
+                        ruler.Visible = false;
+                        sun.Visible = false;
+
                     }
                 }
                 else
                 {
                     lockedScene();
                 }
-                
+
             }
         }
     }

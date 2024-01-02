@@ -26,7 +26,7 @@ public class LocationChangingElement : Area2D {
 
                 switch (locationPath)
                 {
-                    case "res://Scenes/Locations/Location1/GardenSextant.tscn":
+                    case "res://Scenes/Locations/GardenLocation/GardenSextant.tscn":
                         sceneContainer.removeAllChildren();
                         result = myGameSaver.LoadGardenSextantScene(inventoryContainer, sceneContainer);
                         if (!result)
@@ -39,7 +39,7 @@ public class LocationChangingElement : Area2D {
                             gameWrapper.fetchLocation();
                         }
                         break;
-                    case "res://Scenes/Locations/Location1/WorkingTable.tscn":
+                    case "res://Scenes/Locations/GardenLocation/WorkingTable.tscn":
                         sceneContainer.removeAllChildren();
                         result = myGameSaver.LoadWorkingTableScene(inventoryContainer, sceneContainer);
                         if (!result)

@@ -16,7 +16,6 @@ namespace LogicGame1.Scripts.Location
         string leftPath;
         string rightPath;
 
-
         public override void _Ready()
         {
             base._Ready();

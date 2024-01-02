@@ -23,8 +23,17 @@ public class AttachableObject : Area2D
         {
             if (s.Texture.ResourcePath == pathResource)
             {
-                
-                Sprite knob = this.GetNode<Sprite>("Knob");
+               
+                foreach (var child in s.GetChildren())
+                {
+                    if (child is Node node)
+                    {
+                        GD.Print("child name: " + node.Name);
+                    }
+                    
+                }
+              
+                Sprite knob = GetNode<Sprite>("Knob");
                 if (knob != null)
                 {
                     knob.Visible = true;

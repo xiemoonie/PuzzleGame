@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 
 public class SaveButton : TextureButton
 {
@@ -24,17 +25,37 @@ public class SaveButton : TextureButton
         var list = som.GetGroups();
         GD.Print($"Som is :{som?.Name}, list:{list.Count}");
 
+        inventory.getSprites();
+        gameSaverScript.SaveInventory(inventory);
+
         if (list.Count == 0)
         {
             som.AddToGroup("Garden", true);
         }
-
-        inventory.getSprites();
+        var currentScene = sceneContainer.GetChild<Node>(0);
+        switch (currentScene.Name)
+        {
+            case "GreenHouseThree":
+                var greenHouseThree = sceneContainer.GetChild<GreenHousePotLocationHolder>(0);
+                greenHouseThree.saveGreenHouseThree(); 
+                break;
+            case "WorkingTable":
+                var workingTable = sceneContainer.GetChild<WorkingTableLocation>(0);
+                workingTable.WorkingTableToSave(); 
+                break;
+            case "GardenSextant":
+                var gardenSextant = sceneContainer.GetChild<GardenSunLocation>(0);
+                gardenSextant.sextantToSave();
+                break;
+        }
+       
+        
         gameSaverScript.SaveParticularScene(inventory, myGameWrapper, nameScene);
         sceneContainer.removeAllChildren();
-        gameSaverScript.SaveInventory(inventory);
-        
+        SceneController myScript = inventory.GetNode<SceneController>("/root/Main/SceneController");
+        GD.Print("Going to MENUUUU");
+        myScript.goToMenu();
+
+
     }
-
-
 }

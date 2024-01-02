@@ -6,9 +6,9 @@ class ItemSelected : TextureRect
 {
     public override void _Ready()
     {
-     
+
     }
-    
+
     public override void _GuiInput(InputEvent @event)
     {
         base._GuiInput(@event);
@@ -16,19 +16,14 @@ class ItemSelected : TextureRect
         {
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left)
             {
-                
+
                 var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
                 InventoryItem some = this.GetOwner<InventoryItem>();
                 s.selectedItem(some);
                 GD.Print("clicked on item");
-          
             }
-
-           
 
         }
     }
-    
-
 }
 

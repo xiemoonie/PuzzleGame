@@ -1,27 +1,29 @@
 using Godot;
 using System;
 
-
-
 namespace LogicGame1.Scripts.Location
 {
     public class GreenHouseDepositLocationHolder : LocationHolder
     {
-        private Sprite coin;
-        Vector2 position;
+        private Sprite screwdriver;
+        private Sprite sack;
+        Vector2 positionSack;
         string leftPath;
         string rightPath;
+        string backPath;
 
         public override void _Ready()
         {
             base._Ready();
-            /* coin = GetNode<Sprite>("Coin/Coin");
-             if (coin != null)
-             {
-                 Vector2 position = coin.GetPosition();
-             }*/
+            screwdriver = GetNode<Sprite>("Screwdriver/Screwdriver");
+            sack = GetNode<Sprite>("Sack/Sack");
+            if (sack != null)
+            {
+                positionSack = sack.Position;
+            }
             leftPath = base.leftLocationPath;
             rightPath = base.rightLocationPath;
+            backPath = base.backLocationPath;
         }
 
         public override Godot.Collections.Dictionary<string, object> Save()
@@ -30,12 +32,13 @@ namespace LogicGame1.Scripts.Location
             {
                 { "Filename", this.Filename},
                 { "Parent", GetParent().GetParent()},
-               // { "GardenThing", coin},
-                { "PosX", position.x + 20.0f},
-                { "PosY", position.y - 20.0f},
+                { "Screwdriver",screwdriver},
+                { "Sack", sack},
+                { "PosXSack", positionSack.x},
+                { "PosYSack", positionSack.y},
                 { "LeftPath", leftPath},
-                { "RightPath", rightPath}
-
+                { "RightPath", rightPath},
+                { "BackPath", backPath }
             };
         }
     }

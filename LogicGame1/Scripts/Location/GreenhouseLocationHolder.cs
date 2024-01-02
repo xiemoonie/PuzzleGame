@@ -35,7 +35,6 @@ namespace LogicGame1.Scripts.Location
             {
                 { "Filename", this.Filename},
                 { "Parent", GetParent().GetParent()},
-                //{ "GreenhouseThing", coin},
                 { "PosX", position.x + 20.0f},
                 { "PosY", position.y - 20.0f},
                 { "LeftPath", leftPath},

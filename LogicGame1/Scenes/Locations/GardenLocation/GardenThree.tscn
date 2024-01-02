@@ -8,8 +8,8 @@
 
 [node name="GardenThree" type="Node2D"]
 script = ExtResource( 2 )
-leftLocationPath = "res://Scenes/Locations/Location1/GardenOne.tscn"
-rightLocationPath = "res://Scenes/Locations/Location1/GardenTwo.tscn"
+leftLocationPath = "res://Scenes/Locations/GardenLocation/GardenOne.tscn"
+rightLocationPath = "res://Scenes/Locations/GardenLocation/GardenTwo.tscn"
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1

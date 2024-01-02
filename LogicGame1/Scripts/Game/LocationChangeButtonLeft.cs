@@ -16,8 +16,6 @@ public class LocationChangeButtonLeft : TextureButton
         //var inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
         GameWrapper myGameWrapper = GetNode<GameWrapper>("/root/Main/Screen/GameWrapper");
         var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
-        inventory.getSprites();
-
 
         var som = sceneContainer.GetChild<Node>(0);
         var list = som.GetGroups();
@@ -68,6 +66,8 @@ public class LocationChangeButtonLeft : TextureButton
 
                 break;
             case "GreenHouseThree":
+                var greenHouseThree = sceneContainer.GetChild<GreenHousePotLocationHolder>(0);
+                greenHouseThree.saveGreenHouseThree();
                 myGameSaver.SaveParticularScene(inventory, myGameWrapper, "GreenHouseThree");
                 sceneContainer.removeAllChildren();
                 result = myGameSaver.LoadGreenHouseTwoScene(inventory, sceneContainer);

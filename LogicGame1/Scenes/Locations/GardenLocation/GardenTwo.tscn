@@ -13,8 +13,8 @@ extents = Vector2( 49, 21 )
 
 [node name="GardenTwo" type="Node2D"]
 script = ExtResource( 2 )
-leftLocationPath = "res://Scenes/Locations/Location1/GardenThree.tscn"
-rightLocationPath = "res://Scenes/Locations/Location1/GardenOne.tscn"
+leftLocationPath = "res://Scenes/Locations/GardenLocation/GardenThree.tscn"
+rightLocationPath = "res://Scenes/Locations/GardenLocation/GardenOne.tscn"
 
 [node name="Coin" type="Sprite" parent="."]
 position = Vector2( 1575, 500 )
@@ -40,7 +40,7 @@ centered = false
 [node name="Area2D" type="Area2D" parent="BackgroundLayer"]
 position = Vector2( 0, -4 )
 script = ExtResource( 3 )
-locationPath = "res://Scenes/Locations/Location1/GreenHouseOne.tscn"
+locationPath = "res://Scenes/Locations/GardenLocation/GreenHouseOne.tscn"
 
 [node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="BackgroundLayer/Area2D"]
 position = Vector2( 289, 339 )
@@ -69,7 +69,7 @@ texture = ExtResource( 5 )
 [node name="Area2D" type="Area2D" parent="Book/PaintLayer5Merged"]
 position = Vector2( 0, -4 )
 script = ExtResource( 3 )
-locationPath = "res://Scenes/Locations/Location1/GardenSextant.tscn"
+locationPath = "res://Scenes/Locations/GardenLocation/GardenSextant.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Book/PaintLayer5Merged/Area2D"]
 position = Vector2( 0, 5 )

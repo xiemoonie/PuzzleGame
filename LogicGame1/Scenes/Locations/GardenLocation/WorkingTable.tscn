@@ -13,7 +13,7 @@ extents = Vector2( 236.5, 239.5 )
 
 [node name="WorkingTable" type="Node2D"]
 script = ExtResource( 1 )
-backLocationPath = "res://Scenes/Locations/Location1/GreenHouseOne.tscn"
+backLocationPath = "res://Scenes/Locations/GardenLocation/GreenHouseOne.tscn"
 
 [node name="WorkingTable" type="Sprite" parent="."]
 position = Vector2( 957, 540 )

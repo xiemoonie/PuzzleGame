@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Images/Locations/MoonieDrawing/coin.PNG" type="Texture" id=1]
 [ext_resource path="res://Images/Locations/MoonieDrawing/BackgroundFirstScene.png" type="Texture" id=2]
 [ext_resource path="res://Images/Locations/MoonieDrawing/FungiKey.PNG" type="Texture" id=3]
 [ext_resource path="res://Scripts/Location/GardenLocationHolder.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=5]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=6]
 
 [node name="GardenOne" type="Node2D"]
 script = ExtResource( 4 )
-leftLocationPath = "res://Scenes/Locations/Location1/GardenTwo.tscn"
-rightLocationPath = "res://Scenes/Locations/Location1/GardenThree.tscn"
+leftLocationPath = "res://Scenes/Locations/GardenLocation/GardenTwo.tscn"
+rightLocationPath = "res://Scenes/Locations/GardenLocation/GardenThree.tscn"
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -47,3 +48,13 @@ script = ExtResource( 5 )
 position = Vector2( 1270, 753 )
 scale = Vector2( 0.107022, 0.0936994 )
 polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -4 )
+script = ExtResource( 6 )
+locationPath = "res://Scenes/Locations/GardenLocation/GreenHouseOne.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 289, 339 )
+scale = Vector2( 0.717359, 0.638432 )
+polygon = PoolVector2Array( 356.865, -114.343, 522.751, -109.644, 528.327, -321.099, 351.289, -311.701 )

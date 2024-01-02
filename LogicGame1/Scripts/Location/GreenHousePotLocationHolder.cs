@@ -11,6 +11,8 @@ public class GreenHousePotLocationHolder : LocationHolder
     Vector2 positionAreaKnob;
     Vector2 positionWoodenPlank;
     private Sprite secretCompartiment;
+    private bool sextant;
+    private bool locked;
     bool secretCompartimentVisibility;
     string leftPath;
     string rightPath;
@@ -22,7 +24,7 @@ public class GreenHousePotLocationHolder : LocationHolder
         areaKnob = GetNode<Area2D>("Area2D");
         woodenPlank = GetNode<Sprite>("WoodenPlank");
         secretCompartiment = GetNode<Sprite>("SecretCompartiment");
-        
+        sextant = true;
         leftPath = base.leftLocationPath;
         rightPath = base.rightLocationPath;
         backPath = base.backLocationPath;
@@ -37,14 +39,21 @@ public class GreenHousePotLocationHolder : LocationHolder
             knobVisibility = knob.Visible;
             positionAreaKnob = areaKnob.Position;
         }
-        if (woodenPlank != null)
-        {
-            positionWoodenPlank = woodenPlank.Position;
-        }
+       
         if (secretCompartiment != null)
         {
             secretCompartimentVisibility = secretCompartiment.Visible;
+            if (secretCompartiment.GetChildCount() == 0)
+            {
+                sextant = false;
+            }
         }
+        var fungiScript = (AttachableObject)areaKnob;
+        locked = fungiScript.unlockedSlide;
+
+        positionWoodenPlank.x = woodenPlank.Position.x;
+        positionWoodenPlank.y = woodenPlank.Position.y;
+
     }
     public override Godot.Collections.Dictionary<string, object> Save()
     {
@@ -58,10 +67,11 @@ public class GreenHousePotLocationHolder : LocationHolder
                 { "WoodenPlankPosX", positionWoodenPlank.x},
                 { "WoodenPlankPosY", positionWoodenPlank.y},
                 { "SecretCompartimentVisibility", secretCompartimentVisibility},
+                { "Sextant", sextant},
+                 {"Locked", locked},
                 { "LeftPath", leftPath},
                 { "RightPath", rightPath},
                 { "BackPath", backPath}
-
             };
     }
 }
