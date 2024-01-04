@@ -26,7 +26,6 @@ public class LoadGame : TextureButton
         GameTemplate = ResourceLoader.Load<PackedScene>("res://Scenes/Game.tscn");
 
         var gameWrapper = GameTemplate.Instance<GameWrapper>();
-        //  gameWrapper.LocationToLoad = "res://Scenes/Locations/Location1/Top4.tscn";
 
         screenContent.AddChild(gameWrapper);
         var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");

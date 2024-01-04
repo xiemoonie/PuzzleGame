@@ -2,7 +2,8 @@ using Godot;
 using System;
 using Object = Godot.Object;
 
-public class LocationChangingElement : Area2D {
+public class LocationChangingElement : Area2D
+{
     [Export] public string locationPath = "";
     public GameWrapper gameWrapper;
     Control sceneContainer;
@@ -18,47 +19,88 @@ public class LocationChangingElement : Area2D {
     }
 
 
-    public override void _InputEvent(Object viewport, InputEvent @event, int shapeIdx) {
+    public override void _InputEvent(Object viewport, InputEvent @event, int shapeIdx)
+    {
         base._InputEvent(viewport, @event, shapeIdx);
-        
-        if (@event is InputEventMouseButton mouseEvent) {
-            if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left) {
+
+        if (@event is InputEventMouseButton mouseEvent)
+        {
+            if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left)
+            {
+
+                var som = sceneContainer.GetChild<Node>(0);
+                var list = som.GetGroups();
+                GD.Print($"Som is :{som?.Name}, list:{list.Count}");
+
+                if (list.Count == 0)
+                {
+                    som.AddToGroup("Garden", true);
+                }
+
+                bool result = false;
+                string nameScene = som?.Name;
 
                 switch (locationPath)
                 {
                     case "res://Scenes/Locations/GardenLocation/GardenSextant.tscn":
-                        sceneContainer.removeAllChildren();
+                        if (nameScene == "GardenTwo")
+                        {
+                            myGameSaver.SaveParticularScene(inventoryContainer, gameWrapper, "GardenTwo");
+                            sceneContainer.removeAllChildren();
+                        }
                         result = myGameSaver.LoadGardenSextantScene(inventoryContainer, sceneContainer);
                         if (!result)
                         {
-                            this.getGameWrapperController().loadLocation(locationPath);
-                            GD.Print("\n Use default scene");
+                            gameWrapper.loadLocation(locationPath);
                         }
-                        else
-                        {
-                            gameWrapper.fetchLocation();
-                        }
+                        gameWrapper.fetchLocation();
                         break;
                     case "res://Scenes/Locations/GardenLocation/WorkingTable.tscn":
-                        sceneContainer.removeAllChildren();
+                        if (nameScene == "GreenHouseOne")
+                        {
+                            myGameSaver.SaveParticularScene(inventoryContainer, gameWrapper, "GreenHouseOne");
+                            sceneContainer.removeAllChildren();
+                        }
                         result = myGameSaver.LoadWorkingTableScene(inventoryContainer, sceneContainer);
                         if (!result)
                         {
-                            this.getGameWrapperController().loadLocation(locationPath);
-                            GD.Print("\n Use default scene");
+                            gameWrapper.loadLocation(locationPath);
                         }
-                        else
-                        {
-                            gameWrapper.fetchLocation();
-                        }
+                        gameWrapper.fetchLocation();
                         break;
-                    default: this.getGameWrapperController().loadLocation(locationPath);  break;
+                    case "res://Scenes/Locations/GardenLocation/GrutaScene.tscn":
+                        if (nameScene == "GardenOne")
+                        {
+                            myGameSaver.SaveParticularScene(inventoryContainer, gameWrapper, "GardenOne");
+                            sceneContainer.removeAllChildren();
+                        }
+                        result = myGameSaver.LoadGrutaScene(inventoryContainer, sceneContainer);
+                        if (!result)
+                        {
+                            gameWrapper.loadLocation(locationPath);
+                        }
+                        gameWrapper.fetchLocation();
+                        break;
+                    case "res://Scenes/Locations/GardenLocation/GreenHouseOne.tscn":
+                        if (nameScene == "GardenTwo")
+                        {
+                            myGameSaver.SaveParticularScene(inventoryContainer, gameWrapper, "GardenTwo");
+                            sceneContainer.removeAllChildren();
+                        }
+                        result = myGameSaver.LoadGreenHouseOneScene(inventoryContainer, sceneContainer);
+                        if (!result)
+                        {
+                            gameWrapper.loadLocation(locationPath);
+                        }
+                        gameWrapper.fetchLocation();
+                        break;
+                    default: this.getGameWrapperController().loadLocation(locationPath); break;
                 }
 
-               
-               
-                    
-                
+
+
+
+
             }
         }
     }

@@ -1,4 +1,5 @@
 using Godot;
+using LogicGame1.Scripts.Location;
 using System;
 
 public class LocationChangeButtonLeft : TextureButton
@@ -13,7 +14,6 @@ public class LocationChangeButtonLeft : TextureButton
         base._Pressed();
         GameSaver myGameSaver = new GameSaver();
         InventoryManager inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-        //var inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
         GameWrapper myGameWrapper = GetNode<GameWrapper>("/root/Main/Screen/GameWrapper");
         var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
 
@@ -28,9 +28,7 @@ public class LocationChangeButtonLeft : TextureButton
 
         bool result = false;
         string nameScene = som?.Name;
-        // myGameSaver.SaveInventory(inventoryContainer);
-        // inventoryContainer.removeAllChildren();
-        // myGameSaver.LoadInventory(inventoryContainer);
+
         switch (nameScene)
         {
             case "GardenOne":
@@ -52,6 +50,8 @@ public class LocationChangeButtonLeft : TextureButton
                 if (!result) { gameWrapper.loadLocation(locationDestinationPath); } else { GD.Print("Not default scene"); };
                 break;
             case "GreenHouseOne":
+                var greenHouseOne = sceneContainer.GetChild<GreenhouseLocationHolder>(0);
+                greenHouseOne.GreenHouseToSave();
                 myGameSaver.SaveParticularScene(inventory, myGameWrapper, "GreenHouseOne");
                 sceneContainer.removeAllChildren();
                 result = myGameSaver.LoadGreenHouseThreeScene(inventory, sceneContainer);

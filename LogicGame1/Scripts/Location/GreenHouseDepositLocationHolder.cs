@@ -15,8 +15,8 @@ namespace LogicGame1.Scripts.Location
         public override void _Ready()
         {
             base._Ready();
-            screwdriver = GetNode<Sprite>("Screwdriver/Screwdriver");
-            sack = GetNode<Sprite>("Sack/Sack");
+            screwdriver = GetNode<Sprite>("Screwdriver");
+            sack = GetNode<Sprite>("Sack");
             if (sack != null)
             {
                 positionSack = sack.Position;

@@ -13,40 +13,33 @@ leftLocationPath = "res://Scenes/Locations/GardenLocation/GreenHouseOne.tscn"
 rightLocationPath = "res://Scenes/Locations/GardenLocation/GreenHouseThree.tscn"
 backLocationPath = "res://Scenes/Locations/GardenLocation/GardenTwo.tscn"
 
-[node name="BackgroundLayer" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="Sprite" type="Sprite" parent="BackgroundLayer"]
+[node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 centered = false
 
-[node name="Sack" type="CanvasLayer" parent="."]
-
-[node name="Sack" type="Sprite" parent="Sack"]
-position = Vector2( 1080, 900 )
-texture = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="Sack/Sack"]
-position = Vector2( -1270, -755 )
-script = ExtResource( 5 )
-shiftPos = Vector2( 125, 0 )
-nodeToEnable = NodePath("../../../Screwdriver/Screwdriver")
-
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Sack/Sack/Area2D"]
-position = Vector2( 1273, 727 )
-polygon = PoolVector2Array( -119, 16, -157, 173, -31, 200, 153, 192, 67, -51, -22, -84, -55, -86 )
-
-[node name="Screwdriver" type="CanvasLayer" parent="."]
-
-[node name="Screwdriver" type="Sprite" parent="Screwdriver"]
+[node name="Screwdriver" type="Sprite" parent="."]
 position = Vector2( 1060, 1020 )
 rotation = 0.254818
 texture = ExtResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="Screwdriver/Screwdriver"]
+[node name="Area2D" type="Area2D" parent="Screwdriver"]
 position = Vector2( -1270, -755 )
 script = ExtResource( 7 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Screwdriver/Screwdriver/Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Screwdriver/Area2D"]
 position = Vector2( 1274, 721 )
 polygon = PoolVector2Array( -110, 36, -103, 79, 9, 53, 103, 30, 93, -18, -7, 9 )
+
+[node name="Sack" type="Sprite" parent="."]
+position = Vector2( 1080, 900 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Sack"]
+position = Vector2( -1270, -755 )
+script = ExtResource( 5 )
+shiftPos = Vector2( 125, 0 )
+nodeToEnable = NodePath("../../Screwdriver")
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Sack/Area2D"]
+position = Vector2( 1273, 727 )
+polygon = PoolVector2Array( -119, 16, -157, 173, -31, 200, 153, 192, 67, -51, -22, -84, -55, -86 )

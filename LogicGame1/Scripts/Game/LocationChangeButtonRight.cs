@@ -1,4 +1,5 @@
 using Godot;
+using LogicGame1.Scripts.Location;
 using System;
 
 public class LocationChangeButtonRight : TextureButton
@@ -51,6 +52,8 @@ public class LocationChangeButtonRight : TextureButton
            
                 break;
             case "GreenHouseOne":
+                var greenHouseOne = sceneContainer.GetChild<GreenhouseLocationHolder>(0);
+                greenHouseOne.GreenHouseToSave();
                 myGameSaver.SaveParticularScene(inventory, myGameWrapper, "GreenHouseOne");
                 sceneContainer.removeAllChildren();
                 result = myGameSaver.LoadGreenHouseTwoScene(inventory, sceneContainer);

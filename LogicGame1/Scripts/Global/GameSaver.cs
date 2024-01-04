@@ -180,14 +180,13 @@ public class GameSaver
             newObject.rightLocationPath = nodeData["RightPath"].ToString();
             if (newCoin == null)
             {
-
-                var coin = newObject.GetNode<Sprite>("Coin/Coin");
+                var coin = newObject.GetNode<Sprite>("Coin");
                 coin.QueueFree();
             }
             if (newFungi == null)
             {
 
-                var fungi = newObject.GetNode<Sprite>("Fungi/Fungi");
+                var fungi = newObject.GetNode<Sprite>("Fungi");
                 fungi.QueueFree();
             }
 
@@ -248,10 +247,8 @@ public class GameSaver
 
             if (newCoin == null)
             {
-
                 var coin = newObject.GetNode<Sprite>("Coin");
                 coin.QueueFree();
-
             }
             parentTwo.AddChild(newObject);
             // Now we set the remaining variables.
@@ -265,7 +262,6 @@ public class GameSaver
 
             found = true;
         }
-
         saveGame.Close();
         return found;
     }
@@ -297,10 +293,8 @@ public class GameSaver
 
             if (newCoin == null)
             {
-
-                var coin = newObject.GetNode<CanvasLayer>("Vision");
+                var coin = newObject.GetNode<Sprite>("Vision");
                 coin.QueueFree();
-
             }
             parentTwo.AddChild(newObject);
             // Now we set the remaining variables.
@@ -343,6 +337,16 @@ public class GameSaver
             var newObjectScene = (PackedScene)ResourceLoader.Load(nodeData["Filename"].ToString());
             var newObject = (LocationHolder)newObjectScene.Instance();
             newObject.backLocationPath = nodeData["BackPath"].ToString();
+            newObject.leftLocationPath = nodeData["LeftPath"].ToString();
+            newObject.rightLocationPath = nodeData["RightPath"].ToString();
+            bool newPlate = (bool)nodeData["VisibilityPlate"];
+            if (!newPlate)
+            {
+                GD.Print("Plate should not be there");
+                var plate = newObject.GetNode<Sprite>("Plate");
+                plate.QueueFree();
+            }
+
             parentTwo.AddChild(newObject);
 
 
@@ -350,7 +354,7 @@ public class GameSaver
             foreach (KeyValuePair<string, object> entry in nodeData)
             {
                 string key = entry.Key.ToString();
-                if (key == "Filename" || key == "Parent" || key == "Coin" || key == "PosX" || key == "PosY" || key == "LeftPath" || key == "RightPath" || key == "BackPath")
+                if (key == "Filename" || key == "Parent" || key == "VisibilityPlate" || key == "PosX" || key == "PosY" || key == "LeftPath" || key == "RightPath" || key == "BackPath")
                     continue;
                 newObject.Set(key, entry.Value);
             }
@@ -395,14 +399,14 @@ public class GameSaver
 
 
             var screwdriver = nodeData["Screwdriver"];
-            var sack = newObject.GetNode<CanvasLayer>("Sack");
+            var sack = newObject.GetNode<Sprite>("Sack");
             Vector2 positionSack = new Vector2(sackPosX, sackPosY);
+            sack.Position = positionSack;
             if (screwdriver == null)
             {
-                var screwDriver = newObject.GetNode<CanvasLayer>("Screwdriver");
+                var screwDriver = newObject.GetNode<Sprite>("Screwdriver");
                 screwDriver.QueueFree();
-            }
-            
+            } 
             parentTwo.AddChild(newObject);
 
 
@@ -714,6 +718,53 @@ public class GameSaver
 
             found = true;
 
+        }
+
+        saveGame.Close();
+        return found;
+    }
+
+    public bool LoadGrutaScene(HFlowContainer parentOne, Control parentTwo)
+    {
+        bool found = false;
+        var saveGame = new File();
+        if (!saveGame.FileExists("user://saveGrutaScene.save"))
+        {
+            return found; // Error! We don't have a save to load.
+        }
+        else
+        {
+            GD.Print("FILE FOUNT LOAD");
+        }
+
+        saveGame.Open("user://saveGrutaScene.save", File.ModeFlags.Read);
+
+        while (saveGame.GetPosition() < saveGame.GetLen())
+        {
+            // Get the saved dictionary from the next line in the save file
+            var nodeData = new Godot.Collections.Dictionary<string, object>((Godot.Collections.Dictionary)JSON.Parse(saveGame.GetLine()).Result);
+
+            var newObjectScene = (PackedScene)ResourceLoader.Load(nodeData["Filename"].ToString());
+            var newObject = (LocationHolder)newObjectScene.Instance();
+            var newCandle = nodeData["Candle"];
+            newObject.backLocationPath = nodeData["BackPath"].ToString();
+            if (newCandle == null)
+            {
+                GD.Print("Candle should be there");                
+                var candleSprite = newObject.GetNode<Sprite>("Candle");
+                candleSprite.QueueFree();
+            }
+            parentTwo.AddChild(newObject);
+            // Now we set the remaining variables.
+            foreach (KeyValuePair<string, object> entry in nodeData)
+            {
+                string key = entry.Key.ToString();
+                if (key == "Filename" || key == "Parent" || key == "Candle" || key == "BackPath")
+                    continue;
+                newObject.Set(key, entry.Value);
+            }
+
+            found = true;
         }
 
         saveGame.Close();

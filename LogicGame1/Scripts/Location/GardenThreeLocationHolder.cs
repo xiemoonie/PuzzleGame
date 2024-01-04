@@ -15,7 +15,7 @@ namespace LogicGame1.Scripts.Location
         public override void _Ready()
         {
             base._Ready();
-            vision = GetNode<Sprite>("Vision/Vision");
+            vision = GetNodeOrNull<Sprite>("Vision");
             if (vision != null)
              {
                  position = vision.Position;

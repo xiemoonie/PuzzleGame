@@ -1,4 +1,5 @@
 using Godot;
+using LogicGame1.Scripts.Location;
 using System;
 
 public class LocationChangeButtonBack : TextureButton
@@ -40,6 +41,8 @@ public class LocationChangeButtonBack : TextureButton
                 if (!result) { gameWrapper.loadLocation(locationDestinationPath); } 
                 break;
             case "GreenHouseOne":
+                var greenHouse = sceneContainer.GetChild<GreenhouseLocationHolder>(0);
+                greenHouse.GreenHouseToSave();
                 myGameSaver.SaveParticularScene(inventory, gameWrapper, "GreenHouseOne");
                 sceneContainer.removeAllChildren();
                 result = myGameSaver.LoadGardenTwoScene(inventoryContainer, sceneContainer);
@@ -67,9 +70,16 @@ public class LocationChangeButtonBack : TextureButton
                 result = myGameSaver.LoadGardenTwoScene(inventoryContainer, sceneContainer);
                 if (!result) { gameWrapper.loadLocation(locationDestinationPath); }
                 break;
+            case "GrutaScene":
+                GD.Print("Hey we are in gruta!!");
+                var grutaLocation = sceneContainer.GetChild<GrutaLocationHolder>(0);
+                grutaLocation.GrutaToSave();
+                myGameSaver.SaveParticularScene(inventory, gameWrapper, "Gruta");
+                sceneContainer.removeAllChildren();
+                result = myGameSaver.LoadGardenOneScene(inventoryContainer, sceneContainer);
+                if (!result) { gameWrapper.loadLocation(locationDestinationPath); }
+                break;
         }
-
         gameWrapper.fetchLocation();
-
     }
 }

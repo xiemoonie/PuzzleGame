@@ -25,18 +25,16 @@ scale = Vector2( 0.474286, 0.455446 )
 texture = ExtResource( 3 )
 centered = false
 
-[node name="Vision" type="CanvasLayer" parent="."]
-
-[node name="Vision" type="Sprite" parent="Vision"]
+[node name="Vision" type="Sprite" parent="."]
 position = Vector2( 1338, 725 )
 scale = Vector2( 0.305755, 0.402174 )
 texture = ExtResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="Vision/Vision"]
+[node name="Area2D" type="Area2D" parent="Vision"]
 position = Vector2( 37.6113, 11.1891 )
 script = ExtResource( 5 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Vision/Vision/Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Vision/Area2D"]
 position = Vector2( -6.54102, -9.94556 )
 scale = Vector2( 0.191981, 0.162209 )
 polygon = PoolVector2Array( -59.627, -314.246, -996.607, -191.615, -911.426, 329.567, -110.734, 252.923, 638.85, 99.6338, 553.67, -344.904 )

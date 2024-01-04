@@ -1,4 +1,5 @@
 using Godot;
+using LogicGame1.Scripts.Location;
 using System;
 using System.IO;
 
@@ -32,8 +33,8 @@ public class SaveButton : TextureButton
         {
             som.AddToGroup("Garden", true);
         }
-        var currentScene = sceneContainer.GetChild<Node>(0);
-        switch (currentScene.Name)
+
+        switch (nameScene)
         {
             case "GreenHouseThree":
                 var greenHouseThree = sceneContainer.GetChild<GreenHousePotLocationHolder>(0);
@@ -47,9 +48,17 @@ public class SaveButton : TextureButton
                 var gardenSextant = sceneContainer.GetChild<GardenSunLocation>(0);
                 gardenSextant.sextantToSave();
                 break;
+            case "GrutaScene":
+                var grutaLocation = sceneContainer.GetChild<GrutaLocationHolder>(0);
+                grutaLocation.GrutaToSave();
+                break;
+            case "GreenHouseOne":
+                var greenHouseLocation = sceneContainer.GetChild<GreenhouseLocationHolder>(0);
+                greenHouseLocation.GreenHouseToSave();
+                break;
         }
-       
-        
+
+        GD.Print("SAVING SCENE NAMED "+nameScene);
         gameSaverScript.SaveParticularScene(inventory, myGameWrapper, nameScene);
         sceneContainer.removeAllChildren();
         SceneController myScript = inventory.GetNode<SceneController>("/root/Main/SceneController");

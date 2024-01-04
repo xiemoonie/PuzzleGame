@@ -19,8 +19,8 @@ namespace LogicGame1.Scripts.Location
         public override void _Ready()
         {
             base._Ready();
-           coin = GetNode<Sprite>("Coin/Coin");
-           fungi = GetNode<Sprite>("Fungi/Fungi");
+           coin = GetNode<Sprite>("Coin");
+           fungi = GetNode<Sprite>("Fungi");
             if (coin != null)
             {
                 positionCoin = coin.Position;
