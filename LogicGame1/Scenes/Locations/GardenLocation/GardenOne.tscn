@@ -9,19 +9,19 @@
 
 [node name="GardenOne" type="Node2D"]
 script = ExtResource( 4 )
-leftLocationPath = "res://Scenes/Locations/GardenLocation/GardenTwo.tscn"
-rightLocationPath = "res://Scenes/Locations/GardenLocation/GardenThree.tscn"
+RightPath = true
+LeftPath = true
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Gruta" type="Area2D" parent="."]
 position = Vector2( 0, -4 )
 script = ExtResource( 6 )
 locationPath = "res://Scenes/Locations/GardenLocation/GrutaScene.tscn"
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Gruta"]
 position = Vector2( 289, 339 )
 scale = Vector2( 0.717359, 0.638432 )
 polygon = PoolVector2Array( 356.865, -114.343, 522.751, -109.644, 528.327, -321.099, 351.289, -311.701 )
@@ -30,11 +30,11 @@ polygon = PoolVector2Array( 356.865, -114.343, 522.751, -109.644, 528.327, -321.
 position = Vector2( 347, 872 )
 texture = ExtResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="Fungi"]
+[node name="Fungi" type="Area2D" parent="Fungi"]
 position = Vector2( -1270, -755 )
 script = ExtResource( 5 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Fungi/Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Fungi/Fungi"]
 position = Vector2( 1270, 753 )
 scale = Vector2( 0.107022, 0.0936994 )
 polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )
@@ -43,11 +43,11 @@ polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135,
 position = Vector2( 1270, 751 )
 texture = ExtResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="Coin"]
+[node name="Coin" type="Area2D" parent="Coin"]
 position = Vector2( -1270, -755 )
 script = ExtResource( 5 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Coin/Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Coin/Coin"]
 position = Vector2( 1269.47, 750.119 )
 scale = Vector2( 0.191981, 0.162209 )
 polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )

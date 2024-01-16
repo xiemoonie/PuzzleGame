@@ -5,30 +5,30 @@ using System;
     public class GrutaLocationHolder : LocationHolder
     {
         Sprite candle;
-        string backPath;
-        bool candleVisible = false;
-        public override void _Ready()
-        {
+        Sprite plate;
+    public override void _Ready()
+    {
         base._Ready();
-        candle = GetNode<Sprite>("Candle");
-    }
-
-        public void GrutaToSave()
-        {
-        backPath = base.backLocationPath;
         candle = GetNodeOrNull<Sprite>("Candle");
-    }
+        GameLoader.LoadScene();
+        int candleValue = WorldDictionary.checkObjectStatuScene(candle.Name);
 
-        public override Godot.Collections.Dictionary<string, object> Save()
+        if (candleValue != 0)
         {
-            return new Godot.Collections.Dictionary<string, object>()
-            {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "BackPath", backPath},
-                { "Candle", candle}
-
-            };
+            SceneManager(candle, candleValue);
         }
     }
+
+      
+    public void SceneManager(Sprite sprite, int state)
+    {
+        switch (state)
+        {
+            case 1: candle.Visible = false; break;
+        }
+    }
+}
+
+       
+    
 

@@ -6,7 +6,6 @@ public class LoadGame : TextureButton
 {
     private PackedScene GameTemplate;
     private PackedScene inventoryItem;
-
     public override void _Ready()
     {
 
@@ -16,24 +15,24 @@ public class LoadGame : TextureButton
     {
         base._Pressed();
         GD.Print("Load Game");
-        GameSaver myGameSaver = new GameSaver();
+        inventoryItem = ResourceLoader.Load<PackedScene>("res://Objects/Gui/InventoryItem.tscn");
+        GameTemplate = ResourceLoader.Load<PackedScene>("res://Scenes/Game.tscn");
+        GameLoader.LoadScene();
 
         Control screenContent = GetNode<Control>("/root/Main/Screen");
         screenContent.removeAllChildren();
 
+        string scene = WorldDictionary.getMainScene();
+        WorldDictionary.setCurrentScene("GardenOne");
 
-        inventoryItem = ResourceLoader.Load<PackedScene>("res://Objects/Gui/InventoryItem.tscn");
-        GameTemplate = ResourceLoader.Load<PackedScene>("res://Scenes/Game.tscn");
 
-        var gameWrapper = GameTemplate.Instance<GameWrapper>();
-
+        GameWrapper gameWrapper = GameTemplate.Instance<GameWrapper>();
+        var inventoryContainer = gameWrapper.GetNode<InventoryManager>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+        
+        gameWrapper.LocationToLoad = scene;
         screenContent.AddChild(gameWrapper);
-        var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
-        var inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-
-        myGameSaver.LoadGardenOneScene(inventoryContainer, sceneContainer);
-        myGameSaver.LoadInventory(inventoryContainer);
-
+        inventoryContainer.getSprites();
+        //gameWrapper.loadLocation(scene);
         gameWrapper.fetchLocation();
   
     }

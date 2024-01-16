@@ -16,7 +16,7 @@ public class SaveButton : TextureButton
         base._Pressed();
         
         GD.Print("click saving...");
-        GameSaver gameSaverScript = new GameSaver();
+        
         InventoryManager inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
         GameWrapper myGameWrapper = GetNode<GameWrapper>("/root/Main/Screen/GameWrapper");
         var sceneContainer = myGameWrapper.GetNode<Control>("SceneContainer");
@@ -27,42 +27,18 @@ public class SaveButton : TextureButton
         GD.Print($"Som is :{som?.Name}, list:{list.Count}");
 
         inventory.getSprites();
-        gameSaverScript.SaveInventory(inventory);
+        
 
         if (list.Count == 0)
         {
             som.AddToGroup("Garden", true);
         }
-
-        switch (nameScene)
-        {
-            case "GreenHouseThree":
-                var greenHouseThree = sceneContainer.GetChild<GreenHousePotLocationHolder>(0);
-                greenHouseThree.saveGreenHouseThree(); 
-                break;
-            case "WorkingTable":
-                var workingTable = sceneContainer.GetChild<WorkingTableLocation>(0);
-                workingTable.WorkingTableToSave(); 
-                break;
-            case "GardenSextant":
-                var gardenSextant = sceneContainer.GetChild<GardenSunLocation>(0);
-                gardenSextant.sextantToSave();
-                break;
-            case "GrutaScene":
-                var grutaLocation = sceneContainer.GetChild<GrutaLocationHolder>(0);
-                grutaLocation.GrutaToSave();
-                break;
-            case "GreenHouseOne":
-                var greenHouseLocation = sceneContainer.GetChild<GreenhouseLocationHolder>(0);
-                greenHouseLocation.GreenHouseToSave();
-                break;
-        }
-
-        GD.Print("SAVING SCENE NAMED "+nameScene);
-        gameSaverScript.SaveParticularScene(inventory, myGameWrapper, nameScene);
+        inventory.getSprites();
+        GameSaver.SaveGameScene();
+        GameSaver.SaveGameInvenotry();
         sceneContainer.removeAllChildren();
         SceneController myScript = inventory.GetNode<SceneController>("/root/Main/SceneController");
-        GD.Print("Going to MENUUUU");
+        GD.Print("\n Going to Menu from SaveButton Script");
         myScript.goToMenu();
 
 

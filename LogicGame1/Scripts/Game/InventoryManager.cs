@@ -2,7 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-//This should handle the whole inventory
 public class InventoryManager : HFlowContainer
 {
     private PackedScene itemScene = (PackedScene)GD.Load("res://Objects/Gui/InventoryItem.tscn");
@@ -13,6 +12,7 @@ public class InventoryManager : HFlowContainer
     List<Sprite> sprite;
     InventoryItem itemToDrop;
     List<String> texturePath = new List<String>();
+    List<String> nameSprite = new List<String>();
 
     public override void _Ready()
     {
@@ -24,16 +24,17 @@ public class InventoryManager : HFlowContainer
     public void pickedItem(InventoryItem inventoryItem, Sprite texture)
     {
         itemTexture(inventoryItem, texture);
+        nameSprite.Add(texture.Name);
+
     }
 
     public void itemAdded(InventoryItem inventoryItem)
     {
         var invItem = inventoryItem;
         invItem.pictureOnScreenEvent += someMethod;
-        //GD.Print("Hola :D ");
         this.AddChild(inventoryItem);
         itemsOnInventory = this.GetChildCount();
-        //GD.Print("amount of items in inventory", +itemsOnInventory);
+        
     }
 
     public void itemTexture(InventoryItem inventoryItem, Sprite texture)
@@ -112,35 +113,30 @@ public class InventoryManager : HFlowContainer
         //GD.Print(":D I am a sad person who is still trying for no reason");
     }
 
+
+
     public void getSprites()
     {
-        var items = GetChildren();
-        foreach (Node i in items)
+
+        List<string> textureList = new List<string>();
+        textureList = WorldDictionary.getInventoryObject();
+        StreamTexture GameTemplate;
+
+        for (int i = 0; i< textureList.Count; i++)
         {
-            TextureRect itemSprite = i.GetNode<TextureRect>("Content/Texture");
-            String pathTexture = itemSprite.Texture.ResourcePath;
-            texturePath.Add(pathTexture);
+            InventoryItem item = itemScene.Instance<InventoryItem>();
+            GameTemplate = ResourceLoader.Load<StreamTexture>(textureList[i]);
+            Sprite s = new Sprite();
+            s.Texture = GameTemplate;
+
+            //var gameWrapper = GameTemplate.Instance<Sprite>();
+            pickedItem(item, s);
         }
     }
     public void eraseSprites()
     {
         texturePath.Clear();
     }
-
-    public Godot.Collections.Dictionary<string, object> Save()
-    {
-        return new Godot.Collections.Dictionary<string, object>()
-       {
-         { "Filename", Filename},
-         { "InventoryItem", itemScene.ResourcePath},
-         { "TextureFile", texturePath}
-
-        };
-    }
-
-
-
-
 
 }
 

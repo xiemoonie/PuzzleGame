@@ -3,59 +3,48 @@ using System;
 
 public class WorkingTableLocation : LocationHolder
 {
-    Sprite standClassic;
-    bool standClassisVisibility;
-    Sprite sextandUnfinished;
-    bool sextantUnfinishedVisibility;
-    Sprite finishedSextant;
-    bool finishedSextantVisibility;
+    Sprite stand;
+    Sprite sextantUnfinished;
+    Sprite sextantFinished;
     Sprite sextant;
-    bool sextantVisibility;
-    string backPath;
     public override void _Ready()
     {
-        backPath = base.backLocationPath;
-        standClassic = GetNode<Sprite>("Stand");
-        sextandUnfinished = GetNode<Sprite>("SectantUnfinished");
-        finishedSextant = GetNode<Sprite>("FinishedSextant");
-        sextant = GetNode<Sprite>("CompletedSextant");
+        base._Ready();
+        sextantUnfinished = GetNodeOrNull<Sprite>("SextantUnfinished");
+        sextantFinished = GetNodeOrNull<Sprite>("SextantFinished");
+        stand = GetNodeOrNull<Sprite>("Stand");
+        sextant = GetNodeOrNull<Sprite>("SextantCompleted");
+
+        GameLoader.LoadScene();
+
+        int standValue = WorldDictionary.checkObjectStatuScene(stand.Name);
+        int sextantUnfinishedValue = WorldDictionary.checkObjectStatuScene(sextantUnfinished.Name);
+        int sextantFinishedValue = WorldDictionary.checkObjectStatuScene(sextantFinished.Name);
+        if (standValue != 0)
+        {
+            GD.Print("the value of stand is:" +standValue);
+            SceneManager(stand, standValue);
+        }
+        if (sextantUnfinishedValue != 0)
+        {
+            GD.Print("the value of sextantUnfinished" + sextantUnfinishedValue);
+            SceneManager(sextantUnfinished, sextantUnfinishedValue);
+        }
+        if (sextantFinishedValue != 0)
+        {
+            GD.Print("sextant finished" + sextantFinishedValue);
+            SceneManager(sextantFinished, sextantFinishedValue);
+        }
+
     }
-
-    public void WorkingTableToSave()
+    public void SceneManager(Sprite sprite, int state)
     {
-        GD.Print("\n Working Table To Save");
-       
-        if (standClassic != null)
+        switch (state)
         {
-            standClassisVisibility = standClassic.Visible;
+            case 2: sprite.Visible = true; break;
+            case 1: sprite.Visible = false; break;
+            case 3: sprite.QueueFree(); break;
+            case 4: sprite.Visible = false; break;
         }
-        if (sextandUnfinished != null)
-        {
-            sextantUnfinishedVisibility = sextandUnfinished.Visible;
-        }
-        if (finishedSextant != null)
-        {
-            finishedSextantVisibility = finishedSextant.Visible;
-        }
-        if (sextant != null)
-        {
-            sextantVisibility = sextant.Visible;
-        }
-
-    }
-
-    public override Godot.Collections.Dictionary<string, object> Save()
-    {
-        return new Godot.Collections.Dictionary<string, object>()
-            {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "StandClassisVisibility", standClassisVisibility},
-                { "SextantUnfinished", sextantUnfinishedVisibility},
-                { "finishedSextantVisibility", finishedSextantVisibility},
-                { "SextandVisibility", sextantVisibility},
-                { "BackPath", backPath}
-
-            };
     }
 }

@@ -20,19 +20,15 @@ class PickableObj : Area2D
             {
                 Sprite some = (Sprite)this.GetParent();
                 if (some != null)
-                {
-                    var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-                    s.pickedItem(item, some);
+                {  
+                    WorldDictionary.setStateObject(Name,1);
+                    GameSaver.SaveGameScene();
+                    var objectToErase = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+                    objectToErase.pickedItem(item, some);
                     some.QueueFree();
 
                 }
             }
-
-
-
-       
-     
-
         }
     }
 

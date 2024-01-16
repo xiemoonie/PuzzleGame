@@ -7,6 +7,7 @@ public class AttachableObject : Area2D
     private PackedScene game = (PackedScene)GD.Load("res://Scenes/Game.tscn");
     GameWrapper gameWrapper;
     [Export] String pathResource = "";
+    [Export] String pathGuiResource = "";
 
     [Export] public float xShape;
 
@@ -21,18 +22,9 @@ public class AttachableObject : Area2D
         var s = GetNode<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");
         if (s != null)
         {
-            if (s.Texture.ResourcePath == pathResource)
+            GD.Print("Resource path" + s.Texture.ResourcePath);
+            if (s.Texture.ResourcePath == pathResource || s.Texture.ResourcePath == pathGuiResource)
             {
-               
-                foreach (var child in s.GetChildren())
-                {
-                    if (child is Node node)
-                    {
-                        GD.Print("child name: " + node.Name);
-                    }
-                    
-                }
-              
                 Sprite knob = GetNode<Sprite>("Knob");
                 if (knob != null)
                 {
@@ -40,8 +32,14 @@ public class AttachableObject : Area2D
                     var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
                     inventory.eraseItem();
                     unlockedSlide = true;
+                    WorldDictionary.setStateObject("Knob", 2);
+                    GameSaver.SaveGameScene();
                 }
             }
+        }
+        else
+        {
+            GD.Print("s is null");
         }
     }
     
@@ -73,7 +71,12 @@ public class AttachableObject : Area2D
     {
         Node parent = this.GetParent();
         Sprite secretCompartiment = parent.GetNode<Sprite>("SecretCompartiment");
+        Sprite woodenPlank = parent.GetNode<Sprite>("WoodenPlank");
         secretCompartiment.Visible = true;
+        WorldDictionary.setStateObject(secretCompartiment.Name, 3);
+        WorldDictionary.setStateObject(Name, 3);
+        WorldDictionary.setStateObject("Fungi", 3);
+        GameSaver.SaveGameScene();
     }
     
   
@@ -87,10 +90,12 @@ public class AttachableObject : Area2D
             {
                 if (unlockedSlide == false)
                 {
+                    GD.Print("check fot key");
                     checkForKey();
                 }
                 else
                 {
+                    GD.Print("reshape area");
                     ReshapeArea2D();
                 }
             }

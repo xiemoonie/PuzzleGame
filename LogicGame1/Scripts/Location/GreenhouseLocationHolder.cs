@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Godot;
@@ -11,42 +12,27 @@ namespace LogicGame1.Scripts.Location
     internal class GreenhouseLocationHolder : LocationHolder
     {
 
-        private Sprite plateSprite;
+        private Sprite plate;
         bool visibilityPlate;
-        string leftPath;
-        string rightPath;
-        string backPath;
-
 
         public override void _Ready()
         {
-            base._Ready();
-            visibilityPlate = true;
-            leftPath = base.leftLocationPath;
-            rightPath = base.rightLocationPath;
-            backPath = base.backLocationPath;
-        }
-
-        public void GreenHouseToSave()
-        {
-            plateSprite = GetNodeOrNull<Sprite>("Plate");
-            if (plateSprite == null)
-                {
-                    visibilityPlate = false;
-                }   
-        }
-        public override Godot.Collections.Dictionary<string, object> Save()
-        {
-            return new Godot.Collections.Dictionary<string, object>()
+            plate = GetNodeOrNull<Sprite>("Plate");
+            GameLoader.LoadScene();
+            int plateValue = WorldDictionary.checkObjectStatuScene(plate.Name);
+            if (plateValue != 0)
             {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "VisibilityPlate", visibilityPlate},
-                { "LeftPath", leftPath},
-                { "RightPath", rightPath},
-                { "BackPath", backPath}
+                SceneManager(plate, plateValue);
+            }
 
-            };
+        }
+        public void SceneManager(Sprite sprite, int state)
+        {
+            switch (state)
+            {
+                case 1: sprite.QueueFree(); break;
+                case 3: sprite.QueueFree(); break;
+            }
         }
     }
 }

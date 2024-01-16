@@ -124,6 +124,9 @@ public class Sextant : Area2D
             sunCompleted.Visible = true;
             var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
             s.eraseItem();
+            WorldDictionary.setStateObject("SextantGardenBackground", 3);
+            WorldDictionary.setStateObject("SextantVision", 3);
+            GameSaver.SaveGameScene();
             return true;
 
         }
@@ -154,7 +157,8 @@ public class Sextant : Area2D
                 itemToDisplay = GetNode<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");
                 if (itemToDisplay.Texture != null && !InPlace())
                 {
-                    if (itemToDisplay.Texture.ResourcePath == "res://Images/Locations/MoonieDrawing/CompletedSextant.PNG")
+                    GD.Print("item to display" + itemToDisplay.Texture.ResourcePath);
+                    if (itemToDisplay.Texture.ResourcePath == "res://Images/Locations/MoonieDrawing/sextantVision.PNG")
                     {
                         ruler.Visible = true;
                         sextantView.Visible = true;
@@ -190,11 +194,9 @@ public class Sextant : Area2D
                     }
                     else
                     {
-
                         sextantView.Visible = false;
                         ruler.Visible = false;
                         sun.Visible = false;
-
                     }
                 }
                 else

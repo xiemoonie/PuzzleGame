@@ -4,7 +4,6 @@ using System;
 public class GameWrapper : Node
 {
     public string LocationToLoad = "";
-
     public LocationChangeButtonLeft leftLocationButton;
     public LocationChangeButtonRight rightLocationButton;
     public LocationChangeButtonBack backLocationButton;
@@ -27,9 +26,6 @@ public class GameWrapper : Node
         }
 
     }
-
-
-
     public void loadLocation(string locationToLoad)
     {
         GD.Print("LOCATION TO LOOOOOOOAD", locationToLoad);
@@ -45,20 +41,17 @@ public class GameWrapper : Node
         rightLocationButton.Visible = false;
         backLocationButton.Visible = false;
 
-        if (instance.backLocationPath != null && !instance.backLocationPath.Empty())
+        if (instance.BackPath == true)
         {
             backLocationButton.Visible = true;
-            backLocationButton.locationDestinationPath = instance.backLocationPath;
         }
-        if (instance.leftLocationPath != null && !instance.leftLocationPath.Empty())
-        {
-            leftLocationButton.Visible = true;
-            leftLocationButton.locationDestinationPath = instance.leftLocationPath;
-        }
-        if (instance.rightLocationPath != null && !instance.rightLocationPath.Empty())
+        if (instance.RightPath == true)
         {
             rightLocationButton.Visible = true;
-            rightLocationButton.locationDestinationPath = instance.rightLocationPath;
+        }
+        if (instance.LeftPath == true)
+        {
+            leftLocationButton.Visible = true;
         }
     }
 
@@ -68,26 +61,24 @@ public class GameWrapper : Node
     {
         var instance = GetNode("SceneContainer").GetChild<LocationHolder>(GetNode("SceneContainer").GetChildCount() - 1);
 
-        GD.Print("\n Fetching from:................... " + instance.Name + "...................");
+         GD.Print("\n Fetching from:................... " + instance.Name + "...................");
 
         leftLocationButton.Visible = false;
         rightLocationButton.Visible = false;
         backLocationButton.Visible = false;
 
-        if (instance.backLocationPath != null && !instance.backLocationPath.Empty())
+
+        if (instance.BackPath == true)
         {
             backLocationButton.Visible = true;
-            backLocationButton.locationDestinationPath = instance.backLocationPath;
         }
-        if (instance.leftLocationPath != null && !instance.leftLocationPath.Empty())
-        {
-            leftLocationButton.Visible = true;
-            leftLocationButton.locationDestinationPath = instance.leftLocationPath;
-        }
-        if (instance.rightLocationPath != null && !instance.rightLocationPath.Empty())
+        if (instance.RightPath == true)
         {
             rightLocationButton.Visible = true;
-            rightLocationButton.locationDestinationPath = instance.rightLocationPath;
+        }
+        if (instance.LeftPath == true)
+        {
+            leftLocationButton.Visible = true;
         }
     }
 }

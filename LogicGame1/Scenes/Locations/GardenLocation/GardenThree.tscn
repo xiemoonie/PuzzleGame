@@ -8,8 +8,8 @@
 
 [node name="GardenThree" type="Node2D"]
 script = ExtResource( 2 )
-leftLocationPath = "res://Scenes/Locations/GardenLocation/GardenOne.tscn"
-rightLocationPath = "res://Scenes/Locations/GardenLocation/GardenTwo.tscn"
+RightPath = true
+LeftPath = true
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -30,11 +30,11 @@ position = Vector2( 1338, 725 )
 scale = Vector2( 0.305755, 0.402174 )
 texture = ExtResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="Vision"]
+[node name="Vision" type="Area2D" parent="Vision"]
 position = Vector2( 37.6113, 11.1891 )
 script = ExtResource( 5 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Vision/Area2D"]
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Vision/Vision"]
 position = Vector2( -6.54102, -9.94556 )
 scale = Vector2( 0.191981, 0.162209 )
 polygon = PoolVector2Array( -59.627, -314.246, -996.607, -191.615, -911.426, 329.567, -110.734, 252.923, 638.85, 99.6338, 553.67, -344.904 )

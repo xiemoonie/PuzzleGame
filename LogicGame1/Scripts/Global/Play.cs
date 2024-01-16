@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.IO;
 
 public class Play : TextureButton
@@ -8,6 +7,8 @@ public class Play : TextureButton
 
 
     private Control ScreenContent;
+
+
     public override void _Ready()
     {
 
@@ -20,15 +21,17 @@ public class Play : TextureButton
         base._Pressed();
         GD.Print("play game...");
 
-
         ScreenContent = GetNode<Control>("/root/Main/Screen");
         ScreenContent.removeAllChildren();
 
         GameTemplate = ResourceLoader.Load<PackedScene>("res://Scenes/Game.tscn");
-
         var gameWrapperGame = GameTemplate.Instance<GameWrapper>();
-        gameWrapperGame.LocationToLoad = "res://Scenes/Locations/GardenLocation/GardenOne.tscn";
+
+        
+        gameWrapperGame.LocationToLoad = WorldDictionary.getMainScene();
+        
         ScreenContent.AddChild(gameWrapperGame);
+        WorldDictionary.setCurrentScene("GardenOne");
         EraseFiles();
 
     }

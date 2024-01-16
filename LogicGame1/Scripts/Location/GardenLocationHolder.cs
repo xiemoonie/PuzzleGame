@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Godot;
 
 namespace LogicGame1.Scripts.Location
@@ -11,45 +6,31 @@ namespace LogicGame1.Scripts.Location
     {
         private Sprite coin;
         private Sprite fungi;
-        Vector2 positionCoin;
-        Vector2 positionFungi;
-        string leftPath;
-        string rightPath;
-
+       
         public override void _Ready()
         {
             base._Ready();
-           coin = GetNode<Sprite>("Coin");
-           fungi = GetNode<Sprite>("Fungi");
-            if (coin != null)
+            GameLoader.LoadScene();
+            coin = GetNode<Sprite>("Coin");
+            fungi = GetNode<Sprite>("Fungi");
+            int coinValue = WorldDictionary.checkObjectStatuScene(coin.Name);
+            int fungiValue = WorldDictionary.checkObjectStatuScene(fungi.Name);
+            if (coinValue != 0)
             {
-                positionCoin = coin.Position;
+                SceneManager(coin, coinValue);
             }
-            if (fungi != null)
+            if (fungiValue != 0)
             {
-                positionFungi = fungi.Position;
+                SceneManager(fungi, fungiValue);
             }
-            leftPath = base.leftLocationPath;
-            rightPath = base.rightLocationPath;
-
         }
-
-        public override Godot.Collections.Dictionary<string, object> Save()
+        public void SceneManager(Sprite sprite, int state)
         {
-            return new Godot.Collections.Dictionary<string, object>()
+            switch (state)
             {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "Coin", coin},
-                { "Fungi", fungi},
-                { "PosXcoin", positionCoin.x},
-                { "PosYcoin", positionCoin.y},
-                { "PosXfungi", positionFungi.x},
-                { "PosYfungi", positionFungi.y},
-                { "LeftPath", leftPath},
-                { "RightPath", rightPath}
-
-            };
+                case 1: sprite.QueueFree(); break;
+                case 3: sprite.QueueFree(); break;
+            }
         }
     }
 }
