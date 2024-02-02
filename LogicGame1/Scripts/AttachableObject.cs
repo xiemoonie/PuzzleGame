@@ -29,7 +29,7 @@ public class AttachableObject : Area2D
                 if (knob != null)
                 {
                     knob.Visible = true;
-                    var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+                    var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
                     inventory.eraseItem();
                     unlockedSlide = true;
                     WorldDictionary.setStateObject("Knob", 2);

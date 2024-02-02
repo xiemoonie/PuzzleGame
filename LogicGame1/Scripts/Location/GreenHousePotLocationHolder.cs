@@ -64,6 +64,8 @@ public class GreenHousePotLocationHolder : LocationHolder
         switch (state)
         {
             case 1: sprite.QueueFree(); break;
+            case 3: sprite.QueueFree(); break;
+            case 4: sprite.QueueFree(); break;
         }
     }
     public void SceneManagerArea(Area2D area, int state, Vector2 position, Sprite sprite)

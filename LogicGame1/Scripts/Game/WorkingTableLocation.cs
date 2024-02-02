@@ -7,6 +7,9 @@ public class WorkingTableLocation : LocationHolder
     Sprite sextantUnfinished;
     Sprite sextantFinished;
     Sprite sextant;
+    Sprite candle;
+    Sprite plate;
+   
     public override void _Ready()
     {
         base._Ready();

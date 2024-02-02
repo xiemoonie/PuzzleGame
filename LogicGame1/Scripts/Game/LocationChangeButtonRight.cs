@@ -11,7 +11,7 @@ public class LocationChangeButtonRight : TextureButton
     {
         base._Pressed();
 
-        InventoryManager inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+        InventoryManager inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
         var sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
 
 

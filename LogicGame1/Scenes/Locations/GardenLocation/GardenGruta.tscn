@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=1]
 [ext_resource path="res://Images/Locations/MoonieDrawing/Candle.PNG" type="Texture" id=2]
 [ext_resource path="res://Images/Locations/MoonieDrawing/GrutaScene.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Location/GrutaLocationHolder.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/GrutaPuzzle.cs" type="Script" id=5]
+[ext_resource path="res://Images/Locations/MoonieDrawing/PuzzleGruta.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/ClickOnGruta.cs" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 446.564, 390.968 )
 
 [node name="GrutaScene" type="Node2D"]
 script = ExtResource( 4 )
 BackPath = true
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 955, 545 )
+position = Vector2( 963, 539 )
 texture = ExtResource( 3 )
 
 [node name="Candle" type="Sprite" parent="."]
@@ -26,3 +32,27 @@ script = ExtResource( 1 )
 position = Vector2( -33.6807, -9.04492 )
 scale = Vector2( 0.0137969, 0.0144928 )
 polygon = PoolVector2Array( -290.748, -1432.4, -1151.81, -749.197, -1156.29, 819.012, 494.407, 819.012, 559.131, -764.725 )
+
+[node name="Puzzle" type="Area2D" parent="."]
+position = Vector2( 6.10352e-05, 0 )
+script = ExtResource( 5 )
+pathResourceCloth = "res://Images/Locations/MoonieDrawing/Cloth.PNG"
+pathGuiResourceCloth = "res://Images/Gui/Cloth.PNG"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle"]
+position = Vector2( 942, 493 )
+shape = SubResource( 1 )
+
+[node name="PuzzleGruta" type="Sprite" parent="."]
+visible = false
+position = Vector2( 940, 434 )
+scale = Vector2( 0.892708, 0.775 )
+texture = ExtResource( 6 )
+
+[node name="ClickOn" type="Area2D" parent="PuzzleGruta"]
+position = Vector2( 6.10352e-05, 0 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PuzzleGruta/ClickOn"]
+position = Vector2( -9.69055, 3.87103 )
+shape = SubResource( 1 )

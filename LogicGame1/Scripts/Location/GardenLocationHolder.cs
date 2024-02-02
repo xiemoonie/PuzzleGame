@@ -4,24 +4,26 @@ namespace LogicGame1.Scripts.Location
 {
     public class GardenLocationHolder : LocationHolder
     {
-        private Sprite coin;
         private Sprite fungi;
+        private Sprite gum;
        
         public override void _Ready()
         {
             base._Ready();
             GameLoader.LoadScene();
-            coin = GetNode<Sprite>("Coin");
             fungi = GetNode<Sprite>("Fungi");
-            int coinValue = WorldDictionary.checkObjectStatuScene(coin.Name);
+            gum = GetNode<Sprite>("Gum");
+
             int fungiValue = WorldDictionary.checkObjectStatuScene(fungi.Name);
-            if (coinValue != 0)
-            {
-                SceneManager(coin, coinValue);
-            }
+            int gumValue = WorldDictionary.checkObjectStatuScene(gum.Name);
+          
             if (fungiValue != 0)
             {
                 SceneManager(fungi, fungiValue);
+            }
+            if (gumValue != 0)
+            {
+                SceneManager(gum, gumValue);
             }
         }
         public void SceneManager(Sprite sprite, int state)
@@ -30,6 +32,7 @@ namespace LogicGame1.Scripts.Location
             {
                 case 1: sprite.QueueFree(); break;
                 case 3: sprite.QueueFree(); break;
+                case 5: sprite.QueueFree(); break;
             }
         }
     }

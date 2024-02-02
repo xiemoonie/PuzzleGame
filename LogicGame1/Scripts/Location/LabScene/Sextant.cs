@@ -122,7 +122,7 @@ public class Sextant : Area2D
             click.Play();
             sun.Visible = false;
             sunCompleted.Visible = true;
-            var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+            var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
             s.eraseItem();
             WorldDictionary.setStateObject("SextantGardenBackground", 3);
             WorldDictionary.setStateObject("SextantVision", 3);

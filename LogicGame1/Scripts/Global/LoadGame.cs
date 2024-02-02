@@ -27,7 +27,7 @@ public class LoadGame : TextureButton
 
 
         GameWrapper gameWrapper = GameTemplate.Instance<GameWrapper>();
-        var inventoryContainer = gameWrapper.GetNode<InventoryManager>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+        var inventoryContainer = gameWrapper.GetNode<InventoryManager>("GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
         
         gameWrapper.LocationToLoad = scene;
         screenContent.AddChild(gameWrapper);

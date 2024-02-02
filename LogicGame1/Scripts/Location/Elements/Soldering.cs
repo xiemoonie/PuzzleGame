@@ -23,11 +23,11 @@ public class Soldering : Area2D
     void placeSextant()
     {
         itemToDisplay.Texture = null;
-        var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+        var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
         s.eraseItem();
         stand.Visible = false;
         sextantUnfinished.Visible = true;
-        WorldDictionary.setStateObject("Sextant", 3);
+        WorldDictionary.setStateObject("Sextant", 4);
         WorldDictionary.setStateObject("Stand", 4);
         WorldDictionary.setStateObject("SextantUnfinished", 2);
 
@@ -38,13 +38,13 @@ public class Soldering : Area2D
     void placeVision()
     {
         itemToDisplay.Texture = null;
-        var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+        var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
         s.eraseItem();
         sextantUnfinished.Visible = false;
         sextandClomplited.Visible = true;
-        WorldDictionary.setStateObject("Sextant", 3);
-        WorldDictionary.setStateObject("Vision", 3);
-        WorldDictionary.setStateObject("SextantUnfinished", 3);
+        WorldDictionary.setStateObject("Sextant", 4);
+        WorldDictionary.setStateObject("Vision", 4);
+        WorldDictionary.setStateObject("SextantUnfinished", 4);
         WorldDictionary.setStateObject("SextantFinished",2);
         GameSaver.SaveGameScene();
     }
@@ -57,7 +57,7 @@ public class Soldering : Area2D
         {
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left)
             {
-                var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+                var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
                 itemToDisplay = GetNode<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");
                 if (sextandClomplited != null && sextandClomplited.Visible)
                 {
@@ -68,7 +68,7 @@ public class Soldering : Area2D
                     s.pickedItem(item, sextand);
                     WorldDictionary.setStateObject("Stand", 2);
                     WorldDictionary.setStateObject("SextantVision", 1);
-                    WorldDictionary.setStateObject("SextantFinished", 3);
+                    WorldDictionary.setStateObject("SextantFinished", 4);
                     GameSaver.SaveGameScene();
                 }
                 if (itemToDisplay.Texture != null && itemToDisplay.Texture.ResourcePath == "res://Images/Locations/MoonieDrawing/sextant.PNG" && sextantUnfinished!=null && !sextantUnfinished.Visible)

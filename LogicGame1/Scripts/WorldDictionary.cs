@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using System.Threading;
 
 public static class WorldDictionary
@@ -25,12 +26,17 @@ public static class WorldDictionary
       {"Plate", "res://Images/Locations/MoonieDrawing/Plate.PNG"},
       {"SecretCompartiment", "res://Images/Locations/MoonieDrawing/SecretCompartiment.PNG"},
       {"Knob", "res://Images/Locations/MoonieDrawing/CoinPNG.png"},
-      {"SextantGardenBackground", "res://Images/Locations/MoonieDrawing/gardenSun.png"}
+      {"SextantGardenBackground", "res://Images/Locations/MoonieDrawing/gardenSun.png"},
+      {"Gum", "res://Images/Locations/MoonieDrawing/Gum.PNG"},
+      {"Battery", "res://Images/Locations/MoonieDrawing/Battery.PNG"},
+      {"Fire", "res://Images/Locations/MoonieDrawing/Fire.PNG"},
+      {"Flame", "res://Images/Locations/MoonieDrawing/Flame.PNG"},
+      {"Cloth", "res://Images/Locations/MoonieDrawing/Cloth.PNG"},
+      {"PuzzleGruta", "res://Images/Locations/MoonieDrawing/PuzzleGruta.png"}
 };
 
     static Dictionary<string, int> objectState = new Dictionary<string, int>()
       {
-      {"Coin",0},
       {"Vision",0},
       {"Stand",0},
       {"Sextant",0},
@@ -46,6 +52,12 @@ public static class WorldDictionary
       {"Plate",0},
       {"SecretCompartiment", 0},
       {"Knob", 0},
+      {"Gum", 0},
+      {"Battery", 0},
+      {"Fire", 0},
+      {"Flame", 0},
+      {"Cloth", 0},
+      {"PuzzleGruta", 0}
 };
     static IDictionary<string, string> locations = new Dictionary<string, string>(){
     {"GardenOne", "res://Scenes/Locations/GardenLocation/GardenOne.tscn"},
@@ -57,7 +69,7 @@ public static class WorldDictionary
     {"GardenHouseWorkingTable", "res://Scenes/Locations/GardenLocation/GardenHouseWorkingTable.tscn"},
     {"GardenSextant", "res://Scenes/Locations/GardenLocation/GardenSextant.tscn"},
     {"GardenGruta", "res://Scenes/Locations/GardenLocation/GardenGruta.tscn"},
-    {"GardenDiary", "res://Scenes/Locations/GardenLocation/GardenDiary.tscn"},
+    {"GardenDiary", "res://Scenes/Locations/GardenLocation/GardenDiary.tscn"}
 };
     static int getStat(string objectName)
     {
@@ -132,6 +144,11 @@ public static class WorldDictionary
             default: throw new Exception($"Cannot zoom in UNKNOWN scene \"{currentScene}\", zoomedObj was \"{zoomedObject}\""); ;
         }
     }
+
+    static public string getPathResourceObject(string name)
+    {
+       return objectsResources[name];
+    }
     static public string getMainScene()
     {
         return locations["GardenOne"];
@@ -160,6 +177,17 @@ public static class WorldDictionary
             }
         }
         return objectsPath;
+    }
+    static public string getInventoryCombinableObjectName(string resourcePath)
+    {
+        foreach (var i in objectsResources)
+        {
+            if (i.Value == resourcePath)
+            {
+                return i.Key;
+            }
+        }
+        return "";
     }
     static public void setStateObject(string objectName, int state)
     {

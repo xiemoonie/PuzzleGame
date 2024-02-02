@@ -17,7 +17,7 @@ public class SaveButton : TextureButton
         
         GD.Print("click saving...");
         
-        InventoryManager inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+        InventoryManager inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
         GameWrapper myGameWrapper = GetNode<GameWrapper>("/root/Main/Screen/GameWrapper");
         var sceneContainer = myGameWrapper.GetNode<Control>("SceneContainer");
         string nameScene = sceneContainer.GetChild<Node>(0).Name;

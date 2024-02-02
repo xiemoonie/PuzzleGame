@@ -13,7 +13,7 @@ public class LocationChangingElement : Area2D
     public override void _Ready()
     {
         gameWrapper = GetNode<GameWrapper>("/root/Main/Screen/GameWrapper");
-        inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
+        inventoryContainer = gameWrapper.GetNode<HFlowContainer>("GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
         sceneContainer = gameWrapper.GetNode<Control>("SceneContainer");
     }
 
