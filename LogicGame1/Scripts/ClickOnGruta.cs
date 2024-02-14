@@ -5,62 +5,66 @@ public class ClickOnGruta: Area2D
 {
     Vector2 PositionMouse;
     Sprite PressedRock;
-    private StreamTexture pressedRock;
-    private int nodesGraph = 7;
+    private PackedScene pressedRock;
+    private int nodesGraph = 6;
     bool created = false;
+    public int pressedCounter;
+    int[,] puzzlePieceArray =   { {0,1,0,0,0,0},
+                                {1,0,1,0,1,0 },
+                                {0,1,0,0,1,0 },
+                                {0,0,0,1,0,0 },
+                                {0,1,1,0,0,1 },
+                                {0,0,0,0,1,0 } };
     public override void _Ready()
     {
-        pressedRock = ResourceLoader.Load<StreamTexture>("res://Images/Locations/MoonieDrawing/pressedGruta.png");
-    }
+        pressedRock = ResourceLoader.Load<PackedScene>("res://Objects/Locations/Gruta/PuzzlePiece.tscn");
+       
+}
 
     public void createPressedButtons()
     {
-        Sprite _pressed;
-        Vector2 InitialPositionPressed = new Vector2(450, 180);
+
+        Vector2 InitialPositionPressed = new Vector2(580, 130);
         for (int i = 0; i < nodesGraph; i++)
         {
-            InitialPositionPressed.y = 180;
-            _pressed = new Sprite();
-            _pressed.Scale = new Vector2(1f, 1f);
-            _pressed.Texture = pressedRock;
-         
-            GetParent().GetParent().AddChild(_pressed);
-            InitialPositionPressed += new Vector2(120, 0);
-            _pressed.GlobalPosition = InitialPositionPressed;
             for (int j = 0; j < nodesGraph; j++)
             {
-                _pressed = new Sprite();
-                _pressed.Texture = pressedRock;
-                GetParent().GetParent().AddChild(_pressed);
-                InitialPositionPressed += new Vector2(0, 100);
-                _pressed.GlobalPosition = InitialPositionPressed;
+                Node rr = pressedRock.Instance();
+                var PuzzlePieceRR = rr.GetNode<PuzzlePiece>("PuzzlePiece");
+                PuzzlePieceRR.setIDPuzzlePiece(i, j);
+                GetParent().GetParent().AddChild(rr);
+                Area2D sss = rr.GetNode<Area2D>("PuzzlePiece");
+                sss.GlobalPosition = InitialPositionPressed + new Vector2(i*130 , 100*j);
+                if (puzzlePieceArray[i, j] == 1)
+                {
+                    PuzzlePieceRR.setKeyPuzzlePiece(1);
+                }
+                else
+                {
+                    PuzzlePieceRR.setKeyPuzzlePiece(0);
+                }
             }
-        }
-       
 
-    }
-    public void Pressed(Vector2 PositionMouse)
-    {
-        Sprite _pressed = new Sprite();
-        _pressed.Texture = pressedRock;
-        GetParent().GetParent().AddChild(_pressed);
-        if (PositionMouse.x > 530 && PositionMouse.x < 630)
-        {
-            if (PositionMouse.y > 150 && PositionMouse.y < 200)
-            {
-                GD.Print("1 The position of the mouse is X:  " + PositionMouse.x + " Y :  " + PositionMouse.y);
-                _pressed.Visible = true;
-                _pressed.GlobalPosition = new Vector2(600, 180);
-            }
         }
-        if (PositionMouse.x > 630 && PositionMouse.x < 730)
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        if (pressedCounter == 11)
         {
-            GD.Print("2 The position of the mouse is X:  " + PositionMouse.x + " Y :  " + PositionMouse.y);
-            if (PositionMouse.y > 200 && PositionMouse.y < 250)
+            pressedCounter = 0;
+            var parentPuzzle = GetParent().GetParent();
+            var s = parentPuzzle.GetChildren(); 
+            foreach (Node n in s)
             {
-                _pressed.Visible = true;
-                _pressed.GlobalPosition = new Vector2(700, 180);
+                if (n.GetType().ToString() == "Godot.Node2D")
+                {
+                    n.QueueFree();
+                }
             }
+            parentPuzzle = GetParent();
+            parentPuzzle.QueueFree();
+            GameSaver.SaveGameScene();
         }
     }
 

@@ -3,8 +3,6 @@ using System;
 
 public class GreenHousePotLocationHolder : LocationHolder
 {
-
-
     private Sprite woodenPlank;
     Sprite knob;
     Area2D areaKnob;
@@ -16,7 +14,6 @@ public class GreenHousePotLocationHolder : LocationHolder
     private Sprite sextant;
     private bool locked;
     bool woodenPlankVisibility;
-
 
     public override void _Ready()
     {

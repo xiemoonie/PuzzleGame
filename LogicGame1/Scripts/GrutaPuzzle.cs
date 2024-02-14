@@ -20,6 +20,7 @@ public class GrutaPuzzle : Area2D
             item.Visible = true;
             inventory.eraseItem();
             WorldDictionary.setStateObject(item.Name, 2);
+            WorldDictionary.setStateObject("Cloth", 3);
             GameSaver.SaveGameScene();
             cleaned = true;
             QueueFree();
@@ -40,6 +41,7 @@ public class GrutaPuzzle : Area2D
                 if (cleaned == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
                 {
                     placePuzzle(puzzle, s.Texture.ResourcePath);
+                    GameSaver.SaveGameInvenotry();
                 }
 
             }
