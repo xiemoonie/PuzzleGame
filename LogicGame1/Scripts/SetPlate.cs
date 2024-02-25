@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public class SetPlate : Area2D
 {
@@ -7,10 +8,16 @@ public class SetPlate : Area2D
     bool candlePlaced = false;
     bool flamePlaced = false;
     bool potPlaced = false;
+    bool meltingPotEmpty = false;
+    bool meltingPotMetal = false;
     private Sprite plate;
     private Sprite candle;
     private Sprite flame;
-    private Sprite pot;
+    private Sprite potCompleted;
+    private Sprite potMelted;
+    private Sprite potEmpty;
+    private Sprite spoonMelted;
+    private float counter = 1.5f;
     InventoryManager inventory;
     [Export] string pathResourcePlate = "";
     [Export] string pathGuiResourcePlate = "";
@@ -20,14 +27,34 @@ public class SetPlate : Area2D
     [Export] string pathGuiResourceFlame = "";
     [Export] string pathResourcePot = "";
     [Export] string pathGuiResourcePot = "";
+    private PackedScene itemScene = (PackedScene)GD.Load("res://Objects/Gui/InventoryItem.tscn");
+
     public override void _Ready()
     {
         plate = GetParent().GetNodeOrNull<Sprite>("Plate");
         candle = GetParent().GetNodeOrNull<Sprite>("Candle");
         flame = GetParent().GetNodeOrNull<Sprite>("Flame");
-        pot = GetParent().GetNodeOrNull<Sprite>("MeltingPotCompleted");
+        potCompleted = GetParent().GetNodeOrNull<Sprite>("MeltingPotCompleted");
+        potMelted = GetParent().GetNodeOrNull<Sprite>("MeltingPotMelted");
+        potEmpty = GetParent().GetNodeOrNull<Sprite>("MeltingPotEmpty");
+        spoonMelted = GetParent().GetNodeOrNull<Sprite>("SpoonMelted");
+
     }
-    public void placePlate(Sprite item, string texture)
+
+    public override void _PhysicsProcess(float delta)
+    {
+        if (meltingPotMetal && counter <= 10 && !(counter < 0)) {
+            counter += counter * delta;
+            GD.Print("the counter for pot is: " +counter);
+        }else if (counter > 10){
+            GD.Print("the last sprite should appear bigger than 10");
+            potMelted.Visible = true;
+            potCompleted.Visible = false;
+            meltingPotEmpty = true;
+            counter = -1;
+        }
+    }
+        public void placePlate(Sprite item, string texture)
     {
         if (texture == pathResourcePlate || texture == pathGuiResourcePlate)
         {
@@ -99,10 +126,20 @@ public class SetPlate : Area2D
                 }
                 else if (potPlaced == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
                 {
-                    GD.Print("pot placed 1");
-                    placePot(pot, s.Texture.ResourcePath);
+                    placePot(potCompleted, s.Texture.ResourcePath);
+                    meltingPotMetal= true;
+                }
+                else if (potPlaced == true && meltingPotMetal && meltingPotEmpty)
+                {
+                    GD.Print("grabbed item for melting");
+                    InventoryItem item = itemScene.Instance<InventoryItem>();
+                    potMelted.Visible = false;
+                    potEmpty.Visible = true;
+                    inventory.pickedItem(item, spoonMelted);
+                    meltingPotEmpty = false;
 
                 }
+
             }
         }
     }

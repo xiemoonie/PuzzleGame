@@ -38,6 +38,8 @@ public static class WorldDictionary
       {"MeltingSpoon", "res://Images/Locations/MoonieDrawing/meltingSpoon.PNG"},
       {"Metal", "res://Images/Locations/MoonieDrawing/metal.PNG"},
       {"MeltingPotCompleted", "res://Images/Locations/MoonieDrawing/meltingpPotCompleted.PNG"},
+      {"MeltingPotEmpty", "res://Images/Locations/MoonieDrawing/meltingpPotEmpty.PNG"},
+      {"SpoonMetalMelted", "res://Images/Locations/MoonieDrawing/meltingSpoonMetal.PNG"},
 };
 
     static Dictionary<string, int> objectState = new Dictionary<string, int>()
@@ -68,6 +70,8 @@ public static class WorldDictionary
       {"MeltingSpoon", 0},
       {"Metal", 0},
       {"MeltingPotCompleted", 0},
+      {"MeltingPotEmpty", 0},
+      {"SpoonMetalMelted", 0}
 };
     static IDictionary<string, string> locations = new Dictionary<string, string>(){
     {"GardenOne", "res://Scenes/Locations/GardenLocation/GardenOne.tscn"},

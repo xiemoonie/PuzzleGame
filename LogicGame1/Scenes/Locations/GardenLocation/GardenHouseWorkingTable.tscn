@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Game/WorkingTableLocation.cs" type="Script" id=1]
 [ext_resource path="res://Images/Locations/MoonieDrawing/sextantFinished.PNG" type="Texture" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Scripts/SetPlate.cs" type="Script" id=10]
 [ext_resource path="res://Images/Locations/MoonieDrawing/Flame.PNG" type="Texture" id=11]
 [ext_resource path="res://Images/Locations/MoonieDrawing/meltingpPotCompleted.PNG" type="Texture" id=12]
+[ext_resource path="res://Images/Locations/MoonieDrawing/meltingpPotCompletedMelted.PNG" type="Texture" id=13]
+[ext_resource path="res://Images/Locations/MoonieDrawing/meltingpPotEmpty.PNG" type="Texture" id=14]
+[ext_resource path="res://Images/Locations/MoonieDrawing/meltingSpoonMetal.PNG" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 360.5, 394 )
@@ -71,23 +74,42 @@ shape = SubResource( 1 )
 
 [node name="Plate" type="Sprite" parent="."]
 visible = false
-position = Vector2( 394, 724 )
+position = Vector2( 336.5, 901.25 )
+scale = Vector2( 0.739362, 0.66835 )
 texture = ExtResource( 8 )
 
 [node name="Candle" type="Sprite" parent="."]
 visible = false
-position = Vector2( 379, 586 )
-scale = Vector2( 7.65, 9.30357 )
+position = Vector2( 332, 788 )
+scale = Vector2( 6.175, 7.79464 )
 texture = ExtResource( 9 )
 
 [node name="Flame" type="Sprite" parent="."]
 visible = false
-position = Vector2( 379, 441 )
+position = Vector2( 331, 654 )
 scale = Vector2( 3, 2.57143 )
 texture = ExtResource( 11 )
 
 [node name="MeltingPotCompleted" type="Sprite" parent="."]
 visible = false
-position = Vector2( 432, 433 )
-scale = Vector2( 1.82181, 2.58502 )
+position = Vector2( 371, 643 )
+scale = Vector2( 1.40559, 1.99958 )
 texture = ExtResource( 12 )
+
+[node name="MeltingPotMelted" type="Sprite" parent="."]
+visible = false
+position = Vector2( 375, 641 )
+scale = Vector2( 1.40248, 2.01347 )
+texture = ExtResource( 13 )
+
+[node name="MeltingPotEmpty" type="Sprite" parent="."]
+visible = false
+position = Vector2( 373, 648 )
+scale = Vector2( 1.42908, 2.12458 )
+texture = ExtResource( 14 )
+
+[node name="SpoonMelted" type="Sprite" parent="."]
+visible = false
+position = Vector2( 1081, 599 )
+scale = Vector2( 1.82181, 2.58502 )
+texture = ExtResource( 15 )
