@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=1]
 [ext_resource path="res://Images/Locations/MoonieDrawing/Candle.PNG" type="Texture" id=2]
@@ -6,7 +6,11 @@
 [ext_resource path="res://Scripts/Location/GrutaScene.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/GrutaPuzzle.cs" type="Script" id=5]
 [ext_resource path="res://Images/Locations/MoonieDrawing/PuzzleGruta.png" type="Texture" id=6]
+[ext_resource path="res://Images/Gui/GrutaSceneOpen.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/ClickOnGruta.cs" type="Script" id=8]
+[ext_resource path="res://Images/Locations/MoonieDrawing/meltingPot.PNG" type="Texture" id=9]
+[ext_resource path="res://Images/Locations/MoonieDrawing/metal.PNG" type="Texture" id=10]
+[ext_resource path="res://Images/Locations/MoonieDrawing/meltingSpoon.PNG" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 446.564, 390.968 )
@@ -18,6 +22,47 @@ BackPath = true
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 963, 539 )
 texture = ExtResource( 3 )
+
+[node name="BackgroundOpen" type="Sprite" parent="."]
+visible = false
+position = Vector2( 958, 542 )
+texture = ExtResource( 7 )
+
+[node name="Metal" type="Sprite" parent="BackgroundOpen" groups=["Combinable"]]
+position = Vector2( 247, 280 )
+scale = Vector2( 0.506638, 0.69053 )
+texture = ExtResource( 10 )
+
+[node name="Metal" type="Area2D" parent="BackgroundOpen/Metal"]
+script = ExtResource( 1 )
+
+[node name="Metal" type="CollisionPolygon2D" parent="BackgroundOpen/Metal/Metal"]
+polygon = PoolVector2Array( -181.589, -21.7224, -75.0044, -136.127, 41.4497, -104.268, 120.402, -30.4115, 114.48, 72.4081, -102.637, 47.7893 )
+
+[node name="MeltingPot" type="Sprite" parent="BackgroundOpen" groups=["Combinable"]]
+position = Vector2( -134.468, 125 )
+scale = Vector2( 0.85627, 1.26109 )
+texture = ExtResource( 9 )
+
+[node name="MeltingPot" type="Area2D" parent="BackgroundOpen/MeltingPot"]
+script = ExtResource( 1 )
+
+[node name="MeltingPot" type="CollisionPolygon2D" parent="BackgroundOpen/MeltingPot/MeltingPot"]
+position = Vector2( -30.1133, -48.0355 )
+scale = Vector2( 0.602083, 0.576351 )
+polygon = PoolVector2Array( -298.222, 307.605, -213.171, -191.897, 147.907, -191.823, 200.279, 317.236, -90.6749, 328.243 )
+
+[node name="MeltingSpoon" type="Sprite" parent="BackgroundOpen" groups=["Combinable"]]
+position = Vector2( 32, 331 )
+texture = ExtResource( 11 )
+
+[node name="MeltingSpoon" type="Area2D" parent="BackgroundOpen/MeltingSpoon"]
+script = ExtResource( 1 )
+
+[node name="MeltingSpoon" type="CollisionPolygon2D" parent="BackgroundOpen/MeltingSpoon/MeltingSpoon"]
+position = Vector2( -28, -215 )
+scale = Vector2( 0.602083, 0.576351 )
+polygon = PoolVector2Array( -112.941, 43.3765, 159.446, 39.9064, 161.107, 319.25, -90.6749, 328.243 )
 
 [node name="Candle" type="Sprite" parent="."]
 position = Vector2( 1469, 783 )
@@ -40,7 +85,7 @@ pathResourceCloth = "res://Images/Locations/MoonieDrawing/Cloth.PNG"
 pathGuiResourceCloth = "res://Images/Gui/Cloth.PNG"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle"]
-position = Vector2( 942, 493 )
+position = Vector2( 918, 502 )
 shape = SubResource( 1 )
 
 [node name="PuzzleGruta" type="Sprite" parent="."]

@@ -6,9 +6,11 @@ public class SetPlate : Area2D
     bool platePlaced = false;
     bool candlePlaced = false;
     bool flamePlaced = false;
+    bool potPlaced = false;
     private Sprite plate;
     private Sprite candle;
     private Sprite flame;
+    private Sprite pot;
     InventoryManager inventory;
     [Export] string pathResourcePlate = "";
     [Export] string pathGuiResourcePlate = "";
@@ -16,11 +18,14 @@ public class SetPlate : Area2D
     [Export] string pathGuiResourceCandle = "";
     [Export] string pathResourceFlame = "";
     [Export] string pathGuiResourceFlame = "";
+    [Export] string pathResourcePot = "";
+    [Export] string pathGuiResourcePot = "";
     public override void _Ready()
     {
         plate = GetParent().GetNodeOrNull<Sprite>("Plate");
         candle = GetParent().GetNodeOrNull<Sprite>("Candle");
         flame = GetParent().GetNodeOrNull<Sprite>("Flame");
+        pot = GetParent().GetNodeOrNull<Sprite>("MeltingPotCompleted");
     }
     public void placePlate(Sprite item, string texture)
     {
@@ -49,12 +54,23 @@ public class SetPlate : Area2D
     {
         if (texture == pathResourceFlame || texture == pathGuiResourceFlame)
         {
-            GD.Print("flame placed 2");
             item.Visible = true;
             inventory.eraseItem();
             WorldDictionary.setStateObject(item.Name, 2);
             GameSaver.SaveGameScene();
             flamePlaced = true;
+        }
+    }
+    public void placePot(Sprite item, string texture)
+    {
+        if (texture == pathResourcePot || texture == pathGuiResourcePot)
+        {
+            GD.Print("pot placed 3");
+            item.Visible = true;
+            inventory.eraseItem();
+            WorldDictionary.setStateObject(item.Name, 2);
+            GameSaver.SaveGameScene();
+            potPlaced = true;
         }
     }
     public override void _InputEvent(Godot.Object viewport, InputEvent @event, int shapeIdx)
@@ -78,8 +94,13 @@ public class SetPlate : Area2D
                 }
                 else if (flamePlaced == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
                 {
-                    GD.Print("flame placed 1");
                     placeFlame(flame, s.Texture.ResourcePath);
+
+                }
+                else if (potPlaced == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
+                {
+                    GD.Print("pot placed 1");
+                    placePot(pot, s.Texture.ResourcePath);
 
                 }
             }

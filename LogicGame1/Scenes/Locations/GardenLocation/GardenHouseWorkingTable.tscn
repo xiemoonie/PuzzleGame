@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Game/WorkingTableLocation.cs" type="Script" id=1]
 [ext_resource path="res://Images/Locations/MoonieDrawing/sextantFinished.PNG" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Images/Locations/MoonieDrawing/Candle.PNG" type="Texture" id=9]
 [ext_resource path="res://Scripts/SetPlate.cs" type="Script" id=10]
 [ext_resource path="res://Images/Locations/MoonieDrawing/Flame.PNG" type="Texture" id=11]
+[ext_resource path="res://Images/Locations/MoonieDrawing/meltingpPotCompleted.PNG" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 360.5, 394 )
@@ -30,6 +31,8 @@ pathResourceCandle = "res://Images/Locations/MoonieDrawing/Candle.PNG"
 pathGuiResourceCandle = "res://Images/Gui/Candle.PNG"
 pathResourceFlame = "res://Images/Locations/MoonieDrawing/Fire.PNG"
 pathGuiResourceFlame = "res://Images/Gui/Fire.PNG"
+pathResourcePot = "res://Images/Locations/MoonieDrawing/meltingpPotCompleted.PNG"
+pathGuiResourcePot = "res://Images/Gui/meltingpPotCompleted.PNG"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlateArea"]
 position = Vector2( 370.5, 687 )
@@ -82,3 +85,9 @@ visible = false
 position = Vector2( 379, 441 )
 scale = Vector2( 3, 2.57143 )
 texture = ExtResource( 11 )
+
+[node name="MeltingPotCompleted" type="Sprite" parent="."]
+visible = false
+position = Vector2( 432, 433 )
+scale = Vector2( 1.82181, 2.58502 )
+texture = ExtResource( 12 )

@@ -64,7 +64,10 @@ public class ClickOnGruta: Area2D
             }
             parentPuzzle = GetParent();
             parentPuzzle.QueueFree();
+            WorldDictionary.setStateObject("PuzzleGruta", 3);
             GameSaver.SaveGameScene();
+            GrutaScene gruta = GetNode<GrutaScene>("/root/Main/Screen/GameWrapper/SceneContainer/GardenGruta");
+            gruta.OpenGruta();
         }
     }
 

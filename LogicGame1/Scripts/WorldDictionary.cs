@@ -32,7 +32,12 @@ public static class WorldDictionary
       {"Fire", "res://Images/Locations/MoonieDrawing/Fire.PNG"},
       {"Flame", "res://Images/Locations/MoonieDrawing/Flame.PNG"},
       {"Cloth", "res://Images/Locations/MoonieDrawing/Cloth.PNG"},
-      {"PuzzleGruta", "res://Images/Locations/MoonieDrawing/PuzzleGruta.png"}
+      {"PuzzleGruta", "res://Images/Locations/MoonieDrawing/PuzzleGruta.png"},
+      {"BackgroundOpen", "res://Images/Gui/GrutaSceneOpen.png"},
+      {"MeltingPot", "res://Images/Locations/MoonieDrawing/meltingPot.PNG"},
+      {"MeltingSpoon", "res://Images/Locations/MoonieDrawing/meltingSpoon.PNG"},
+      {"Metal", "res://Images/Locations/MoonieDrawing/metal.PNG"},
+      {"MeltingPotCompleted", "res://Images/Locations/MoonieDrawing/meltingpPotCompleted.PNG"},
 };
 
     static Dictionary<string, int> objectState = new Dictionary<string, int>()
@@ -57,7 +62,12 @@ public static class WorldDictionary
       {"Fire", 0},
       {"Flame", 0},
       {"Cloth", 0},
-      {"PuzzleGruta", 0}
+      {"PuzzleGruta", 0},
+      {"BackgroundOpen", 0},
+      {"MeltingPot", 0},
+      {"MeltingSpoon", 0},
+      {"Metal", 0},
+      {"MeltingPotCompleted", 0},
 };
     static IDictionary<string, string> locations = new Dictionary<string, string>(){
     {"GardenOne", "res://Scenes/Locations/GardenLocation/GardenOne.tscn"},

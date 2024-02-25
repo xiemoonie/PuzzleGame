@@ -15,7 +15,7 @@ public class Combine : TextureButton
        
         List<string> findResourceOfSelected = new List<string>();
         inventoryList = inventory.getSelectedItemsInventory();
-
+        bool createObject = true;
         foreach (var item in inventoryList)
         {
             TextureRect itemSelected = item.GetNode<TextureRect>("Content/Texture/SelectedItem");
@@ -27,9 +27,31 @@ public class Combine : TextureButton
         }
         switch (findResourceOfSelected.Count)
         {
+            case 3:
+
+                foreach (string name in findResourceOfSelected)
+                {
+                    GD.Print($"text path" + name);
+                    if (name != "Metal" && name != "MeltingPot" && name != "MeltingSpoon")
+                    {
+                        GD.Print($"hey hey hey hye hye no se puede combinar");
+                        createObject = false;
+                    }
+                }
+                if (createObject)
+                {
+                    InventoryItem item = itemScene.Instance<InventoryItem>();
+                    inventory.eraseSelectedItem();
+                    Sprite combinableItem = new Sprite();
+                    StreamTexture texture = ResourceLoader.Load<StreamTexture>(WorldDictionary.getPathResourceObject("MeltingPotCompleted"));
+                    WorldDictionary.setStateObject("MeltingPotCompleted", 1);
+                    combinableItem.Texture = texture;
+                    inventory.addItem(item, combinableItem);
+                }
+                break;
+
             case 2:
                 
-                bool createObject = true;
                 foreach (string name in findResourceOfSelected)
                 {
                     GD.Print($"text path" +name);

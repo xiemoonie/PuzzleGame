@@ -31,6 +31,7 @@ namespace LogicGame1.Scripts.Location
             switch (state)
             {
                 case 1: sprite.QueueFree(); break;
+                case 2: sprite.QueueFree(); break;
                 case 3: sprite.QueueFree(); break;
             }
         }
