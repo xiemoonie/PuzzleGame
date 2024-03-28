@@ -67,7 +67,7 @@ public class SetPlate : Area2D
     }
     public void placeCandle(Sprite item, string texture)
     {
-
+        GD.Print("place candle" + texture);
         if (texture == pathResourceCandle || texture == pathGuiResourceCandle)
         {
             item.Visible = true;
@@ -79,11 +79,13 @@ public class SetPlate : Area2D
     }
     public void placeFlame(Sprite item, string texture)
     {
-        if (texture == pathResourceFlame || texture == pathGuiResourceFlame)
+        GD.Print("place flame" + texture);
+        if (texture == pathResourceFlame || texture== pathGuiResourceFlame)
         {
             item.Visible = true;
             inventory.eraseItem();
             WorldDictionary.setStateObject(item.Name, 2);
+            WorldDictionary.setStateObject("Fire", 2);
             GameSaver.SaveGameScene();
             flamePlaced = true;
         }
@@ -92,7 +94,6 @@ public class SetPlate : Area2D
     {
         if (texture == pathResourcePot || texture == pathGuiResourcePot)
         {
-            GD.Print("pot placed 3");
             item.Visible = true;
             inventory.eraseItem();
             WorldDictionary.setStateObject(item.Name, 2);
@@ -109,27 +110,32 @@ public class SetPlate : Area2D
             inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left)
             {
+                GD.Print("Clicking for crafting");
                 var s = GetNodeOrNull<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");
-                if (platePlaced == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
+                if (WorldDictionary.getStateObject("Plate") == 1 && s != null && s.Texture != null && s.Texture.ResourcePath != null)
                 {
+                    GD.Print("1");
                     placePlate(plate, s.Texture.ResourcePath);
                 }
-                else if (candlePlaced == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
+                else if (WorldDictionary.getStateObject("Candle") == 1 && WorldDictionary.getStateObject("Plate") == 2 && s != null && s.Texture != null && s.Texture.ResourcePath != null)
                 {
+                    GD.Print("2");
                     placeCandle(candle, s.Texture.ResourcePath);
 
                 }
-                else if (flamePlaced == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
+                else if (WorldDictionary.getStateObject("Fire") == 1 && WorldDictionary.getStateObject("Candle") == 2 && s != null && s.Texture != null && s.Texture.ResourcePath != null)
                 {
+                    GD.Print("3");
                     placeFlame(flame, s.Texture.ResourcePath);
 
                 }
-                else if (potPlaced == false && s != null && s.Texture != null && s.Texture.ResourcePath != null)
+                else if (WorldDictionary.getStateObject("MeltingPotCompleted") == 1 && WorldDictionary.getStateObject("Fire") == 2 && s != null && s.Texture != null && s.Texture.ResourcePath != null)
                 {
+                    GD.Print("4");
                     placePot(potCompleted, s.Texture.ResourcePath);
-                    meltingPotMetal= true;
+                    meltingPotMetal = true;
                 }
-                else if (potPlaced == true && meltingPotMetal && meltingPotEmpty)
+                else if (potPlaced && WorldDictionary.getStateObject("MeltingPotCompleted") ==2 && meltingPotMetal && meltingPotEmpty)
                 {
                     GD.Print("grabbed item for melting");
                     InventoryItem item = itemScene.Instance<InventoryItem>();
@@ -137,7 +143,6 @@ public class SetPlate : Area2D
                     potEmpty.Visible = true;
                     inventory.pickedItem(item, spoonMelted);
                     meltingPotEmpty = false;
-
                 }
 
             }

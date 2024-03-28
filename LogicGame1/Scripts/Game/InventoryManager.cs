@@ -12,12 +12,14 @@ public class InventoryManager : HFlowContainer
     bool itemGrabbed = false;
     List<Sprite> sprite;
     InventoryItem itemToDrop;
+    List<InventoryItem> selectedItems;
     List<String> texturePath = new List<String>();
     List<String> nameSprite = new List<String>();
-
+    [Export] string combinable;
     public override void _Ready()
     {
         itemToDisplay = GetNode<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");
+        selectedItems = new List<InventoryItem>();
     }
     
     public void pickedItem(InventoryItem inventoryItem, Sprite texture)
@@ -77,31 +79,56 @@ public class InventoryManager : HFlowContainer
         }
     }
 
-
     public void selectedItem(InventoryItem inventoryItem)
     {
-        if (itemToDrop != inventoryItem || itemGrabbed == false)
-        {
             GD.Print("item grabbed");
             itemGrabbed = true;
             itemToDrop = inventoryItem;
             TextureRect itemSelected = inventoryItem.GetNode<TextureRect>("Content/Texture/SelectedItem");
             TextureRect itemSelectedTexture = inventoryItem.GetNode<TextureRect>("Content/Texture");
             itemSelected.Visible = true;
-            itemToDisplay.Texture = itemSelectedTexture.Texture;
+            StreamTexture combinableTexture = ResourceLoader.Load<StreamTexture>(combinable);
+            if (inventoryItem.IsInGroup("Combinable"))
+            {
+                itemToDisplay.Texture = combinableTexture;
+            }
+            else if (itemToDisplay.Texture == combinableTexture)
+            {
+                itemToDisplay.Texture = combinableTexture;
+            }
+            else
+            {
+                itemToDisplay.Texture = itemSelectedTexture.Texture;
+            }
+            selectedItems.Add(inventoryItem);
+        
+    }
+    public void unselectedItem(InventoryItem inventoryItem)
+    {
+        TextureRect itemSelected = inventoryItem.GetNode<TextureRect>("Content/Texture/SelectedItem");
+        itemSelected.Visible = false;
+        List<InventoryItem> selected = getSelectedItemsInventory(); 
+        if (selected.Count > 0) 
+        {
+            var list = GetChildren();
+            foreach (InventoryItem item in list)
+            {
+                if (selected[0].GetNode<TextureRect>("Content/Texture") == item.GetNode<TextureRect>("Content/Texture"))
+                {
+                    TextureRect itemSelectedTexture = item.GetNode<TextureRect>("Content/Texture");
+                    itemToDisplay.Texture = itemSelectedTexture.Texture;
+                    //itemToDrop = item;
+                    break;
+                }
+            }
         }
         else
         {
-            GD.Print("item dropped");
-            dropItem(itemToDrop);
-            itemGrabbed = false;
-            if (itemToDrop != inventoryItem)
-            {
-                selectedItem(inventoryItem);
-            }
+            itemToDisplay.Texture = null;
+            itemToDrop = null;
         }
     }
-    public void getSprites()
+        public void getSprites()
     {
         List<string> textureList = new List<string>();
         textureList = WorldDictionary.getInventoryObject();

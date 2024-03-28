@@ -46,7 +46,7 @@ position = Vector2( 962, 546 )
 texture = ExtResource( 2 )
 
 [node name="FlowerOnWindow" type="Sprite" parent="."]
-position = Vector2( 1254, 619 )
+position = Vector2( 257, 583 )
 texture = ExtResource( 4 )
 
 [node name="SecretCompartiment" type="Sprite" parent="."]

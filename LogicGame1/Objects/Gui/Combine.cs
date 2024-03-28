@@ -73,6 +73,7 @@ public class Combine : TextureButton
                 }
                 break;
         }
+        GameSaver.SaveGameScene();
         GameSaver.SaveGameInvenotry();
     }
 }

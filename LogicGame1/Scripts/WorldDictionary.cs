@@ -40,6 +40,9 @@ public static class WorldDictionary
       {"MeltingPotCompleted", "res://Images/Locations/MoonieDrawing/meltingpPotCompleted.PNG"},
       {"MeltingPotEmpty", "res://Images/Locations/MoonieDrawing/meltingpPotEmpty.PNG"},
       {"SpoonMetalMelted", "res://Images/Locations/MoonieDrawing/meltingSpoonMetal.PNG"},
+      {"Bucket", "res://Images/Gui/bucket.png"},
+      {"BucketSand", "res://Images/Gui/bucketSand.png"},
+      {"KeyShape", "res://Images/Locations/MoonieDrawing/keyShape.png" }
 };
 
     static Dictionary<string, int> objectState = new Dictionary<string, int>()
@@ -71,7 +74,10 @@ public static class WorldDictionary
       {"Metal", 0},
       {"MeltingPotCompleted", 0},
       {"MeltingPotEmpty", 0},
-      {"SpoonMetalMelted", 0}
+      {"SpoonMetalMelted", 0},
+      {"Bucket", 0 },
+      {"BucketSand", 0 },
+      {"KeyShape", 0 }
 };
     static IDictionary<string, string> locations = new Dictionary<string, string>(){
     {"GardenOne", "res://Scenes/Locations/GardenLocation/GardenOne.tscn"},
@@ -83,7 +89,9 @@ public static class WorldDictionary
     {"GardenHouseWorkingTable", "res://Scenes/Locations/GardenLocation/GardenHouseWorkingTable.tscn"},
     {"GardenSextant", "res://Scenes/Locations/GardenLocation/GardenSextant.tscn"},
     {"GardenGruta", "res://Scenes/Locations/GardenLocation/GardenGruta.tscn"},
-    {"GardenDiary", "res://Scenes/Locations/GardenLocation/GardenDiary.tscn"}
+    {"GardenDiary", "res://Scenes/Locations/GardenLocation/GardenDiary.tscn"},
+    {"GardenSand", "res://Scenes/Locations/GardenLocation/GardenSand.tscn"},
+    {"GardenBucketSand", "res://Scenes/Locations/GardenLocation/GardenBucketSand.tscn"}
 };
     static int getStat(string objectName)
     {
@@ -93,6 +101,8 @@ public static class WorldDictionary
     {
         switch (currentScene)
         {
+            case "GardenBucketSand": setCurrentScene("GardenSand"); return locations["GardenSand"];
+            case "GardenSand": setCurrentScene("GardenThree"); return locations["GardenThree"];
             case "GardenGruta": setCurrentScene("GardenOne"); return locations["GardenOne"];
             case "GardenSextant": setCurrentScene("GardenTwo"); return locations["GardenTwo"];
             case "GardenHouseOne": setCurrentScene("GardenTwo"); return locations["GardenTwo"];
@@ -152,6 +162,18 @@ public static class WorldDictionary
                     case "House": setCurrentScene("GardenHouseOne"); return locations["GardenHouseOne"];
                     case "Diary": setCurrentScene("GardenDiary"); return locations["GardenDiary"];
                     case "Pillar": setCurrentScene("GardenSextant"); return locations["GardenSextant"];
+                    default: throw new Exception($"Cannot zoom in scene \"{currentScene}\", Unknown zoomedObj \"{zoomedObject}\"");
+                }
+            case "GardenThree":
+                switch (zoomedObject)
+                {
+                    case "Sand": setCurrentScene("GardenSand"); return locations["GardenSand"]; 
+                    default: throw new Exception($"Cannot zoom in scene \"{currentScene}\", Unknown zoomedObj \"{zoomedObject}\"");
+                }
+            case "GardenSand":
+                switch (zoomedObject)
+                {
+                    case "BucketSand": setCurrentScene("GardenBucketSand"); return locations["GardenBucketSand"];
                     default: throw new Exception($"Cannot zoom in scene \"{currentScene}\", Unknown zoomedObj \"{zoomedObject}\"");
                 }
 

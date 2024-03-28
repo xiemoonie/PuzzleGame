@@ -23,20 +23,22 @@ class PickableObj : Area2D
                 {  
                     WorldDictionary.setStateObject(Name,1);
                     
-                    var objectToErase = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
+                    var inventoryManager = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
                     var groups = GetParent().GetGroups();
                     foreach (string g in groups)
                     {
                         if (g == "Combinable")
                         {
+                            item.AddToGroup("Combinable");
                             WorldDictionary.setStateObject(Name, 5);
                         }
                         else
                         {
                             WorldDictionary.setStateObject(Name, 1);
                         }
+                        
                     }
-                    objectToErase.pickedItem(item, some);
+                    inventoryManager.pickedItem(item, some);
                     some.QueueFree();
                     GameSaver.SaveGameScene();
 

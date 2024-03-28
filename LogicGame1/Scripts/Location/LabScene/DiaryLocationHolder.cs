@@ -27,8 +27,6 @@ namespace LogicGame1.Scripts.Location
         public override void _Ready()
         {
             base._Ready();
-
-            
             first = GetNode<Sprite>("First");
             back = GetNode<Sprite>("Last");
 
