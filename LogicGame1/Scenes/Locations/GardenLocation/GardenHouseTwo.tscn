@@ -60,7 +60,7 @@ position = Vector2( 1270.56, 754.273 )
 scale = Vector2( 0.0729204, 0.0839102 )
 polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )
 
-[node name="Bucket" type="Sprite" parent="." groups=["Combinable"]]
+[node name="Bucket" type="Sprite" parent="."]
 position = Vector2( 413, 1007 )
 scale = Vector2( 4.95, 4.42857 )
 texture = ExtResource( 8 )

@@ -12,7 +12,7 @@
 [ext_resource path="res://Images/Locations/MoonieDrawing/CoinPNG.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.8334, 13.5 )
+extents = Vector2( 16.9167, 11.25 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 220.909, 212.988 )
@@ -31,7 +31,7 @@ pathResource = "res://Images/Locations/MoonieDrawing/FungiKey.PNG"
 pathGuiResource = "res://Images/Gui/FungiKey.PNG"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knob"]
-position = Vector2( -3, 2 )
+position = Vector2( -2.75012, -4.75 )
 scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
 
@@ -42,7 +42,7 @@ scale = Vector2( 0.0931921, 0.087864 )
 texture = ExtResource( 10 )
 
 [node name="FlowerPotScene" type="Sprite" parent="."]
-position = Vector2( 962, 546 )
+position = Vector2( 963, 542 )
 texture = ExtResource( 2 )
 
 [node name="FlowerOnWindow" type="Sprite" parent="."]

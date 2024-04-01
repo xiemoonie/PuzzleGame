@@ -43,10 +43,13 @@ public class SetPlate : Area2D
 
     public override void _PhysicsProcess(float delta)
     {
-        if (meltingPotMetal && counter <= 10 && !(counter < 0)) {
+        if (meltingPotMetal && counter <= 10 && !(counter < 0))
+        {
             counter += counter * delta;
-            GD.Print("the counter for pot is: " +counter);
-        }else if (counter > 10){
+            GD.Print("the counter for pot is: " + counter);
+        }
+        else if (counter > 10)
+        {
             GD.Print("the last sprite should appear bigger than 10");
             potMelted.Visible = true;
             potCompleted.Visible = false;
@@ -54,51 +57,61 @@ public class SetPlate : Area2D
             counter = -1;
         }
     }
-        public void placePlate(Sprite item, string texture)
+    public void placePlate(Sprite item, string texture)
     {
-        if (texture == pathResourcePlate || texture == pathGuiResourcePlate)
+        if (inventory.onlyOneSelected())
         {
-            item.Visible = true;
-            inventory.eraseItem();
-            WorldDictionary.setStateObject(item.Name, 2);
-            GameSaver.SaveGameScene();
-            platePlaced = true;
+            if (texture == pathResourcePlate || texture == pathGuiResourcePlate)
+            {
+                item.Visible = true;
+                inventory.eraseItem();
+                WorldDictionary.setStateObject(item.Name, 2);
+                GameSaver.SaveGameScene();
+                platePlaced = true;
+            }
         }
     }
     public void placeCandle(Sprite item, string texture)
     {
-        GD.Print("place candle" + texture);
-        if (texture == pathResourceCandle || texture == pathGuiResourceCandle)
+        if (inventory.onlyOneSelected())
         {
-            item.Visible = true;
-            inventory.eraseItem();
-            WorldDictionary.setStateObject(item.Name, 2);
-            GameSaver.SaveGameScene();
-            candlePlaced = true;
+            if (texture == pathResourceCandle || texture == pathGuiResourceCandle)
+            {
+                item.Visible = true;
+                inventory.eraseItem();
+                WorldDictionary.setStateObject(item.Name, 2);
+                GameSaver.SaveGameScene();
+                candlePlaced = true;
+            }
         }
     }
     public void placeFlame(Sprite item, string texture)
     {
-        GD.Print("place flame" + texture);
-        if (texture == pathResourceFlame || texture== pathGuiResourceFlame)
+        if (inventory.onlyOneSelected())
         {
-            item.Visible = true;
-            inventory.eraseItem();
-            WorldDictionary.setStateObject(item.Name, 2);
-            WorldDictionary.setStateObject("Fire", 2);
-            GameSaver.SaveGameScene();
-            flamePlaced = true;
+            if (texture == pathResourceFlame || texture == pathGuiResourceFlame)
+            {
+                item.Visible = true;
+                inventory.eraseItem();
+                WorldDictionary.setStateObject(item.Name, 2);
+                WorldDictionary.setStateObject("Fire", 2);
+                GameSaver.SaveGameScene();
+                flamePlaced = true;
+            }
         }
     }
     public void placePot(Sprite item, string texture)
     {
-        if (texture == pathResourcePot || texture == pathGuiResourcePot)
+        if (inventory.onlyOneSelected())
         {
-            item.Visible = true;
-            inventory.eraseItem();
-            WorldDictionary.setStateObject(item.Name, 2);
-            GameSaver.SaveGameScene();
-            potPlaced = true;
+            if (texture == pathResourcePot || texture == pathGuiResourcePot)
+            {
+                item.Visible = true;
+                inventory.eraseItem();
+                WorldDictionary.setStateObject(item.Name, 2);
+                GameSaver.SaveGameScene();
+                potPlaced = true;
+            }
         }
     }
     public override void _InputEvent(Godot.Object viewport, InputEvent @event, int shapeIdx)
@@ -135,7 +148,7 @@ public class SetPlate : Area2D
                     placePot(potCompleted, s.Texture.ResourcePath);
                     meltingPotMetal = true;
                 }
-                else if (potPlaced && WorldDictionary.getStateObject("MeltingPotCompleted") ==2 && meltingPotMetal && meltingPotEmpty)
+                else if (potPlaced && WorldDictionary.getStateObject("MeltingPotCompleted") == 2 && meltingPotMetal && meltingPotEmpty)
                 {
                     GD.Print("grabbed item for melting");
                     InventoryItem item = itemScene.Instance<InventoryItem>();

@@ -4,10 +4,12 @@ using System;
 public class Sand : Area2D
 {
     Area2D Bucket;
+    InventoryManager inventory;
     [Export] string bucketSprite;
     public override void _Ready()
     {
         Bucket = GetParent().GetNode<Area2D>("BucketSand");
+        inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
     }
     public void checkForBucket()
     {
@@ -15,12 +17,17 @@ public class Sand : Area2D
         if (s != null && s.Texture != null)
         {
             GD.Print("Check for bucket" + s.Texture.ResourcePath);
-            if (s.Texture.ResourcePath == bucketSprite)
+            if (inventory.onlyOneSelected())
             {
-                var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
-                inventory.eraseItem();
-                GD.Print("Bucket found");
-                Bucket.Visible = true;
+                if (s.Texture.ResourcePath == bucketSprite)
+                {
+
+                    inventory.eraseItem();
+                    GD.Print("Bucket found");
+                    Bucket.Visible = true;
+                    WorldDictionary.setStateObject(Bucket.Name, 2);
+                    GameSaver.SaveGameScene();
+                }
             }
         }
     }

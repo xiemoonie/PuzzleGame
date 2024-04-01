@@ -63,16 +63,16 @@ position = Vector2( -121, 659 )
 scale = Vector2( 0.628748, 0.418232 )
 polygon = PoolVector2Array( 356.865, -114.343, 522.751, -109.644, 528.327, -321.099, 351.289, -311.701 )
 
-[node name="ShapeKey" type="Sprite" parent="."]
+[node name="KeyShape" type="Sprite" parent="."]
 position = Vector2( 1699, 704 )
 scale = Vector2( 1.85, 1 )
 texture = ExtResource( 8 )
 
-[node name="ShapeKey" type="Area2D" parent="ShapeKey"]
+[node name="KeyShape" type="Area2D" parent="KeyShape"]
 position = Vector2( 37.6113, 11.1891 )
 script = ExtResource( 5 )
 
-[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="ShapeKey/ShapeKey"]
-position = Vector2( -31.666, -32.189 )
-scale = Vector2( 0.0512818, 0.0848796 )
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="KeyShape/KeyShape"]
+position = Vector2( -50.2713, -32.189 )
+scale = Vector2( 0.0385175, 0.0848796 )
 polygon = PoolVector2Array( 1248.01, -294.535, -833.23, -282.754, -822.152, 647.977, 1209.01, 600.852 )

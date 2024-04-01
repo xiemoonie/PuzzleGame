@@ -3,19 +3,24 @@ using System;
 
 public class GardenSand : LocationHolder
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
+    Area2D candle;
     public override void _Ready()
     {
-        
+        candle = GetNode<Area2D>("BucketSand");
+        GameLoader.LoadScene();
+        int candleValue = WorldDictionary.checkObjectStatuScene(candle.Name);
+        if (candleValue != 0)
+        {
+            SceneManager(candle, candleValue);
+        }
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    public void SceneManager(Area2D sprite, int state)
+    {
+        switch (state)
+        {
+            case 1: sprite.QueueFree(); break;
+            case 2: sprite.Visible = true; break;
+            case 3: sprite.QueueFree(); break;
+        }
+    }
 }

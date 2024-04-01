@@ -7,15 +7,9 @@ public class PuzzlePiece : Area2D
     int[,] puzzlePiece;
     private int y;
     private int key;
-    private int  counterKeys = 0;
-    int[,] puzzlePieceArray =  { {0,1,0,0,0,0},
-                                 {1,0,1,0,1,0},
-                                 {0,1,0,0,1,0},
-                                 {0,0,0,1,0,0},
-                                 {0,1,1,0,0,1},
-                                 {0,0,0,0,1,0} };
+    private int counterKeys = 0;
     float timer = 0;
- 
+    bool used;
     public override void _PhysicsProcess(float delta)
     {
         if (timer > 0)
@@ -31,7 +25,7 @@ public class PuzzlePiece : Area2D
     public void unpressSprites()
     {
         Godot.Collections.Array nodes = GetParent().GetParent().GetChildren();
-        foreach(Node n in nodes)
+        foreach (Node n in nodes)
         {
             if (n.GetType().ToString() == "Godot.Node2D")
             {
@@ -39,11 +33,11 @@ public class PuzzlePiece : Area2D
                 s.Visible = false;
 
             }
-            
+
         }
     }
 
-        public void setIDPuzzlePiece(int xIndex, int yIndex)
+    public void setIDPuzzlePiece(int xIndex, int yIndex)
     {
         x = xIndex;
         y = yIndex;
@@ -66,19 +60,24 @@ public class PuzzlePiece : Area2D
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left)
             {
                 Sprite sprite = GetNodeOrNull<Sprite>("PuzzlePiece");
-                sprite.Visible = true;
-                var puzzleGruta = GetNode<Sprite>("/root/Main/Screen/GameWrapper/SceneContainer/GardenGruta/PuzzleGruta");
-                var clickOnGruta = puzzleGruta.GetNode<ClickOnGruta>("PuzzleGruta");
+                sprite.Visible = !sprite.Visible;
+                var clickOnGruta = GetNode<PuzzleGruta>("/root/Main/Screen/GameWrapper/SceneContainer/GardenGruta/PuzzleGruta");
+
                 if (key == 1)
                 {
-                   
-                    clickOnGruta.pressedCounter++;
-                    GD.Print("Counter keys: " +clickOnGruta.pressedCounter);
+                    if (sprite.Visible)
+                    {
+                        clickOnGruta.pressedCounter++;
+                    }
+                    else
+                    {
+                        clickOnGruta.pressedCounter--;
+                    }
                 }
                 else
                 {
                     clickOnGruta.pressedCounter = 0;
-                    timer = 5;
+                    timer = 2;
                 }
             }
 

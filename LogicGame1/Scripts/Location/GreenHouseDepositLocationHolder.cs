@@ -8,14 +8,17 @@ namespace LogicGame1.Scripts.Location
     {
         private Sprite screwdriver;
         private Sprite battery;
+        private Sprite bucket;
 
         public override void _Ready()
         {
             screwdriver = GetNodeOrNull<Sprite>("Screwdriver");
             battery = GetNodeOrNull<Sprite>("Battery");
+            bucket = GetNodeOrNull<Sprite>("Bucket");
             GameLoader.LoadScene();
             int screwdriverValue = WorldDictionary.checkObjectStatuScene(screwdriver.Name);
             int batteryValue = WorldDictionary.checkObjectStatuScene(battery.Name);
+            int bucketValue = WorldDictionary.checkObjectStatuScene(bucket.Name);
             if (screwdriverValue != 0)
             {
                 SceneManager(screwdriver, screwdriverValue);
@@ -23,6 +26,10 @@ namespace LogicGame1.Scripts.Location
             if (batteryValue != 0)
             {
                 SceneManager(battery, batteryValue);
+            }
+            if (bucketValue != 0)
+            {
+                SceneManager(bucket, bucketValue);
             }
 
         }

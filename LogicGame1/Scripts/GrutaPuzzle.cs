@@ -11,20 +11,24 @@ public class GrutaPuzzle : Area2D
     public override void _Ready()
     {
         puzzle = GetParent().GetNodeOrNull<Sprite>("PuzzleGruta");
+        inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
     }
     public void placePuzzle (Sprite item, string texture)
     {
-        if (texture == pathResourceCloth || texture == pathGuiResourceCloth)
+        if(inventory.onlyOneSelected())
         {
-            GD.Print("Should be visible" +item.Name);
-            item.Visible = true;
-            inventory.eraseItem();
-            WorldDictionary.setStateObject(item.Name, 2);
-            WorldDictionary.setStateObject("Cloth", 3);
-            GameSaver.SaveGameScene();
-            cleaned = true;
-            QueueFree();
-           
+            if (texture == pathResourceCloth || texture == pathGuiResourceCloth)
+            {
+                GD.Print("Should be visible" + item.Name);
+                item.Visible = true;
+                inventory.eraseItem();
+                WorldDictionary.setStateObject(item.Name, 2);
+                WorldDictionary.setStateObject("Cloth", 3);
+                GameSaver.SaveGameScene();
+                cleaned = true;
+                QueueFree();
+
+            }
         }
     }
 
@@ -34,7 +38,6 @@ public class GrutaPuzzle : Area2D
 
         if (@event is InputEventMouseButton mouseEvent)
         {
-            inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left)
             {
                 var s = GetNodeOrNull<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");

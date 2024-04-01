@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/GrutaPuzzle.cs" type="Script" id=5]
 [ext_resource path="res://Images/Locations/MoonieDrawing/PuzzleGruta.png" type="Texture" id=6]
 [ext_resource path="res://Images/Gui/GrutaSceneOpen.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/ClickOnGruta.cs" type="Script" id=8]
+[ext_resource path="res://Scenes/Locations/GardenLocation/PuzzleGruta.cs" type="Script" id=8]
 [ext_resource path="res://Images/Locations/MoonieDrawing/meltingPot.PNG" type="Texture" id=9]
 [ext_resource path="res://Images/Locations/MoonieDrawing/metal.PNG" type="Texture" id=10]
 [ext_resource path="res://Images/Locations/MoonieDrawing/meltingSpoon.PNG" type="Texture" id=11]
@@ -93,11 +93,4 @@ visible = false
 position = Vector2( 940, 434 )
 scale = Vector2( 0.892708, 0.775 )
 texture = ExtResource( 6 )
-
-[node name="PuzzleGruta" type="Area2D" parent="PuzzleGruta"]
-position = Vector2( 6.10352e-05, 0 )
 script = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PuzzleGruta/PuzzleGruta"]
-position = Vector2( -9.69055, 3.87103 )
-shape = SubResource( 1 )

@@ -25,6 +25,8 @@ public class Rotate : Area2D
     CollisionPolygon2D Left;
     BucketKey bucket;
     bool drawnedKey = false;
+
+    InventoryManager inventory;
     public override void _Ready()
     {
         gameWrapper = game.Instance<GameWrapper>();
@@ -35,7 +37,8 @@ public class Rotate : Area2D
         Left = GetParent().GetParent().GetNode<CollisionPolygon2D>("BackgroundOne/Left/AreaLeft");
         Right = GetParent().GetParent().GetNode<CollisionPolygon2D>("BackgroundOne/Right/AreaRight");
         bucket = GetParent<BucketKey>();
-     
+        inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
+
     }
     public bool checkForKey()
     {
@@ -43,7 +46,7 @@ public class Rotate : Area2D
         if (s != null && s.Texture != null)
         {
             GD.Print("Check for key" + s.Texture.ResourcePath);
-            if (s.Texture.ResourcePath == pathKey || s.Texture.ResourcePath == pathGuiKey)
+            if (s.Texture.ResourcePath == pathKey || s.Texture.ResourcePath == pathGuiKey && inventory.onlyOneSelected())
             {
                 return true;
             }
@@ -105,7 +108,6 @@ public class Rotate : Area2D
                         {    
                             bucket.finishedPuzzle = true;
                             GD.Print("Rotation finished");
-                            var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
                             inventory.eraseItem();
                             WorldDictionary.setStateObject("KeyShape", 3);
                             GameSaver.SaveGameScene();

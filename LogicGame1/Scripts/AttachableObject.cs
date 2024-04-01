@@ -10,11 +10,13 @@ public class AttachableObject : Area2D
     [Export] String pathGuiResource = "";
 
     [Export] public float xShape;
+    InventoryManager inventory;
 
     public bool unlockedSlide = false;
     public override void _Ready()
     {
         gameWrapper = game.Instance<GameWrapper>();
+        inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
     }
 
     public void checkForKey()
@@ -23,24 +25,24 @@ public class AttachableObject : Area2D
         if (s != null)
         {
             GD.Print("Resource path" + s.Texture.ResourcePath);
-            if (s.Texture.ResourcePath == pathResource || s.Texture.ResourcePath == pathGuiResource)
+            if (inventory.onlyOneSelected())
             {
-                Sprite knob = GetNode<Sprite>("Knob");
-                if (knob != null)
+                if (s.Texture.ResourcePath == pathResource || s.Texture.ResourcePath == pathGuiResource)
                 {
-                    knob.Visible = true;
-                    var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
-                    inventory.eraseItem();
-                    unlockedSlide = true;
-                    WorldDictionary.setStateObject("Knob", 2);
-                    GameSaver.SaveGameScene();
+                    Sprite knob = GetNode<Sprite>("Knob");
+                    if (knob != null)
+                    {
+                        knob.Visible = true;
+                        inventory.eraseItem();
+                        unlockedSlide = true;
+                        WorldDictionary.setStateObject("Knob", 2);
+                        GameSaver.SaveGameScene();
+                    }
                 }
             }
+           
         }
-        else
-        {
-            GD.Print("s is null");
-        }
+     
     }
     
     public void ReshapeArea2D()
@@ -53,14 +55,18 @@ public class AttachableObject : Area2D
         if (posKnob.x >= 420)
         {
             posKnob.x -= 200;
+            posKnob.y = 235;
             posWoodenPlank.x -= 75;
+            posWoodenPlank.y = 700;
             woodenPlank.Position = posWoodenPlank;
             this.Position = posKnob;
         }
         else
         {
             posKnob.x = 230;
+            posKnob.y = 235;
             posWoodenPlank.x = 500;
+            posWoodenPlank.y = 700;
             this.GlobalPosition = posKnob;
             woodenPlank.Position = posWoodenPlank;
             ShowSecretCompartiment();

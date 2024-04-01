@@ -20,11 +20,28 @@ public class GardenBucketSand : LocationHolder
         Left = GetNode<Sprite>("BackgroundOne/Left/Left");
         Right = GetNode<Sprite>("BackgroundOne/Right/Right");
 
-        Up.RotationDegrees = -90;
-        Down.RotationDegrees = -90;
-        Left.RotationDegrees = -90;
-        Right.RotationDegrees = -90;
-
+        if (WorldDictionary.getStateObject("KeyShape") == 3)
+        {
+            Up.Visible = true;
+            Down.Visible = true;
+            Left.Visible = true;
+            Right.Visible = true;
+            Up.RotationDegrees = -90;
+            Down.RotationDegrees = 90;
+            Left.RotationDegrees = 180;
+            Right.RotationDegrees = 0;
+            Up.FlipV = false;
+            Down.FlipV = true;
+            Left.FlipV = false;
+            Right.FlipV = true;
+        }
+        else
+        {
+            Up.RotationDegrees = -90;
+            Down.RotationDegrees = -90;
+            Left.RotationDegrees = -90;
+            Right.RotationDegrees = -90;
+        }
     }
     public void rotateUp()
     {

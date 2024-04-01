@@ -21,7 +21,6 @@ public class Combine : TextureButton
             TextureRect itemSelected = item.GetNode<TextureRect>("Content/Texture/SelectedItem");
             TextureRect itemSelectedTexture = item.GetNode<TextureRect>("Content/Texture");
             string i = itemSelectedTexture.Texture.ResourcePath;
-            GD.Print($"hey hey did anyone say buuu {i}");
             string n = WorldDictionary.getInventoryCombinableObjectName(i);
             findResourceOfSelected.Add(n);
         }
@@ -34,7 +33,6 @@ public class Combine : TextureButton
                     GD.Print($"text path" + name);
                     if (name != "Metal" && name != "MeltingPot" && name != "MeltingSpoon")
                     {
-                        GD.Print($"hey hey hey hye hye no se puede combinar");
                         createObject = false;
                     }
                 }
@@ -47,6 +45,8 @@ public class Combine : TextureButton
                     WorldDictionary.setStateObject("MeltingPotCompleted", 1);
                     combinableItem.Texture = texture;
                     inventory.addItem(item, combinableItem);
+                    inventory.selectCombinableItem(texture);
+                    inventory.setItemToDisplay(texture);
                 }
                 break;
 
@@ -57,7 +57,6 @@ public class Combine : TextureButton
                     GD.Print($"text path" +name);
                     if (name != "Gum" && name != "Battery")
                     {
-                        GD.Print($"hey hey hey hye hye no se puede combinar");
                         createObject = false;
                     }
                 }
@@ -70,6 +69,8 @@ public class Combine : TextureButton
                     WorldDictionary.setStateObject("Fire", 1);
                     combinableItem.Texture = texture;
                     inventory.addItem(item, combinableItem);
+                    inventory.setItemToDisplay(texture);
+                    inventory.selectCombinableItem(texture);
                 }
                 break;
         }

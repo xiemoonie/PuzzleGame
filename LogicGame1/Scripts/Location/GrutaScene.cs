@@ -32,7 +32,7 @@ public class GrutaScene : LocationHolder
         int meltingSpoonValue = WorldDictionary.checkObjectStatuScene(spoonPot.Name);
         if (candleValue != 0)
         {
-            SceneManager(candle, candleValue);
+            ObjectManager(candle, candleValue);
         }
         if (puzzleValue != 0)
         {
@@ -44,15 +44,15 @@ public class GrutaScene : LocationHolder
         }
         if (metalValue != 0)
         {
-            SceneManager(metal, metalValue);
+            ObjectManager(metal, metalValue);
         }
         if (meltingPotValue != 0)
         {
-            SceneManager(meltingPot, meltingPotValue);
+            ObjectManager(meltingPot, meltingPotValue);
         }
         if (meltingSpoonValue != 0)
         {
-            SceneManager(spoonPot, meltingPotValue);
+            ObjectManager(spoonPot, meltingPotValue);
         }
 
     }
@@ -74,6 +74,16 @@ public class GrutaScene : LocationHolder
                 background.Visible = false;
                 backgroundOpen.Visible = true;
                 break;
+            case 5: sprite.QueueFree(); break;
+        }
+    }
+    public void ObjectManager(Sprite sprite, int state)
+    {
+        switch (state)
+        {
+            case 1: 
+            case 2: 
+            case 3: 
             case 5: sprite.QueueFree(); break;
         }
     }
