@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Images/Locations/MoonieDrawing/GreenHouseScene.png" type="Texture" id=2]
+[ext_resource path="res://Images/Locations/MoonieDrawing/stand.PNG" type="Texture" id=4]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=5]
+[ext_resource path="res://Scripts/Location/GreenhouseLocationHolder.cs" type="Script" id=6]
+[ext_resource path="res://Images/Locations/MoonieDrawing/Plate.PNG" type="Texture" id=7]
+[ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=8]
+
+[node name="GreenHouseOne" type="Node2D"]
+script = ExtResource( 6 )
+RightPath = true
+LeftPath = true
+BackPath = true
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="WorkingTable" type="Area2D" parent="Background"]
+position = Vector2( 0, -4 )
+script = ExtResource( 5 )
+locationPath = "res://Scenes/Locations/GardenLocation/WorkingTable.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Background/WorkingTable"]
+position = Vector2( 292, 342 )
+scale = Vector2( 0.717359, 0.638432 )
+polygon = PoolVector2Array( 947.921, 269.41, 950.71, 316.4, 1576.62, 314.834, 1734.14, 222.42, 1729.96, 183.262, 1104.05, 180.129 )
+
+[node name="Stand" type="Sprite" parent="."]
+position = Vector2( 1200, 451.5 )
+scale = Vector2( 0.188764, 0.168399 )
+texture = ExtResource( 4 )
+
+[node name="Plate" type="Sprite" parent="."]
+position = Vector2( 551, 575 )
+scale = Vector2( 0.169326, 0.111953 )
+texture = ExtResource( 7 )
+
+[node name="Plate" type="Area2D" parent="Plate"]
+position = Vector2( 1349.5, 729.5 )
+scale = Vector2( 0.305755, 0.402174 )
+script = ExtResource( 8 )
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Plate/Plate"]
+position = Vector2( 847.85, -865.196 )
+scale = Vector2( 4.07629, 2.51449 )
+polygon = PoolVector2Array( -1518.21, -651.111, -1518.21, 11.353, -1058.57, 2.52002, -1067.1, -654.625 )

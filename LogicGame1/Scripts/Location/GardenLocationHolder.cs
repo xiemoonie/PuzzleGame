@@ -1,56 +1,39 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Godot;
 
 namespace LogicGame1.Scripts.Location
 {
     public class GardenLocationHolder : LocationHolder
     {
-        private Sprite coin;
         private Sprite fungi;
-        Vector2 positionCoin;
-        Vector2 positionFungi;
-        string leftPath;
-        string rightPath;
-
-
+        private Sprite gum;
+       
         public override void _Ready()
         {
             base._Ready();
-           coin = GetNode<Sprite>("Coin/Coin");
-           fungi = GetNode<Sprite>("Fungi/Fungi");
-            if (coin != null)
-            {
-                positionCoin = coin.Position;
-            }
-            if (fungi != null)
-            {
-                positionFungi = fungi.Position;
-            }
-            leftPath = base.leftLocationPath;
-            rightPath = base.rightLocationPath;
+            GameLoader.LoadScene();
+            fungi = GetNode<Sprite>("Fungi");
+            gum = GetNode<Sprite>("Gum");
 
+            int fungiValue = WorldDictionary.checkObjectStatuScene(fungi.Name);
+            int gumValue = WorldDictionary.checkObjectStatuScene(gum.Name);
+          
+            if (fungiValue != 0)
+            {
+                SceneManager(fungi, fungiValue);
+            }
+            if (gumValue != 0)
+            {
+                SceneManager(gum, gumValue);
+            }
         }
-
-        public override Godot.Collections.Dictionary<string, object> Save()
+        public void SceneManager(Sprite sprite, int state)
         {
-            return new Godot.Collections.Dictionary<string, object>()
+            switch (state)
             {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "Coin", coin},
-                { "Fungi", fungi},
-                { "PosXcoin", positionCoin.x},
-                { "PosYcoin", positionCoin.y},
-                { "PosXfungi", positionFungi.x},
-                { "PosYfungi", positionFungi.y},
-                { "LeftPath", leftPath},
-                { "RightPath", rightPath}
-
-            };
+                case 1: sprite.QueueFree(); break;
+                case 3: sprite.QueueFree(); break;
+                case 5: sprite.QueueFree(); break;
+            }
         }
     }
 }

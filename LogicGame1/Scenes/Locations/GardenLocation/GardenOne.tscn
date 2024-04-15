@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Images/Locations/MoonieDrawing/BackgroundFirstScene.png" type="Texture" id=2]
+[ext_resource path="res://Images/Locations/MoonieDrawing/FungiKey.PNG" type="Texture" id=3]
+[ext_resource path="res://Scripts/Location/GardenLocationHolder.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=5]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=6]
+[ext_resource path="res://Images/Locations/MoonieDrawing/Gum.PNG" type="Texture" id=7]
+
+[node name="GardenOne" type="Node2D"]
+script = ExtResource( 4 )
+RightPath = true
+LeftPath = true
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Gruta" type="Area2D" parent="."]
+position = Vector2( 0, -4 )
+script = ExtResource( 6 )
+locationPath = "res://Scenes/Locations/GardenLocation/GrutaScene.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Gruta"]
+position = Vector2( 289, 339 )
+scale = Vector2( 0.717359, 0.638432 )
+polygon = PoolVector2Array( 356.865, -114.343, 522.751, -109.644, 528.327, -321.099, 351.289, -311.701 )
+
+[node name="Fungi" type="Sprite" parent="."]
+position = Vector2( 525, 389 )
+scale = Vector2( 1.2, 1 )
+texture = ExtResource( 3 )
+
+[node name="Fungi" type="Area2D" parent="Fungi"]
+position = Vector2( -1270, -755 )
+script = ExtResource( 5 )
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Fungi/Fungi"]
+position = Vector2( 1272.5, 749 )
+scale = Vector2( 0.107022, 0.0936994 )
+polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 205.565, 213.448, 184, -135, 4, -203 )
+
+[node name="Gum" type="Sprite" parent="." groups=["Combinable"]]
+position = Vector2( 1120, 765 )
+scale = Vector2( 1.4, 1.14285 )
+texture = ExtResource( 7 )
+
+[node name="Gum" type="Area2D" parent="Gum"]
+position = Vector2( -1270, -755 )
+script = ExtResource( 5 )
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Gum/Gum"]
+position = Vector2( 1270.71, 755.875 )
+scale = Vector2( 0.0851028, 0.0840597 )
+polygon = PoolVector2Array( -208, -111, -219, 165, 20, 253, 208, 173, 184, -135, 4, -203 )

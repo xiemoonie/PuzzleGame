@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/Game/Inventory.cs" type="Script" id=5]
 [ext_resource path="res://Scripts/Game/InventoryExpansionButton.cs" type="Script" id=6]
 [ext_resource path="res://Scripts/Game/InventoryCollapseButton.cs" type="Script" id=7]
-[ext_resource path="res://Scenes/SaveButton.cs" type="Script" id=8]
+[ext_resource path="res://Scripts/SaveButton.cs" type="Script" id=8]
 [ext_resource path="res://Scripts/Game/LocationChangeButtonRight.cs" type="Script" id=9]
 [ext_resource path="res://Objects/Gui/InventoryContainer.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Images/Locations/GateLaboratory/ElectricBlockKnob.png" type="Texture" id=11]
@@ -164,7 +164,10 @@ margin_right = 276.0
 margin_bottom = 1048.0
 scroll_horizontal_enabled = false
 
-[node name="InventoryContainer" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer" instance=ExtResource( 10 )]
+[node name="Inventory" parent="GuiLayer/Inventory/MarginContainer/ScrollContainer" instance=ExtResource( 10 )]
+margin_left = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
 
 [node name="FullscreenRect" type="NinePatchRect" parent="GuiLayer"]
 visible = false

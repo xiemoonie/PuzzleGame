@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Images/Gui/bucketScene.png" type="Texture" id=1]
+[ext_resource path="res://Images/Gui/shape.PNG" type="Texture" id=2]
+[ext_resource path="res://Scripts/Location/Elements/PickableObj.cs" type="Script" id=3]
+[ext_resource path="res://Scripts/Rotate.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/GardenBucketSand.cs" type="Script" id=5]
+[ext_resource path="res://Images/Locations/MoonieDrawing/finalKey.PNG" type="Texture" id=6]
+[ext_resource path="res://Scenes/Locations/GardenLocation/BucketKey.cs" type="Script" id=7]
+
+[node name="GardenBucketSand" type="Node2D"]
+script = ExtResource( 5 )
+BackPath = true
+
+[node name="BackgroundOne" type="Sprite" parent="."]
+position = Vector2( 965, 540 )
+texture = ExtResource( 1 )
+script = ExtResource( 7 )
+
+[node name="Up" type="Area2D" parent="BackgroundOne"]
+position = Vector2( -3505, -2050 )
+script = ExtResource( 4 )
+pathKey = "res://Images/Locations/MoonieDrawing/keyShape.png"
+pathGuiKey = "res://Images/Gui/shape.PNG"
+pathMetal = "res://Images/Locations/MoonieDrawing/meltingSpoonMetal.PNG"
+
+[node name="AreaUp" type="CollisionPolygon2D" parent="BackgroundOne/Up"]
+position = Vector2( 3477, 1860 )
+scale = Vector2( 0.424334, 0.390825 )
+polygon = PoolVector2Array( -174.391, 204.695, 369.991, 202.137, 572.662, -608.968, -510, -645 )
+
+[node name="Up" type="Sprite" parent="BackgroundOne/Up"]
+visible = false
+position = Vector2( 3497, 1863 )
+rotation = -1.5708
+texture = ExtResource( 2 )
+
+[node name="Right" type="Area2D" parent="BackgroundOne"]
+position = Vector2( -6045, -3560 )
+script = ExtResource( 4 )
+pathKey = "res://Images/Locations/MoonieDrawing/keyShape.png"
+pathGuiKey = "res://Images/Gui/shape.PNG"
+pathMetal = "res://Images/Locations/MoonieDrawing/meltingSpoonMetal.PNG"
+
+[node name="AreaRight" type="CollisionPolygon2D" parent="BackgroundOne/Right"]
+position = Vector2( 6324, 3580 )
+scale = Vector2( 0.250239, 0.334736 )
+polygon = PoolVector2Array( -615.412, 146.384, 595.431, 340.567, 491.53, -740.882, -523.5, -507.863 )
+
+[node name="Right" type="Sprite" parent="BackgroundOne/Right"]
+visible = false
+position = Vector2( 6237, 3521 )
+texture = ExtResource( 2 )
+flip_v = true
+
+[node name="Left" type="Area2D" parent="BackgroundOne"]
+position = Vector2( -6045, -3560 )
+script = ExtResource( 4 )
+pathKey = "res://Images/Locations/MoonieDrawing/keyShape.png"
+pathGuiKey = "res://Images/Gui/shape.PNG"
+pathMetal = "res://Images/Locations/MoonieDrawing/meltingSpoonMetal.PNG"
+
+[node name="AreaLeft" type="CollisionPolygon2D" parent="BackgroundOne/Left"]
+position = Vector2( 5774.93, 3586.79 )
+scale = Vector2( 0.257163, 0.299844 )
+polygon = PoolVector2Array( -625.803, 484.276, 579.671, 94.082, 634.111, -452.869, -532.477, -956.475 )
+
+[node name="Left" type="Sprite" parent="BackgroundOne/Left"]
+visible = false
+position = Vector2( 5882, 3536 )
+rotation = 3.14159
+texture = ExtResource( 2 )
+
+[node name="Down" type="Area2D" parent="BackgroundOne"]
+position = Vector2( -6045, -3560 )
+script = ExtResource( 4 )
+pathKey = "res://Images/Locations/MoonieDrawing/keyShape.png"
+pathGuiKey = "res://Images/Gui/shape.PNG"
+pathMetal = "res://Images/Locations/MoonieDrawing/meltingSpoonMetal.PNG"
+
+[node name="AreaDown" type="CollisionPolygon2D" parent="BackgroundOne/Down"]
+position = Vector2( 6064, 3866 )
+scale = Vector2( 0.250239, 0.334736 )
+polygon = PoolVector2Array( -1174.88, 143.397, 967.076, 137.422, 403.614, -693.083, -51.9504, -713.995, -571.454, -722.958 )
+
+[node name="Down" type="Sprite" parent="BackgroundOne/Down"]
+visible = false
+position = Vector2( 6080, 3685 )
+rotation = 1.5708
+texture = ExtResource( 2 )
+flip_v = true
+
+[node name="Key" type="Sprite" parent="."]
+visible = false
+position = Vector2( 962, 520 )
+texture = ExtResource( 6 )
+
+[node name="Key" type="Area2D" parent="Key"]
+position = Vector2( -1270, -755 )
+script = ExtResource( 3 )
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Key/Key"]
+position = Vector2( 1282, 737 )
+scale = Vector2( 0.714286, 0.620888 )
+polygon = PoolVector2Array( -119, -157.839, -463.4, -172.334, -429.8, 109.521, -145.6, 175.555, -71.3999, 478.347, 189, 613.637, 155.4, 177.166, 452.2, 225.483, 456.4, -51.5392, 163.8, -128.848, 56, -467.073, -212.8, -583.036 )

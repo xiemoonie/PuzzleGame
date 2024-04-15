@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Images/Locations/MoonieDrawing/SecondScene.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Location/GardenTwoLocationHolder.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/Location/Elements/LocationChangingElement.cs" type="Script" id=3]
+[ext_resource path="res://Images/Locations/MoonieDrawing/ChineseLintern.PNG" type="Texture" id=4]
+[ext_resource path="res://Images/Locations/MoonieDrawing/Paint Layer 5 Merged.PNG" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 49, 21 )
+
+[node name="GardenTwo" type="Node2D"]
+script = ExtResource( 2 )
+RightPath = true
+LeftPath = true
+
+[node name="BackgroundLayer" type="Sprite" parent="."]
+position = Vector2( 4, 3 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="House" type="Area2D" parent="."]
+position = Vector2( 0, -4 )
+script = ExtResource( 3 )
+locationPath = "res://Scenes/Locations/GardenLocation/GreenHouseOne.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="House"]
+position = Vector2( 289, 339 )
+scale = Vector2( 0.717359, 0.638432 )
+polygon = PoolVector2Array( -246.738, -51.6892, -253.708, 239.65, 469.778, 231.818, 465.596, -62.6536, 299.71, -352.426, -61.3362, -349.293 )
+
+[node name="Diary" type="Sprite" parent="."]
+position = Vector2( 1030, 350 )
+texture = ExtResource( 4 )
+
+[node name="Diary" type="Area2D" parent="Diary"]
+position = Vector2( -1270, -755 )
+script = ExtResource( 3 )
+locationPath = "res://Scenes/Locations/Location1/Diary.tscn"
+
+[node name="ClickAreaPolygon" type="CollisionPolygon2D" parent="Diary/Diary"]
+position = Vector2( 1523, 1151 )
+polygon = PoolVector2Array( -285, -399, -260, -385, -239, -375, -217, -398, -267, -422 )
+
+[node name="Pillar" type="Sprite" parent="."]
+position = Vector2( 1308, 336 )
+texture = ExtResource( 5 )
+
+[node name="Pillar" type="Area2D" parent="Pillar"]
+position = Vector2( 0, -4 )
+script = ExtResource( 3 )
+locationPath = "res://Scenes/Locations/GardenLocation/GardenSextant.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar/Pillar"]
+position = Vector2( 0, 5 )
+shape = SubResource( 1 )

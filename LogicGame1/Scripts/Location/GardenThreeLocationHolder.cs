@@ -7,37 +7,39 @@ namespace LogicGame1.Scripts.Location
     public class GardenThreeLocationHolder : LocationHolder
     {
         private Sprite vision;
-        Vector2 position;
-        string leftPath;
-        string rightPath;
-
-
-        public override void _Ready()
-        {
-            base._Ready();
-            vision = GetNode<Sprite>("Vision/Vision");
-            if (vision != null)
-             {
-                 position = vision.Position;
-             }
-            
-          leftPath = base.leftLocationPath;
-          rightPath = base.rightLocationPath;
+        private Sprite cloth;
+        private Sprite keyShape;
+            public override void _Ready()
+            {
+                base._Ready();
+                GameLoader.LoadScene();
+                vision = GetNode<Sprite>("Vision");
+                cloth = GetNode<Sprite>("Cloth");
+                keyShape = GetNode<Sprite>("KeyShape");
+                int visionValue = WorldDictionary.checkObjectStatuScene(vision.Name);
+                int clothValue = WorldDictionary.checkObjectStatuScene(cloth.Name);
+                int keyShapeValue = WorldDictionary.checkObjectStatuScene(keyShape.Name);
+                if (visionValue != 0)
+                {
+                    SceneManager(vision, visionValue);
+                }
+                if (clothValue != 0)
+                {
+                SceneManager(cloth, clothValue);
+                }
+                if (keyShapeValue != 0)
+                {
+                SceneManager(keyShape, keyShapeValue);
+                }
         }
 
-        public override Godot.Collections.Dictionary<string, object> Save()
-        {
-            return new Godot.Collections.Dictionary<string, object>()
+            public void SceneManager(Sprite sprite, int state)
             {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "Vision", vision},
-                { "PosXvision", position.x},
-                { "PosYvision", position.y },
-                { "LeftPath", leftPath},
-                { "RightPath", rightPath}
-
-            };
+                switch (state)
+                {
+                    case 1: sprite.QueueFree(); break;
+                    case 3: sprite.QueueFree(); break;
+            }
+            }
         }
     }
-}

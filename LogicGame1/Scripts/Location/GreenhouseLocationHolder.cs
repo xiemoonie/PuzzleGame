@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Godot;
@@ -11,38 +12,28 @@ namespace LogicGame1.Scripts.Location
     internal class GreenhouseLocationHolder : LocationHolder
     {
 
-        private Sprite coin;
-        Vector2 position;
-        string leftPath;
-        string rightPath;
-        string backPath;
+        private Sprite plate;
+        bool visibilityPlate;
 
         public override void _Ready()
         {
-            base._Ready();
-            /*  coin = GetNode<Sprite>("Coin/Coin");
-              if (coin != null)
-              {
-                  Vector2 position = coin.GetPosition();
-              }*/
-            leftPath = base.leftLocationPath;
-            rightPath = base.rightLocationPath;
-            backPath = base.backLocationPath;
-        }
-        public override Godot.Collections.Dictionary<string, object> Save()
-        {
-            return new Godot.Collections.Dictionary<string, object>()
+            plate = GetNodeOrNull<Sprite>("Plate");
+            GameLoader.LoadScene();
+            int plateValue = WorldDictionary.checkObjectStatuScene(plate.Name);
+            if (plateValue != 0)
             {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                //{ "GreenhouseThing", coin},
-                { "PosX", position.x + 20.0f},
-                { "PosY", position.y - 20.0f},
-                { "LeftPath", leftPath},
-                { "RightPath", rightPath},
-                { "BackPath", backPath}
+                SceneManager(plate, plateValue);
+            }
 
-            };
+        }
+        public void SceneManager(Sprite sprite, int state)
+        {
+            switch (state)
+            {
+                case 1: sprite.QueueFree(); break;
+                case 2: sprite.QueueFree(); break;
+                case 3: sprite.QueueFree(); break;
+            }
         }
     }
 }

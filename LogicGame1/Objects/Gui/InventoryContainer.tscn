@@ -1,9 +1,25 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Game/InventoryManager.cs" type="Script" id=1]
+[ext_resource path="res://Images/Locations/MoonieDrawing/Combine.PNG" type="Texture" id=2]
+[ext_resource path="res://Objects/Gui/Combine.cs" type="Script" id=3]
 
-[node name="InventoryContainer" type="HFlowContainer" groups=["PersistInventory"]]
+[node name="Control" type="Control"]
+margin_left = 199.0
+margin_right = 199.0
+margin_bottom = 70.0
+
+[node name="InventoryContainer" type="HFlowContainer" parent="." groups=["PersistInventory"]]
 margin_right = 276.0
 mouse_filter = 2
 size_flags_horizontal = 3
 script = ExtResource( 1 )
+combinable = "res://Images/Locations/MoonieDrawing/Combinable.png"
+
+[node name="Combine" type="TextureButton" parent="."]
+margin_left = 48.0
+margin_top = 978.0
+margin_right = 243.0
+margin_bottom = 1048.0
+texture_normal = ExtResource( 2 )
+script = ExtResource( 3 )

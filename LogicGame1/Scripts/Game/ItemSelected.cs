@@ -1,34 +1,48 @@
 using Godot;
 using System;
+using System.Threading;
+using System.Timers;
 using Object = Godot.Object;
+
 
 class ItemSelected : TextureRect
 {
+    bool selected = false;
+    Vector2 positionMouse;
+    Vector2 mousePosition;
+    InventoryItem inventory;
     public override void _Ready()
     {
-     
+
     }
-    
-    public override void _GuiInput(InputEvent @event)
+    public override void _Process(float delta)
     {
-        base._GuiInput(@event);
-        if (@event is InputEventMouseButton mouseEvent)
+        
+    }
+    public override void _GuiInput(InputEvent _event)
+    {
+        base._GuiInput(_event);
+        if (_event is InputEventMouseButton mouseEvent)
         {
+            var inventoryManager = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
+            inventory = GetOwner<InventoryItem>();
             if (mouseEvent.Pressed && mouseEvent.ButtonIndex == (int)ButtonList.Left)
             {
-                
-                var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-                InventoryItem some = this.GetOwner<InventoryItem>();
-                s.selectedItem(some);
-                GD.Print("clicked on item");
-          
+                if (!selected)
+                {
+                    inventoryManager.selectedItem(inventory);
+                    selected = true;
+                }
+                else
+                {
+                    inventoryManager.unselectedItem(inventory);
+                    selected = false;
+                }
             }
-
-           
-
+            
         }
-    }
-    
-
+       
+     }
 }
+
 

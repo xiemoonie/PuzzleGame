@@ -3,65 +3,84 @@ using System;
 
 public class GreenHousePotLocationHolder : LocationHolder
 {
-
-    private Sprite knob;
     private Sprite woodenPlank;
+    Sprite knob;
     Area2D areaKnob;
     bool knobVisibility;
     Vector2 positionAreaKnob;
-    Vector2 positionWoodenPlank;
+    Vector2 positionAreaFinished;
+    Vector2 positionCompartiment;
     private Sprite secretCompartiment;
-    bool secretCompartimentVisibility;
-    string leftPath;
-    string rightPath;
-    string backPath;
+    private Sprite sextant;
+    private bool locked;
+    bool woodenPlankVisibility;
 
     public override void _Ready()
     {
-        base._Ready();
-        areaKnob = GetNode<Area2D>("Area2D");
-        woodenPlank = GetNode<Sprite>("WoodenPlank");
-        secretCompartiment = GetNode<Sprite>("SecretCompartiment");
-        
-        leftPath = base.leftLocationPath;
-        rightPath = base.rightLocationPath;
-        backPath = base.backLocationPath;
+        GameLoader.LoadScene();
+        positionCompartiment = new Vector2(500,752);
+        positionAreaKnob = new Vector2(1600, 231);
+        positionAreaFinished = new Vector2(230, 230);
+        areaKnob = GetNodeOrNull<Area2D>("Knob");
+        woodenPlank = GetNodeOrNull<Sprite>("WoodenPlank");
+        secretCompartiment = GetNodeOrNull<Sprite>("SecretCompartiment");
+        sextant = secretCompartiment.GetNodeOrNull<Sprite>("Sextant");
+        knob = areaKnob.GetNodeOrNull<Sprite>("Knob");
+        int sextantValue = WorldDictionary.checkObjectStatuScene(sextant.Name);
+        int secretCompartimentValue = WorldDictionary.checkObjectStatuScene(secretCompartiment.Name);
+        int knobValue = WorldDictionary.checkObjectStatuScene(knob.Name);
+        if (secretCompartimentValue != 0)
+        {
+            SceneManagerWooden(secretCompartiment, secretCompartimentValue, positionCompartiment);
+        }
+        if (knobValue != 0)
+        {
+            SceneManagerArea(areaKnob, knobValue, positionAreaKnob, knob);
+         
+        }
+        if (sextantValue != 0)
+        {
+            GD.Print("Sextant value" + sextantValue);
+            SceneManagerSextant(sextant, sextantValue);
+        }
+
     }
-
-    public void saveGreenHouseThree()
+    public void SceneManagerWooden(Sprite sprite, int state, Vector2 position)
     {
-
-        if (areaKnob != null)
+        switch (state)
         {
-            knob = areaKnob.GetNode<Sprite>("Knob");
-            knobVisibility = knob.Visible;
-            positionAreaKnob = areaKnob.Position;
-        }
-        if (woodenPlank != null)
-        {
-            positionWoodenPlank = woodenPlank.Position;
-        }
-        if (secretCompartiment != null)
-        {
-            secretCompartimentVisibility = secretCompartiment.Visible;
+            case 1: sprite.QueueFree(); break;
+            case 3: woodenPlank.Position = new Vector2(500, 700); 
+                    sprite.Visible = true;
+                    sprite.Position = position;
+                    break;
         }
     }
-    public override Godot.Collections.Dictionary<string, object> Save()
+    public void SceneManagerSextant(Sprite sprite, int state)
     {
-        return new Godot.Collections.Dictionary<string, object>()
-            {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "KnobVisibility", knobVisibility},
-                { "AreaKnobPosX",positionAreaKnob.x},
-                { "AreaKnobPosY", positionAreaKnob.y},
-                { "WoodenPlankPosX", positionWoodenPlank.x},
-                { "WoodenPlankPosY", positionWoodenPlank.y},
-                { "SecretCompartimentVisibility", secretCompartimentVisibility},
-                { "LeftPath", leftPath},
-                { "RightPath", rightPath},
-                { "BackPath", backPath}
+        switch (state)
+        {
+            case 1: sprite.QueueFree(); break;
+            case 3: sprite.QueueFree(); break;
+            case 4: sprite.QueueFree(); break;
+        }
+    }
+    public void SceneManagerArea(Area2D area, int state, Vector2 position, Sprite sprite)
+    {
+        switch (state)
+        {
+            case 2: 
+                area.Position = position; 
+                sprite.Visible = true;
+                var attachableObj = (AttachableObject)area;
+                attachableObj.unlockedSlide = true;
+                break;
 
-            };
+            case 3: area.Position = positionAreaFinished;
+                    sprite.Visible = true;
+                    
+                break;
+        }
     }
 }
+

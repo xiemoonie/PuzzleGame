@@ -27,8 +27,6 @@ namespace LogicGame1.Scripts.Location
         public override void _Ready()
         {
             base._Ready();
-
-            
             first = GetNode<Sprite>("First");
             back = GetNode<Sprite>("Last");
 
@@ -37,7 +35,6 @@ namespace LogicGame1.Scripts.Location
             two = GetNode<Sprite>("Middle/Two");
             three = GetNode<Sprite>("Middle/Three");
             page = GetNode<Sprite>("Middle/Page");
-            backPath = base.backLocationPath;
         }
 
         public void goRight()
@@ -84,21 +81,5 @@ namespace LogicGame1.Scripts.Location
 
             }
         }
-
-        public override Godot.Collections.Dictionary<string, object> Save()
-        {
-            return new Godot.Collections.Dictionary<string, object>()
-            {
-                { "Filename", this.Filename},
-                { "Parent", GetParent().GetParent()},
-                { "GardenThing", first},
-                { "PosX", position.x + 20.0f},
-                { "PosY", position.y - 20.0f},
-                { "BackPath", backPath}
-
-            };
-        }
-
-
     }
 }

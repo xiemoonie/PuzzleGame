@@ -7,13 +7,16 @@ public class AttachableObject : Area2D
     private PackedScene game = (PackedScene)GD.Load("res://Scenes/Game.tscn");
     GameWrapper gameWrapper;
     [Export] String pathResource = "";
+    [Export] String pathGuiResource = "";
 
     [Export] public float xShape;
+    InventoryManager inventory;
 
     public bool unlockedSlide = false;
     public override void _Ready()
     {
         gameWrapper = game.Instance<GameWrapper>();
+        inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
     }
 
     public void checkForKey()
@@ -21,19 +24,25 @@ public class AttachableObject : Area2D
         var s = GetNode<TextureRect>("/root/Main/Screen/GameWrapper/GuiLayer/GrabbedItem");
         if (s != null)
         {
-            if (s.Texture.ResourcePath == pathResource)
+            GD.Print("Resource path" + s.Texture.ResourcePath);
+            if (inventory.onlyOneSelected())
             {
-                
-                Sprite knob = this.GetNode<Sprite>("Knob");
-                if (knob != null)
+                if (s.Texture.ResourcePath == pathResource || s.Texture.ResourcePath == pathGuiResource)
                 {
-                    knob.Visible = true;
-                    var inventory = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-                    inventory.eraseItem();
-                    unlockedSlide = true;
+                    Sprite knob = GetNode<Sprite>("Knob");
+                    if (knob != null)
+                    {
+                        knob.Visible = true;
+                        inventory.eraseItem();
+                        unlockedSlide = true;
+                        WorldDictionary.setStateObject("Knob", 2);
+                        GameSaver.SaveGameScene();
+                    }
                 }
             }
+           
         }
+     
     }
     
     public void ReshapeArea2D()
@@ -46,14 +55,18 @@ public class AttachableObject : Area2D
         if (posKnob.x >= 420)
         {
             posKnob.x -= 200;
+            posKnob.y = 235;
             posWoodenPlank.x -= 75;
+            posWoodenPlank.y = 700;
             woodenPlank.Position = posWoodenPlank;
             this.Position = posKnob;
         }
         else
         {
             posKnob.x = 230;
+            posKnob.y = 235;
             posWoodenPlank.x = 500;
+            posWoodenPlank.y = 700;
             this.GlobalPosition = posKnob;
             woodenPlank.Position = posWoodenPlank;
             ShowSecretCompartiment();
@@ -64,7 +77,12 @@ public class AttachableObject : Area2D
     {
         Node parent = this.GetParent();
         Sprite secretCompartiment = parent.GetNode<Sprite>("SecretCompartiment");
+        Sprite woodenPlank = parent.GetNode<Sprite>("WoodenPlank");
         secretCompartiment.Visible = true;
+        WorldDictionary.setStateObject(secretCompartiment.Name, 3);
+        WorldDictionary.setStateObject(Name, 3);
+        WorldDictionary.setStateObject("Fungi", 3);
+        GameSaver.SaveGameScene();
     }
     
   
@@ -78,15 +96,17 @@ public class AttachableObject : Area2D
             {
                 if (unlockedSlide == false)
                 {
+                    GD.Print("check fot key");
                     checkForKey();
                 }
                 else
                 {
+                    GD.Print("reshape area");
                     ReshapeArea2D();
                 }
             }
 
         }
 
-        }
+     }
     }

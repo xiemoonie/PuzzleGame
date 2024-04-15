@@ -20,19 +20,30 @@ class PickableObj : Area2D
             {
                 Sprite some = (Sprite)this.GetParent();
                 if (some != null)
-                {
-                    var s = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/InventoryContainer");
-                    s.pickedItem(item, some);
+                {  
+                    WorldDictionary.setStateObject(Name,1);
+                    
+                    var inventoryManager = GetNode<InventoryManager>("/root/Main/Screen/GameWrapper/GuiLayer/Inventory/MarginContainer/ScrollContainer/Inventory/InventoryContainer");
+                    var groups = GetParent().GetGroups();
+                    foreach (string g in groups)
+                    {
+                        if (g == "Combinable")
+                        {
+                            item.AddToGroup("Combinable");
+                            WorldDictionary.setStateObject(Name, 5);
+                        }
+                        else
+                        {
+                            WorldDictionary.setStateObject(Name, 1);
+                        }
+                        
+                    }
+                    inventoryManager.pickedItem(item, some);
                     some.QueueFree();
+                    GameSaver.SaveGameScene();
 
                 }
             }
-
-
-
-       
-     
-
         }
     }
 

@@ -3,10 +3,9 @@ using System;
 
 public abstract class LocationHolder : Node {
 
-    [Export] public string leftLocationPath = "";
-    [Export] public string rightLocationPath = "";
-    [Export] public string backLocationPath = "";
-    [Export] public string sceneName = "";
+    [Export] public bool RightPath;
+    [Export] public bool LeftPath;
+    [Export] public bool BackPath;
 
     private Sprite ss;
     private Vector2 position;
@@ -16,17 +15,9 @@ public abstract class LocationHolder : Node {
 
     public override void _Ready() {
         base._Ready();
-        
-       // element1 = GetNode<Area2D>("cube/Sprite/Area2D");
-       
         GC.Collect();
+        GameSaver.SaveGameScene();
+        GD.Print("......................Saved in the inventory.................");
+        GameSaver.SaveGameInvenotry();
     }
-
-
-    //to each Garden class make inherit LocationHolder make it 
-    public abstract Godot.Collections.Dictionary<string, object> Save();
-    
-    
-
-
 }
